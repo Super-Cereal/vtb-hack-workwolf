@@ -1,3 +1,9 @@
 .intro {
-  background-color: yellow;
+  display: block;
+  margin: 60px auto 0;
+  width: 400px;
+  height: 300px;
+  background-color: rebeccapurple;
+  color: white;
+  cursor: pointer;
 }

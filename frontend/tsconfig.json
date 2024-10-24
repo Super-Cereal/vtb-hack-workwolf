@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "jsx": "react",
+    "module": "ESNEXT",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "typeRoots": ["./@types", "./node_modules/@types"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "lib": ["es2019", "ES2020.String", "dom", "DOM.Iterable", "ES2022", "ES2023"]
+  },
+  "exclude": ["node_modules", "dist"]
+}

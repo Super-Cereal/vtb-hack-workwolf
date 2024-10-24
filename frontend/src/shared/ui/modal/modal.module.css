@@ -1,0 +1,36 @@
+.wrapper {
+  --padding: 28px;
+
+  width: fit-content;
+  min-width: 400px;
+  min-height: 400px;
+  padding: var(--padding);
+  box-sizing: border-box;
+
+  border-radius: var(--padding);
+
+  background-color: white;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.title {
+  font-size: 2rem;
+  margin-right: 40px;
+}
+
+.close {
+  all: unset;
+
+  position: absolute;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  cursor: pointer;
+
+  top: var(--padding);
+  right: var(--padding);
+}

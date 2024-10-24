@@ -1,6 +1,8 @@
 const path = require("path");
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -17,6 +19,10 @@ const plugins = [
   new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
 ];
 
+if (!isProduction) {
+  plugins.push(new ReactRefreshWebpackPlugin());
+}
+
 const rules = [
   {
     test: /\.(jsx?|tsx?)$/,
@@ -31,13 +37,14 @@ const rules = [
   {
     test: /\.(scss|css)$/,
     use: [
-      MiniCssExtractPlugin.loader,
+      isProduction ? MiniCssExtractPlugin.loader : "style-loader",
       {
         loader: "css-loader",
         options: {
           modules: {
             namedExport: false,
             exportLocalsConvention: "as-is",
+            localIdentName: "[name]__[local]--[hash:base64:5]",
           },
         },
       },
@@ -64,7 +71,7 @@ module.exports = {
   mode,
   target,
 
-  entry: "./src/index.jsx",
+  entry: "./src/index.tsx",
   output: {
     assetModuleFilename: "assets/[hash][ext][query]", // Все ассеты будут складываться в dist/assets
     path: path.join(__dirname, "dist"), // Директория, в которой будет размещаться итоговый бандл
@@ -81,11 +88,7 @@ module.exports = {
     alias: {
       "@": path.resolve(__dirname, "src/"),
     },
-    extensions: [".jsx", "..."],
-  },
-
-  optimization: {
-    sideEffects: true,
+    extensions: [".jsx", ".ts", ".tsx", "..."],
   },
 
   plugins,
