@@ -10,11 +10,11 @@
   ```
 - Запускаем бэкенд
   ```bash
-  npm run backend:dev
+  npm run backend
   ```
 - Запускаем фронтенд
   ```bash
-  npm run frontend:dev
+  npm run frontend
   ```
 
 ## О проекте

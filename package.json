@@ -5,8 +5,8 @@
   "license": "ISC",
   "scripts": {
     "deps": "npm i & (cd ./frontend && npm i) & (cd ./backend && npm i)",
-    "frontend:dev": "cd frontend && npm run start",
-    "backend:dev": "cd backend && npm run start",
+    "frontend": "cd frontend && npm run start",
+    "backend": "cd backend && npm run start",
     "prettier:check": "prettier . --check",
     "prettier:fix": "prettier . --write --list-different",
     "prepare": "husky"
