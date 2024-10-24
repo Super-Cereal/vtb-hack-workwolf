@@ -1,0 +1,22 @@
+{
+  "name": "vtb-hack-workwolf",
+  "version": "1.0.0",
+  "description": "Проект команды workwolf на VTB API hackathon 2024",
+  "license": "ISC",
+  "scripts": {
+    "deps": "npm i & (cd ./frontend && npm i) & (cd ./backend && npm i)",
+    "frontend:dev": "cd frontend && npm run start",
+    "backend:dev": "cd backend && npm run start",
+    "prettier:check": "prettier . --check",
+    "prettier:fix": "prettier . --write --list-different",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md,json,html}": "npm run prettier:fix"
+  }
+}
