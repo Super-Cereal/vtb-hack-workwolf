@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Modal } from "@/shared/ui/modal";
+import { LessonPage } from "@/pages/lessonPage";
+import { LessonsListPage } from "@/pages/lessonsListPage";
+import { LessonTestPage } from "@/pages/lessonTestPage";
+import { MainPage } from "@/pages/mainPage";
+import { ObjectPage } from "@/pages/objectPage";
+import { staticUrls } from "@/shared/lib/routes";
 
 import "./app.css";
-import s from "./app.module.css";
 
-export const App = () => {
-  const [modalOpened, setModalOpened] = useState(false);
+export const browserRouter = createBrowserRouter([
+  { path: staticUrls.main, element: <MainPage /> },
+  { path: staticUrls.object, element: <ObjectPage /> },
 
-  return (
-    <>
-      <button className={s.intro} onClick={() => setModalOpened(true)}>
-        Оооткрыть модалку!
-      </button>
+  { path: staticUrls.lessonsList, element: <LessonsListPage /> },
+  { path: staticUrls.lesson, element: <LessonPage /> },
+  { path: staticUrls.lessonTest, element: <LessonTestPage /> },
+]);
 
-      {modalOpened && (
-        <Modal title="Привет я заголовок модалки" onClose={() => setModalOpened(false)}>
-          привет я контент модалки
-        </Modal>
-      )}
-    </>
-  );
-};
+export const App = () => <RouterProvider router={browserRouter} />;
