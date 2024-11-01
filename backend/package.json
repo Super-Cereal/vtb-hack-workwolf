@@ -12,7 +12,9 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,json,yml}\" --fix",
+    "lint": "npm run eslint:check -- --fix",
+    "eslint:check": "eslint \"{src,apps,libs,test}/**/*.{ts,json,yml}\"",
+    "typescript:check": "tsc",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -43,9 +45,7 @@
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "husky": "^9.1.6",
     "jest": "^29.5.0",
-    "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "source-map-support": "^0.5.21",
     "supertest": "^7.0.0",
@@ -71,16 +71,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,json,yml}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
 }
