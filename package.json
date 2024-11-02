@@ -17,6 +17,6 @@
     "prettier": "^3.3.3"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,md,json,html}": "npm run prettier:fix"
+    "*.{js,jsx,ts,tsx,css,md,json,html,yml}": "npm run prettier:fix"
   }
 }
