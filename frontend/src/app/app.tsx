@@ -1,12 +1,14 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import { Header } from "@/components/header/ui/header";
 import { LessonPage } from "@/pages/lessonPage";
 import { LessonsListPage } from "@/pages/lessonsListPage";
 import { LessonTestPage } from "@/pages/lessonTestPage";
 import { MainPage } from "@/pages/mainPage";
 import { ObjectPage } from "@/pages/objectPage";
 import { staticUrls } from "@/shared/lib/routes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./app.css";
 
@@ -19,4 +21,12 @@ export const browserRouter = createBrowserRouter([
   { path: staticUrls.lessonTest, element: <LessonTestPage /> },
 ]);
 
-export const App = () => <RouterProvider router={browserRouter} />;
+const queryClient = new QueryClient();
+
+export const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <Header />
+
+    <RouterProvider router={browserRouter} />
+  </QueryClientProvider>
+);
