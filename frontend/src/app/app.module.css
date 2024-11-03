@@ -1,0 +1,16 @@
+.page {
+  display: flex;
+  justify-content: center;
+  background-color: #222325;
+  min-height: 100vh;
+}
+
+.layout {
+  width: 100%;
+  max-width: 440px;
+  padding: 16px 8px;
+}
+
+.header {
+  margin-bottom: 22px;
+}

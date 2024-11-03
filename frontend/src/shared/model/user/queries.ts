@@ -10,7 +10,7 @@ export const useUser = () =>
     queryFn: (): Promise<IUser> =>
       new Promise((resolve) => {
         setTimeout(() => {
-          resolve({ id: 1, name: "Антон Рудольфович", coins: 5600 });
+          resolve({ id: 1, name: "Антон Рудольфович", coins: 5600, specialOffers: 4 });
         }, 2000);
       }),
   });

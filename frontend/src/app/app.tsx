@@ -11,6 +11,7 @@ import { staticUrls } from "@/shared/lib/routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./app.css";
+import styles from "./app.module.css";
 
 export const browserRouter = createBrowserRouter([
   { path: staticUrls.main, element: <MainPage /> },
@@ -25,8 +26,12 @@ const queryClient = new QueryClient();
 
 export const App = () => (
   <QueryClientProvider client={queryClient}>
-    <Header />
+    <div className={styles.page}>
+      <div className={styles.layout}>
+        <Header className={styles.header} />
 
-    <RouterProvider router={browserRouter} />
+        <RouterProvider router={browserRouter} />
+      </div>
+    </div>
   </QueryClientProvider>
 );
