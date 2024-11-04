@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Header } from "@/components/header/ui/header";
+import { Header } from "@/components/header";
 import { LessonPage } from "@/pages/lessonPage";
 import { LessonsListPage } from "@/pages/lessonsListPage";
 import { LessonTestPage } from "@/pages/lessonTestPage";

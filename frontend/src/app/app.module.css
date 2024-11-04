@@ -1,8 +1,20 @@
 .page {
   display: flex;
   justify-content: center;
-  background-color: #222325;
+  background-color: var(--bg-color-primary);
   min-height: 100vh;
+
+  --bg-color-primary: #1e1f24;
+  --bg-color-secondary: #303239;
+  --bg-color-special: #0153f4;
+  --bg-color-white: #f8f8f8;
+
+  --font-color-primary: #f8f8f8;
+  --font-color-secondary: #f7f9fc;
+  --font-color-special: #fdf6fc;
+
+  --color-special: #2a70f2;
+  --color-white: #fff5f7;
 }
 
 .layout {

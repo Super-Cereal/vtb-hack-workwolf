@@ -32,7 +32,7 @@ export const Header = ({ className }: Props) => {
   }, []);
 
   if (isLoading || !data) {
-    return <header className={styles.header}>загрузка...</header>;
+    return <header className={cx(styles.header, className)}>загрузка...</header>;
   }
 
   return (
