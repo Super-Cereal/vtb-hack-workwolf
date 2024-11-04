@@ -18,5 +18,9 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,md,json,html,yml}": "npm run prettier:fix"
+  },
+  "dependencies": {
+    "@nestjs/mapped-types": "*",
+    "uuid": "^11.0.2"
   }
 }
