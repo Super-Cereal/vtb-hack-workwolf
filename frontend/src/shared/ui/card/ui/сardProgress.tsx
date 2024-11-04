@@ -35,9 +35,9 @@ export default function CardProgress({
           <img src={card_image} alt="card_image" />
         </div>
         <div className={styles.lvl_card}>{lvl_card}</div>
-        <h3>{title}</h3>
       </div>
       <div className={styles.block_description_card}>
+        <h3>{title}</h3>
         <p className={styles.paragraph}>{paragraph}</p>
         <div className={styles.progress_bar}>
           <div className={styles.progress_fill} style={{ width: `${progress}%` }}></div>
