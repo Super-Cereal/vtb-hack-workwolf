@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, BeforeCreate } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+  BeforeCreate,
+} from 'sequelize-typescript';
 import { ObjectCategory } from './object-category.model';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -36,7 +44,7 @@ export class PartnerBanner extends Model<PartnerBanner> {
   ObjectCategoryId: string;
 
   @BelongsTo(() => ObjectCategory)
-  object: Object;
+  object: object;
 
   @BeforeCreate
   static generateUuid(instance: PartnerBanner) {

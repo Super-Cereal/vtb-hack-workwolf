@@ -1,4 +1,13 @@
-import { Table, Column, Model, DataType, HasMany, ForeignKey, HasOne, BeforeCreate } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  HasMany,
+  ForeignKey,
+  HasOne,
+  BeforeCreate,
+} from 'sequelize-typescript';
 import { PartnerBanner } from './partner-banner.model';
 import { ObjectLevel } from './object-level.model';
 import { v4 as uuidv4 } from 'uuid';
@@ -60,9 +69,9 @@ export class ObjectCategory extends Model<ObjectCategory> {
   levels: ObjectLevel[];
 
   @BeforeCreate
-static generateUuid(instance: ObjectCategory) {
-  if (!instance.id) {
-    instance.id = uuidv4();
+  static generateUuid(instance: ObjectCategory) {
+    if (!instance.id) {
+      instance.id = uuidv4();
+    }
   }
-}
 }

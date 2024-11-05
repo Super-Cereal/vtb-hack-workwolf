@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType, BelongsTo, ForeignKey, BeforeCreate } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  BelongsTo,
+  ForeignKey,
+  BeforeCreate,
+} from 'sequelize-typescript';
 import { FinancialTest } from './financial-test.model';
 import { v4 as uuidv4 } from 'uuid';
 @Table
@@ -8,7 +16,7 @@ export class Question extends Model<Question> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id: string;;
+  id: string;
 
   @Column({
     type: DataType.STRING,

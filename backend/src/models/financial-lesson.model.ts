@@ -1,4 +1,14 @@
-import { Table, Column, Model, DataType, BelongsTo, ForeignKey, HasOne, BelongsToMany, BeforeCreate } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  // BelongsTo,
+  ForeignKey,
+  HasOne,
+  BelongsToMany,
+  BeforeCreate,
+} from 'sequelize-typescript';
 import { User } from './user.model';
 import { Article } from './article.model';
 import { FinancialTest } from './financial-test.model';
@@ -48,7 +58,6 @@ export class FinancialLesson extends Model<FinancialLesson> {
   users: User[];
 
   @BeforeCreate
-  
   static generateUuid(instance: FinancialLesson) {
     if (!instance.id) {
       instance.id = uuidv4();

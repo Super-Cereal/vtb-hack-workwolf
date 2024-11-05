@@ -41,7 +41,10 @@ export class UsersService {
         });
 
         if (!initialLevel) {
-          throw new HttpException(`Initial level not found for category: ${category}`, HttpStatus.BAD_REQUEST);
+          throw new HttpException(
+            `Initial level not found for category: ${category}`,
+            HttpStatus.BAD_REQUEST,
+          );
         }
 
         await this.objectCardsService.createObjectCard({

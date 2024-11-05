@@ -23,7 +23,10 @@ export class ObjectCategoryController {
   }
 
   @Put(':id')
-  async updateObjectCategory(@Param('id') id: number, @Body() updateObjectCategoryDto: UpdateObjectCategoryDto) {
+  async updateObjectCategory(
+    @Param('id') id: number,
+    @Body() updateObjectCategoryDto: UpdateObjectCategoryDto,
+  ) {
     return this.objectCategoryService.updateObjectCategory(id, updateObjectCategoryDto);
   }
 

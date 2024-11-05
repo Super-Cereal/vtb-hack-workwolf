@@ -1,4 +1,4 @@
 export class CreateObjectCardDto {
-    userId: string;
-    currentLevelId?: string;
-  }
+  userId: string;
+  currentLevelId?: string;
+}

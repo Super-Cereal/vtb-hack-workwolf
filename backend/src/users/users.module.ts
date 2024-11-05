@@ -8,11 +8,8 @@ import { ObjectLevel } from 'src/models/object-level.model';
 import { ObjectCard } from 'src/models/object-card.model';
 import { ObjectCardsService } from 'src/object-cards/object-cards.service';
 
-
 @Module({
-  imports: [
-    SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel, ObjectCard]),
-  ],
+  imports: [SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel, ObjectCard])],
   controllers: [UsersController],
   providers: [UsersService, ObjectCardsService],
 })

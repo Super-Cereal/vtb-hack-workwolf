@@ -11,7 +11,9 @@ export class ObjectCategoryService {
     private objectCategoryModel: typeof ObjectCategory,
   ) {}
 
-  async createObjectCategory(createObjectCategoryDto: CreateObjectCategoryDto): Promise<ObjectCategory> {
+  async createObjectCategory(
+    createObjectCategoryDto: CreateObjectCategoryDto,
+  ): Promise<ObjectCategory> {
     return this.objectCategoryModel.create(createObjectCategoryDto);
   }
 
@@ -27,7 +29,10 @@ export class ObjectCategoryService {
     return objectCategory;
   }
 
-  async updateObjectCategory(id: number, updateObjectCategoryDto: UpdateObjectCategoryDto): Promise<ObjectCategory> {
+  async updateObjectCategory(
+    id: number,
+    updateObjectCategoryDto: UpdateObjectCategoryDto,
+  ): Promise<ObjectCategory> {
     const [updatedRows] = await this.objectCategoryModel.update(updateObjectCategoryDto, {
       where: { id },
       returning: true,

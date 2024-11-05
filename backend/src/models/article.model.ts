@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, BeforeCreate } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+  BeforeCreate,
+} from 'sequelize-typescript';
 import { FinancialLesson } from './financial-lesson.model';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -33,11 +41,10 @@ export class Article extends Model<Article> {
   @BelongsTo(() => FinancialLesson)
   financialLesson: FinancialLesson;
 
-  
-@BeforeCreate
-static generateUuid(instance: Article) {
-  if (!instance.id) {
-    instance.id = uuidv4();
+  @BeforeCreate
+  static generateUuid(instance: Article) {
+    if (!instance.id) {
+      instance.id = uuidv4();
+    }
   }
-}
 }

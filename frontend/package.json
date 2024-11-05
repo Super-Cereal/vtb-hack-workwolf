@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack --mode=production",
-    "eslint:check": "eslint src",
+    "eslint:check": "eslint ./src",
+    "eslint:fix": "eslint ./src --fix",
     "typescript:check": "tsc",
     "prepare": "cd .. && npm run prepare"
   },

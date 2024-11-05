@@ -19,8 +19,12 @@ import { ObjectCategoryModule } from './object-category/object-category.module';
       autoLoadModels: true,
       synchronize: true,
     }),
-    UsersModule, ObjectCardModule, PartnerBannerModule, ObjectCategoryModule],
+    UsersModule,
+    ObjectCardModule,
+    PartnerBannerModule,
+    ObjectCategoryModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

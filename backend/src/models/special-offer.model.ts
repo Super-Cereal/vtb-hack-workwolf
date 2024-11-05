@@ -1,4 +1,13 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, BelongsToMany, BeforeCreate } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+  BelongsToMany,
+  BeforeCreate,
+} from 'sequelize-typescript';
 import { ObjectLevel } from './object-level.model';
 import { User } from './user.model';
 import { UserSpecialOffers } from './staging_tables/user-special-offers.model';
@@ -30,7 +39,6 @@ export class SpecialOffer extends Model<SpecialOffer> {
   @BelongsToMany(() => User, () => UserSpecialOffers)
   users: User[];
 
-  
   @BeforeCreate
   static generateUuid(instance: SpecialOffer) {
     if (!instance.id) {

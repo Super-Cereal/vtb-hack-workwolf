@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType, BelongsTo, ForeignKey, BeforeCreate } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  BelongsTo,
+  ForeignKey,
+  BeforeCreate,
+} from 'sequelize-typescript';
 import { ObjectCategory } from './object-category.model';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -19,7 +27,7 @@ export class ObjectLevel extends Model<ObjectLevel> {
   objectId: string;
 
   @BelongsTo(() => ObjectCategory)
-  object: Object;
+  object: object;
 
   @Column({
     type: DataType.INTEGER,

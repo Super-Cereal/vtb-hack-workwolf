@@ -4,6 +4,7 @@ import { UpdatePartnerBannerDto } from './dto/update-partner-banner.dto';
 
 @Injectable()
 export class PartnerBannerService {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   create(createPartnerBannerDto: CreatePartnerBannerDto) {
     return 'This action adds a new partnerBanner';
   }
@@ -16,6 +17,7 @@ export class PartnerBannerService {
     return `This action returns a #${id} partnerBanner`;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updatePartnerBannerDto: UpdatePartnerBannerDto) {
     return `This action updates a #${id} partnerBanner`;
   }

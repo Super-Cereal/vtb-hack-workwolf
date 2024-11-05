@@ -1,8 +1,15 @@
-import { Table, Column, Model, DataType, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  HasMany,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
 import { Question } from './question.model';
 import { FinancialLesson } from './financial-lesson.model';
 import { v4 as uuidv4 } from 'uuid';
-
 
 @Table
 export class FinancialTest extends Model<FinancialTest> {

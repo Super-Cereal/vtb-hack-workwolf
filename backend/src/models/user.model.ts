@@ -1,4 +1,14 @@
-import { Table, Column, Model, DataType, HasMany, BelongsTo, ForeignKey, BeforeCreate, BelongsToMany } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  // HasMany,
+  // BelongsTo,
+  // ForeignKey,
+  BeforeCreate,
+  BelongsToMany,
+} from 'sequelize-typescript';
 import { FinancialLesson } from './financial-lesson.model';
 import { SpecialOffer } from './special-offer.model';
 import { v4 as uuidv4 } from 'uuid';
@@ -37,7 +47,7 @@ export class User extends Model<User> {
     allowNull: false,
   })
   name: string;
-  
+
   @Column({
     type: DataType.STRING,
     allowNull: false,

@@ -23,7 +23,10 @@ export class ObjectCardsController {
   }
 
   @Put(':id')
-  async updateObjectCard(@Param('id') id: string, @Body() updateObjectCardDto: UpdateObjectCardDto) {
+  async updateObjectCard(
+    @Param('id') id: string,
+    @Body() updateObjectCardDto: UpdateObjectCardDto,
+  ) {
     return this.objectCardService.updateObjectCard(id, updateObjectCardDto);
   }
 

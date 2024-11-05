@@ -5,7 +5,6 @@ import { ObjectCard } from '../models/object-card.model';
 import { CreateObjectCardDto } from './dto/create-object-card.dto';
 import { UpdateObjectCardDto } from './dto/update-object-card.dto';
 
-
 @Injectable()
 export class ObjectCardsService {
   constructor(
@@ -29,7 +28,10 @@ export class ObjectCardsService {
     return objectCard;
   }
 
-  async updateObjectCard(id: string, updateObjectCardDto: UpdateObjectCardDto): Promise<ObjectCard> {
+  async updateObjectCard(
+    id: string,
+    updateObjectCardDto: UpdateObjectCardDto,
+  ): Promise<ObjectCard> {
     const [updatedRows] = await this.objectCardModel.update(updateObjectCardDto, {
       where: { id },
       returning: true,
