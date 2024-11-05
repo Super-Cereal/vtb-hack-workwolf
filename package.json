@@ -6,7 +6,7 @@
   "scripts": {
     "deps": "npm i & (cd ./frontend && npm i) & (cd ./backend && npm i)",
     "frontend": "cd frontend && npm run start",
-    "backend": "cd backend && npm run start",
+    "backend": "cd backend && npm run start:dev",
     "prettier:check": "prettier . --check",
     "prettier:fix": "prettier . --write --list-different",
     "prepare": "husky"
