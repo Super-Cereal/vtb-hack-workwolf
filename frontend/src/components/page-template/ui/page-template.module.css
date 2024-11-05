@@ -1,0 +1,38 @@
+.page {
+  --max-width: 440px;
+  --padding-vertical: 16px;
+  --padding-horizontal: 8px;
+  --max-header-height: 56px;
+}
+
+.page.page_main {
+  --max-header-height: 170px;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-color-primary);
+  min-height: 150vh;
+
+  .header {
+    position: fixed;
+    top: var(--padding-vertical);
+    z-index: 5;
+
+    width: 100%;
+    max-width: calc(var(--max-width) + var(--padding-horizontal) * 2);
+    max-height: var(--max-header-height);
+
+    box-sizing: border-box;
+    padding: 0 var(--padding-horizontal);
+  }
+
+  .layout {
+    width: 100%;
+    max-width: var(--max-width);
+
+    padding: var(--padding-vertical) var(--padding-horizontal);
+    margin-top: calc(var(--max-header-height) + 12px);
+  }
+}

@@ -1,78 +1,64 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 
 import { useUser } from "@/shared/model/user";
-import { IconCoins, IconSpecialOffers } from "@/shared/ui/icons";
+import { A11yButton } from "@/shared/ui/a11yButton";
+import { IconCoins, IconShortArrowLeft, IconSpecialOffers } from "@/shared/ui/icons";
+
+import { InfoBlock } from "./info-block";
 
 import styles from "./header.module.css";
 
 interface Props {
+  shouldShowBigHeader?: boolean;
+  withGoBackButton?: boolean;
+
   className?: string;
 }
 
-export const Header = ({ className }: Props) => {
+export const Header = ({ shouldShowBigHeader, withGoBackButton = false, className }: Props) => {
   const { isLoading, data } = useUser();
-
-  const [isScrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    function handleScroll() {
-      if (window.scrollY) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const navigate = useNavigate();
 
   if (isLoading || !data) {
     return <header className={cx(styles.header, className)}>загрузка...</header>;
   }
 
-  return (
-    <header className={cx(styles.header, isScrolled && styles.header_scrolled, className)}>
-      <div className={styles.userWrapper}>
-        <div className={styles.imgWrapper}>
-          <img src="#" alt="" />
-        </div>
+  const onGoBack = () => navigate(-1);
 
-        {!isScrolled && <span className={styles.userName}>{data.name}</span>}
+  return (
+    <header className={cx(styles.header, !shouldShowBigHeader && styles.header_scrolled, className)}>
+      <div className={styles.leftCornerSlot}>
+        {withGoBackButton ? (
+          <A11yButton
+            aria-label="Вернуться на предыдущую страницу"
+            className={cx(styles.circle, styles.goBackButton)}
+            onClick={onGoBack}
+          >
+            <IconShortArrowLeft />
+          </A11yButton>
+        ) : (
+          <img alt="" className={cx(styles.circle, styles.userImg)} src="#" />
+        )}
+
+        {shouldShowBigHeader && !withGoBackButton && <span className={styles.userName}>{data.name}</span>}
       </div>
 
       <div className={styles.infoBlocksList}>
-        <div className={styles.infoBlock}>
-          <span aria-label="Коллличество активированных спецпредложений">{data.specialOffers}/10</span>
+        <InfoBlock
+          aria-label="Коллличество активированных спецпредложений"
+          text={`${data.specialOffers}/10`}
+          description={shouldShowBigHeader ? "спецпредложений активировано" : undefined}
+          icon={<IconSpecialOffers />}
+        />
 
-          {!isScrolled && (
-            <span aria-hidden="true" className={styles.infoText}>
-              спецпредложений активировано
-            </span>
-          )}
-
-          <div className={styles.iconWrapper}>
-            <IconSpecialOffers />
-          </div>
-        </div>
-
-        <div className={styles.infoBlock}>
-          <span aria-label="Колличество валюты">{data.coins}</span>
-
-          {!isScrolled && (
-            <span aria-hidden="true" className={styles.infoText}>
-              валюта
-            </span>
-          )}
-
-          <div className={styles.iconWrapper}>
-            <IconCoins />
-          </div>
-        </div>
+        <InfoBlock
+          aria-label="Колличество валюты"
+          text={data.coins}
+          description={shouldShowBigHeader ? "валюта" : undefined}
+          icon={<IconCoins />}
+        />
       </div>
     </header>
   );

@@ -1,0 +1,32 @@
+.infoBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 6px;
+  padding-left: 16px;
+
+  background-color: var(--bg-color-primary);
+  border-radius: 100px;
+
+  font-size: 0.7rem;
+
+  .infoText {
+    font-size: 0.6rem;
+    color: var(--font-color-secondary);
+  }
+
+  .iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+    margin-left: 12px;
+
+    border-radius: 50%;
+
+    background-color: var(--bg-color-white);
+  }
+}
