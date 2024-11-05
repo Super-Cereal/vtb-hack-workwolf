@@ -1,4 +1,4 @@
-import React, { type ElementType, type PropsWithChildren, useState } from "react";
+import React, { useState, type ElementType, type PropsWithChildren } from "react";
 import cx from "classnames";
 
 import styles from "./card.module.css";
@@ -55,9 +55,7 @@ export const CardSelection = ({
 
     setCheckedItems((prev) => {
       const newCheckedItems = { ...prev, [name]: checked };
-
       setSelectedCount(Object.values(newCheckedItems).filter(Boolean).length);
-
       return newCheckedItems;
     });
   };
@@ -69,13 +67,11 @@ export const CardSelection = ({
         {React.Children.map(children, (child) => {
           if (React.isValidElement(child)) {
             return React.cloneElement(child, {
-              // @ts-expect-error выдает ошибку
               checked: checkedItems[child.props.name] || false,
               onChange: handleCheckboxChange,
               disabled: maxSelections ? selectedCount >= maxSelections && !checkedItems[child.props.name] : false,
             });
           }
-
           return child;
         })}
         {maxSelections !== undefined && (

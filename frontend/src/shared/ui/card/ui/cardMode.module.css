@@ -1,0 +1,107 @@
+:root {
+  --card-bg-color: #eaeaea;
+  --text-color: #f8f8f8;
+  --highlight-color: #303239;
+  --progress-color: #2a70f2;
+  --hover-bg-color: #d4d4d4;
+  --dark-blue: #0153f4;
+}
+
+.card_progress {
+  border-radius: 40px;
+  width: 100%;
+  height: 467px;
+  overflow: hidden;
+}
+
+.card_header {
+  position: relative;
+  height: 174px;
+}
+
+.card_image {
+  width: 100%;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 40px 40px 0 0;
+}
+
+.card_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.block_description_card {
+  padding: 16px 28px;
+  position: relative;
+  background-color: var(--highlight-color);
+  overflow: hidden;
+  color: var(--text-color);
+  border-radius: 40px 40px 0 0;
+
+  -webkit-backdrop-filter: blur(12px) brightness(100%);
+  backdrop-filter: blur(12px) brightness(100%);
+  background-color: #1e1f2499;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-color: #303239;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-radius: 0px 0px 30px 30px;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-top-style: none;
+}
+
+.block_description_card h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 27px;
+  margin: 0 0 12px 0;
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+}
+
+.title {
+  width: 85%;
+}
+
+.paragraph {
+  padding: 0 0 16px 0;
+  font-size: 90%;
+}
+
+.lvl_card {
+  position: absolute;
+  right: 16px;
+  top: 18px;
+  color: #ffffff;
+  background-color: var(--dark-blue);
+  padding: 8px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+}
+
+.progress_bar {
+  height: 8px;
+  border-radius: 10px;
+  background: #eee;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress_fill {
+  height: 100%;
+  border-radius: 10px;
+  background: var(--progress-color);
+  transition: width 0.3s ease-in-out;
+}

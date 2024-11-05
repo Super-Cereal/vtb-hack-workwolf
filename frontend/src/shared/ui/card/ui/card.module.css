@@ -80,7 +80,7 @@
 .card_progress {
   border-radius: 40px;
   width: 100%;
-  height: 342px;
+  height: auto;
   background-color: var(--card-bg-color);
   overflow: hidden;
 }
@@ -121,7 +121,7 @@
   padding: 16px 28px;
   position: relative;
   background-color: var(--highlight-color);
-  height: 168px;
+  height: auto;
   overflow: hidden;
   color: var(--text-color);
   border-radius: 40px 40px 0 0;
@@ -169,6 +169,7 @@ h6 {
   background: #eee;
   overflow: hidden;
   position: relative;
+  margin-bottom: 5%;
 }
 
 .progress_fill {
