@@ -1,6 +1,17 @@
+import type { ISpecialOffer } from "../specialOffers";
+
 export interface IUser {
   id: number;
-  coins: number;
+  email: string;
+  password: string;
+  gameCoins: number;
+  activeSpecialOffers: ISpecialOffer[];
+
   name: string;
-  specialOffers: number;
+  accountImage: string;
+
+  bankAccount: unknown; // FIXME
+
+  /** Кол-во мультибонусов */
+  multibonusAccount: number;
 }

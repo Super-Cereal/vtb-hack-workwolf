@@ -20,7 +20,7 @@ interface CardMoreProps {
  *    title="ВТБ-Гурман"
  * />
  */
-export default function CardMore({
+export function CardMore({
   paragraph = "Описание по умолчанию",
   lvl_card = "Уровень",
   card_image = "",

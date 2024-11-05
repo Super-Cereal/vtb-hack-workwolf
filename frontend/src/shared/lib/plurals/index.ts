@@ -1,0 +1,1 @@
+export { getPluralForm } from "./getPluralForm";

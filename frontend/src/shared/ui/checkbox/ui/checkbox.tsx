@@ -2,15 +2,13 @@ import React from "react";
 
 import styles from "./checkbox.module.css";
 
-interface Props {
-  id: string;
-  value: string;
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   children: string;
 }
 
-export const Checkbox = ({ id, value, children }: Props) => (
+export const Checkbox = ({ children, id, ...inputProps }: Props) => (
   <>
-    <input type="checkbox" className={styles.checkbox} id={id} name={id} value={value} />
+    <input type="checkbox" className={styles.checkbox} id={id} name={id} {...inputProps} />
 
     <label className={styles.label} htmlFor={id}>
       {children}

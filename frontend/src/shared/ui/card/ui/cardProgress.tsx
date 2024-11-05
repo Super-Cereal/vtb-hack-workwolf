@@ -22,7 +22,7 @@ interface CardProgressProps {
  *    title="ВТБ-Гурман"
  * />
  */
-export default function CardProgress({
+export function CardProgress({
   progress = 0,
   paragraph = "",
   lvl_card = "Уровень",

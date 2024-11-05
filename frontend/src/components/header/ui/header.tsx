@@ -18,10 +18,10 @@ interface Props {
 }
 
 export const Header = ({ shouldShowBigHeader, withGoBackButton = false, className }: Props) => {
-  const { isLoading, data } = useUser();
+  const { isLoading, data: user } = useUser();
   const navigate = useNavigate();
 
-  if (isLoading || !data) {
+  if (isLoading || !user) {
     return <header className={cx(styles.header, className)}>загрузка...</header>;
   }
 
@@ -42,20 +42,20 @@ export const Header = ({ shouldShowBigHeader, withGoBackButton = false, classNam
           <img alt="" className={cx(styles.circle, styles.userImg)} src="#" />
         )}
 
-        {shouldShowBigHeader && !withGoBackButton && <span className={styles.userName}>{data.name}</span>}
+        {shouldShowBigHeader && !withGoBackButton && <span className={styles.userName}>{user.name}</span>}
       </div>
 
       <div className={styles.infoBlocksList}>
         <InfoBlock
           aria-label="Коллличество активированных спецпредложений"
-          text={`${data.specialOffers}/10`}
+          text={`${user.activeSpecialOffers.length}/10`}
           description={shouldShowBigHeader ? "спецпредложений активировано" : undefined}
           icon={<IconSpecialOffers />}
         />
 
         <InfoBlock
           aria-label="Колличество валюты"
-          text={data.coins}
+          text={user.gameCoins}
           description={shouldShowBigHeader ? "валюта" : undefined}
           icon={<IconCoins />}
         />

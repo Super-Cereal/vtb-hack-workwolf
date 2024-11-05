@@ -5,3 +5,8 @@
 
   margin-top: 20px;
 }
+
+.hint {
+  color: var(--font-color-gray);
+  margin-top: 20px;
+}

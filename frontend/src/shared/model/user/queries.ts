@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { IUser } from "./types";
 
 import { userQueryKeys } from "./queryKeys";
+import { userMocks } from ".";
 
 export const useUser = () =>
   useQuery({
@@ -10,7 +11,7 @@ export const useUser = () =>
     queryFn: (): Promise<IUser> =>
       new Promise((resolve) => {
         setTimeout(() => {
-          resolve({ id: 1, name: "Антон Рудольфович", coins: 5600, specialOffers: 4 });
+          resolve(userMocks.user);
         }, 2000);
       }),
   });
