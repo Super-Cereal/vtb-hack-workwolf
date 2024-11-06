@@ -50,9 +50,9 @@ export class FinancialLesson extends Model<FinancialLesson> {
 
   @ForeignKey(() => User)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUID,
   })
-  userId: number;
+  userId: string;
 
   @BelongsToMany(() => User, () => UserFinancialLessons)
   users: User[];

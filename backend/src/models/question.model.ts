@@ -25,6 +25,7 @@ export class Question extends Model<Question> {
   text: string;
 
   @Column({
+    type: DataType.ARRAY(DataType.STRING),
     allowNull: false,
   })
   answers: string[];
@@ -37,7 +38,7 @@ export class Question extends Model<Question> {
 
   @ForeignKey(() => FinancialTest)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUID,
   })
   financialTestId: number;
 

@@ -22,7 +22,7 @@ export class FinancialTest extends Model<FinancialTest> {
 
   @ForeignKey(() => FinancialLesson)
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.UUID,
     allowNull: false,
   })
   lessonId: number;

@@ -29,7 +29,7 @@ export class SpecialOffer extends Model<SpecialOffer> {
 
   @ForeignKey(() => ObjectLevel)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUID,
   })
   objectLevelId: number;
 

@@ -23,7 +23,7 @@ export class ObjectCard extends Model<ObjectCard> {
 
   @ForeignKey(() => User)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUID,
     allowNull: false,
   })
   userId: string;
@@ -33,12 +33,19 @@ export class ObjectCard extends Model<ObjectCard> {
 
   @Column({
     type: DataType.INTEGER,
+    defaultValue: 0,
   })
   progress: number;
 
+  @Column({
+    type: DataType.INTEGER,
+    defaultValue: 0,
+  })
+  weeklyTransferredCoins: number;
+
   @ForeignKey(() => ObjectLevel)
   @Column({
-    type: DataType.STRING,
+    type: DataType.UUID,
   })
   currentLevelId: string;
 

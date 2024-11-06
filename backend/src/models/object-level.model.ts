@@ -22,12 +22,12 @@ export class ObjectLevel extends Model<ObjectLevel> {
   @ForeignKey(() => ObjectCategory)
   @Column({
     allowNull: false,
-    type: DataType.INTEGER,
+    type: DataType.UUID,
   })
   objectId: string;
 
   @BelongsTo(() => ObjectCategory)
-  object: object;
+  object: ObjectCategory;
 
   @Column({
     type: DataType.INTEGER,
