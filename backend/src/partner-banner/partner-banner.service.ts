@@ -1,28 +1,69 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+
 import { CreatePartnerBannerDto } from './dto/create-partner-banner.dto';
 import { UpdatePartnerBannerDto } from './dto/update-partner-banner.dto';
+import { ObjectCategory } from 'src/models/object-category.model';
+import { PartnerBanner } from 'src/models/partner-banner.model';
 
 @Injectable()
 export class PartnerBannerService {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  create(createPartnerBannerDto: CreatePartnerBannerDto) {
-    return 'This action adds a new partnerBanner';
+  constructor(
+    @InjectModel(PartnerBanner)
+    private partnerBannerModel: typeof PartnerBanner,
+    @InjectModel(ObjectCategory)
+    private objectCategoryModel: typeof ObjectCategory,
+  ) {}
+
+  async createPartnerBanner(createPartnerBannerDto: CreatePartnerBannerDto): Promise<PartnerBanner> {
+    const objectCategory = await this.objectCategoryModel.findByPk(createPartnerBannerDto.ObjectCategoryId);
+    if (!objectCategory) {
+      throw new NotFoundException('ObjectCategory not found');
+    }
+
+    return this.partnerBannerModel.create(createPartnerBannerDto);
   }
 
-  findAll() {
-    return `This action returns all partnerBanner`;
+  async findAllPartnerBanners(): Promise<PartnerBanner[]> {
+    return this.partnerBannerModel.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} partnerBanner`;
+  async findPartnerBannerById(id: string): Promise<PartnerBanner> {
+    const partnerBanner = await this.partnerBannerModel.findByPk(id);
+    if (!partnerBanner) {
+      throw new NotFoundException('PartnerBanner not found');
+    }
+    return partnerBanner;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  update(id: number, updatePartnerBannerDto: UpdatePartnerBannerDto) {
-    return `This action updates a #${id} partnerBanner`;
+  async updatePartnerBanner(
+    id: string,
+    updatePartnerBannerDto: UpdatePartnerBannerDto,
+  ): Promise<PartnerBanner> {
+    const partnerBanner = await this.partnerBannerModel.findByPk(id);
+    if (!partnerBanner) {
+      throw new NotFoundException('PartnerBanner not found');
+    }
+
+    if (updatePartnerBannerDto.ObjectCategoryId) {
+      const objectCategory = await this.objectCategoryModel.findByPk(updatePartnerBannerDto.ObjectCategoryId);
+      if (!objectCategory) {
+        throw new NotFoundException('ObjectCategory not found');
+      }
+    }
+
+    partnerBanner.url = updatePartnerBannerDto.url ?? partnerBanner.url;
+    partnerBanner.desc = updatePartnerBannerDto.desc ?? partnerBanner.desc;
+    partnerBanner.name = updatePartnerBannerDto.name ?? partnerBanner.name;
+    partnerBanner.ObjectCategoryId = updatePartnerBannerDto.ObjectCategoryId ?? partnerBanner.ObjectCategoryId;
+
+    return partnerBanner.save();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} partnerBanner`;
+  async deletePartnerBanner(id: string): Promise<void> {
+    const deletedRows = await this.partnerBannerModel.destroy({ where: { id } });
+    if (deletedRows === 0) {
+      throw new NotFoundException('PartnerBanner not found');
+    }
   }
 }
