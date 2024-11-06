@@ -138,6 +138,18 @@
   border-top-style: none;
 }
 
+.block_description_card_noneBorder {
+  padding: 16px 28px;
+  position: relative;
+  background-color: var(--highlight-color);
+  overflow: hidden;
+  color: var(--text-color);
+  border-radius: 40px 40px 0 0;
+  -webkit-backdrop-filter: blur(12px) brightness(100%);
+  backdrop-filter: blur(12px) brightness(100%);
+  background-color: rgba(30, 31, 36, 0.6);
+}
+
 .block_description_card h1,
 h2,
 h3,
@@ -173,6 +185,15 @@ h6 {
   font-size: 0.75rem;
 }
 
+.progress_bar_lil {
+  height: 8px;
+  border-radius: 10px;
+  background: #2a70f2;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 1%;
+}
+
 .progress_bar {
   height: 8px;
   border-radius: 10px;
@@ -180,6 +201,13 @@ h6 {
   overflow: hidden;
   position: relative;
   margin-bottom: 1%;
+}
+
+.progress_fill_lil {
+  height: 100%;
+  border-radius: 10px;
+  background: #ffffff;
+  transition: width 0.3s ease-in-out;
 }
 
 .progress_fill {

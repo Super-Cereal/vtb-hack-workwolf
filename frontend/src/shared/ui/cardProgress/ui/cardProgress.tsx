@@ -25,6 +25,7 @@ interface CardProgressProps {
  *    title="ВТБ-Гурман"
  * />
  */
+
 export function CardProgress({
   progress = 0,
   start,
@@ -49,13 +50,16 @@ export function CardProgress({
         )}
         {lvl_card !== "Уровень" && <div className={styles.lvl_card}>{lvl_card}</div>}
       </div>
-      <div className={styles.block_description_card}>
+      <div className={isCollapsed ? styles.block_description_card_noneBorder : styles.block_description_card}>
         <h3>{title}</h3>
         {paragraph && <p className={styles.paragraph}>{paragraph}</p>}
 
         {/* Полоса прогресса */}
-        <div className={styles.progress_bar}>
-          <div className={styles.progress_fill} style={{ width: `${calculatedProgress}%` }}></div>
+        <div className={isCollapsed ? styles.progress_bar_lil : styles.progress_bar}>
+          <div
+            className={isCollapsed ? styles.progress_fill_lil : styles.progress_fill}
+            style={{ width: `${calculatedProgress}%` }}
+          ></div>
         </div>
 
         {/* Отображение start и end только если они определены */}
