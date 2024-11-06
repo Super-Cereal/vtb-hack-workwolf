@@ -23,7 +23,7 @@ export const MainPage = () => (
     />
 
     <CardProgress
-      progress={50}
+      progress={30}
       paragraph="Это место, где можно насладиться изысканными блюдами в комфортной и элегантной обстановке"
       lvl_card="2 Уровень"
       card_image="https://avatars.mds.yandex.net/i?id=6f064b1de4ef81dc467c6e68fda0c46f_l-5480371-images-thumbs&n=13"
