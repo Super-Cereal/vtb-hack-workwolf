@@ -22,60 +22,68 @@ interface Props {
   title?: string;
   description?: string;
   className?: string;
+  href?: string; // Обновленный интерфейс Props с href
 }
 
-export const CardWithCircles: FC<Props> = memo(function CardWithCircles({ title, description, className }) {
+export const CardBanner: FC<Props> = memo(function CardBanner({ title, description, className, href }) {
   return (
-    <div className={`${resets.clapyResets} ${classes.root} ${className}`}>
-      <div className={classes.ellipse29}>
-        <Ellipse29Icon className={classes.icon} />
-      </div>
-      <div className={classes.rectangle51}></div>
-      <div className={classes.ellipse17}>
-        <Ellipse17Icon className={classes.icon2} />
-      </div>
-      <div className={classes.ellipse35}>
-        <Ellipse35Icon className={classes.icon3} />
-      </div>
-      <div className={classes.ellipse41}>
-        <Ellipse41Icon className={classes.icon4} />
-      </div>
-      <div className={classes.ellipse39}>
-        <Ellipse39Icon className={classes.icon5} />
-      </div>
-      <div className={classes.ellipse31}>
-        <Ellipse31Icon className={classes.icon6} />
-      </div>
-      <div className={classes.ellipse36}>
-        <Ellipse36Icon className={classes.icon7} />
-      </div>
-      <div className={classes.ellipse33}>
-        <Ellipse33Icon className={classes.icon8} />
-      </div>
-      <div className={classes.ellipse37}>
-        <Ellipse37Icon className={classes.icon9} />
-      </div>
-      <div className={classes.ellipse38}>
-        <Ellipse38Icon className={classes.icon10} />
-      </div>
-      <div className={classes.ellipse43}>
-        <Ellipse43Icon className={classes.icon11} />
-      </div>
-      <div className={classes.ellipse42}>
-        <Ellipse42Icon className={classes.icon12} />
-      </div>
-      <div className={classes.ellipse40}>
-        <Ellipse40Icon className={classes.icon13} />
-      </div>
+    <a
+      href={href} // Используем href из props
+      target="_blank" // Открыть в новой вкладке
+      rel="noopener noreferrer" // Для безопасности при открытии внешних ссылок
+      className={`${resets.clapyResets} ${classes.root} ${classes.card} ${className}`}
+    >
+      <div className={`${resets.clapyResets} ${classes.root} ${classes.card} ${className}`}>
+        <div className={classes.ellipse29}>
+          <Ellipse29Icon className={classes.icon} />
+        </div>
+        <div className={classes.rectangle51}></div>
+        <div className={classes.ellipse17}>
+          <Ellipse17Icon className={classes.icon2} />
+        </div>
+        <div className={classes.ellipse35}>
+          <Ellipse35Icon className={classes.icon3} />
+        </div>
+        <div className={classes.ellipse41}>
+          <Ellipse41Icon className={classes.icon4} />
+        </div>
+        <div className={classes.ellipse39}>
+          <Ellipse39Icon className={classes.icon5} />
+        </div>
+        <div className={classes.ellipse31}>
+          <Ellipse31Icon className={classes.icon6} />
+        </div>
+        <div className={classes.ellipse36}>
+          <Ellipse36Icon className={classes.icon7} />
+        </div>
+        <div className={classes.ellipse33}>
+          <Ellipse33Icon className={classes.icon8} />
+        </div>
+        <div className={classes.ellipse37}>
+          <Ellipse37Icon className={classes.icon9} />
+        </div>
+        <div className={classes.ellipse38}>
+          <Ellipse38Icon className={classes.icon10} />
+        </div>
+        <div className={classes.ellipse43}>
+          <Ellipse43Icon className={classes.icon11} />
+        </div>
+        <div className={classes.ellipse42}>
+          <Ellipse42Icon className={classes.icon12} />
+        </div>
+        <div className={classes.ellipse40}>
+          <Ellipse40Icon className={classes.icon13} />
+        </div>
 
-      {/* Заголовок и описание */}
-      {title && <h2 className={classes.unnamed}>{title}</h2>}
-      {description && <div className={classes.unnamed2}>{description}</div>}
+        {/* Заголовок и описание */}
+        {title && <h2 className={classes.title}>{title}</h2>}
+        {description && <div className={classes.description}>{description}</div>}
 
-      {/* Иконка */}
-      <div className={classes.ellipse22}>
-        <Ellipse22Icon className={classes.icon14} />
+        {/* Иконка */}
+        <div className={classes.ellipse22}>
+          <Ellipse22Icon className={classes.icon14} />
+        </div>
       </div>
-    </div>
+    </a>
   );
 });
