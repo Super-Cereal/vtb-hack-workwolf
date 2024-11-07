@@ -29,7 +29,6 @@ export class ObjectCategoryService {
     return objectCategory;
   }
 
-  
   async updateObjectCategory(
     id: number,
     updateObjectCategoryDto: UpdateObjectCategoryDto,

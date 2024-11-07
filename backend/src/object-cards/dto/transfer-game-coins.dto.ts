@@ -1,5 +1,5 @@
 export class TransferGameCoinsDto {
-    userId: string;
-    objectCardId: string;
-    amount: number;
-  }
+  userId: string;
+  objectCardId: string;
+  amount: number;
+}

@@ -11,9 +11,18 @@ import { SpecialOffer } from 'src/models/special-offer.model';
 import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers.model';
 import { UserFinancialLessons } from 'src/models/staging_tables/user-financial-lessons.model';
 
-
 @Module({
-  imports: [SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel, ObjectCard, SpecialOffer, UserSpecialOffers, UserFinancialLessons])],
+  imports: [
+    SequelizeModule.forFeature([
+      User,
+      ObjectCategory,
+      ObjectLevel,
+      ObjectCard,
+      SpecialOffer,
+      UserSpecialOffers,
+      UserFinancialLessons,
+    ]),
+  ],
   controllers: [UsersController],
   providers: [UsersService, ObjectCardsService],
 })

@@ -1,4 +1,5 @@
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
+// @ts-expect-error 123
 import * as dotenv from 'dotenv';
 
 dotenv.config();

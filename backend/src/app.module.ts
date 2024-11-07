@@ -20,14 +20,26 @@ import { Question } from './models/question.model';
 
 @Module({
   imports: [
-    SequelizeModule.forRoot(sequelizeConfig), 
+    SequelizeModule.forRoot(sequelizeConfig),
 
-    SequelizeModule.forFeature([User, SpecialOffer, UserSpecialOffers, UserFinancialLessons, ObjectCard, ObjectLevel, ObjectCategory, FinancialLesson, PartnerBanner, FinancialTest, Article, Question]),
+    SequelizeModule.forFeature([
+      User,
+      SpecialOffer,
+      UserSpecialOffers,
+      UserFinancialLessons,
+      ObjectCard,
+      ObjectLevel,
+      ObjectCategory,
+      FinancialLesson,
+      PartnerBanner,
+      FinancialTest,
+      Article,
+      Question,
+    ]),
     UsersModule,
     ObjectCardModule,
     PartnerBannerModule,
     ObjectCategoryModule,
   ],
-
 })
 export class AppModule {}

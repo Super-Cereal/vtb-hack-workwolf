@@ -8,7 +8,7 @@ import { SpecialOffer } from 'src/models/special-offer.model';
 import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers.model';
 import { AddSpecialOfferDto } from './dto/add-special-offer.dto';
 import { ObjectLevel } from 'src/models/object-level.model';
-import { ObjectCategory } from 'src/models/object-category.model';
+// import { ObjectCategory } from 'src/models/object-category.model';
 import { TransferGameCoinsDto } from './dto/transfer-game-coins.dto';
 
 @Injectable()
@@ -42,7 +42,6 @@ export class ObjectCardsService {
     return objectCard;
   }
 
-  
   async addSpecialOffer(addSpecialOfferDto: AddSpecialOfferDto): Promise<void> {
     const user = await this.userModel.findByPk(addSpecialOfferDto.userId);
     if (!user) {

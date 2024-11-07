@@ -8,7 +8,6 @@ import { SpecialOffer } from 'src/models/special-offer.model';
 import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers.model';
 import { ObjectLevel } from 'src/models/object-level.model';
 
-
 @Module({
   imports: [
     SequelizeModule.forFeature([ObjectCard, User, SpecialOffer, UserSpecialOffers, ObjectLevel]),

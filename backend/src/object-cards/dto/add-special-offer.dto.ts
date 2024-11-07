@@ -1,4 +1,4 @@
 export class AddSpecialOfferDto {
-    userId: string;
-    specialOfferId: string;
-  }
+  userId: string;
+  specialOfferId: string;
+}
