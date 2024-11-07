@@ -1,5 +1,5 @@
 message="$(cat $1)"
-requiredPattern="^(front|back|all): .*$"
+requiredPattern="^(front|back|openApi|all): .*$"
 if ! [[ $message =~ $requiredPattern ]];
 then
   echo
