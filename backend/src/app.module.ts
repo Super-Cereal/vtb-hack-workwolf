@@ -17,11 +17,11 @@ import { PartnerBanner } from './models/partner-banner.model';
 import { FinancialTest } from './models/financial-test.model';
 import { Article } from './models/article.model';
 import { Question } from './models/question.model';
+import { OAuth2Module } from './open-api/auth/oauth2.module';
 
 @Module({
   imports: [
     SequelizeModule.forRoot(sequelizeConfig),
-
     SequelizeModule.forFeature([
       User,
       SpecialOffer,
@@ -40,6 +40,7 @@ import { Question } from './models/question.model';
     ObjectCardModule,
     PartnerBannerModule,
     ObjectCategoryModule,
+    OAuth2Module,
   ],
 })
 export class AppModule {}
