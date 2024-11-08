@@ -27,7 +27,7 @@ components:
         status:
           type: string
           description: Статус транзакции
-          example: approved
+          example: Consumed
           enum:
             - AwaitingAuthorisation
             - Rejected

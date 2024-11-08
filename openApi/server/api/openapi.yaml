@@ -1,0 +1,84 @@
+openapi: 3.0.0
+info:
+  title: OpenApi микросервис команды workwolf
+  description: Микросервис дает возможность получить список последних транзакий пользователя
+    с учетом категорий покупок/пополнений
+  version: 1.0.0
+servers:
+  - url: https://workwolf.swagger.io/api/v3
+paths:
+  /transactions:
+    get:
+      description: Получить список последних транзакций
+      operationId: getTransactions
+      responses:
+        "200":
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Transaction"
+                x-content-type: application/json
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    Transaction:
+      required:
+        - id
+        - type
+        - value
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        value:
+          type: integer
+          description: Размер транзакции в рублях
+          format: int64
+          example: 4877
+        type:
+          type: string
+          description: "Направление транзакции (in – пополнение, out – списание)"
+          enum:
+            - in
+            - out
+        category:
+          $ref: "#/components/schemas/Category"
+        status:
+          type: string
+          description: Статус транзакции
+          example: Consumed
+          enum:
+            - AwaitingAuthorisation
+            - Rejected
+            - Authorised
+            - Consumed
+      example:
+        id: 10
+        type: in
+        category:
+          name: Restaurant
+          id: 1
+        value: 4877
+        status: Consumed
+      xml:
+        name: transaction
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Restaurant
+      example:
+        name: Restaurant
+        id: 1
+      xml:
+        name: category
