@@ -17,20 +17,32 @@ import { Ellipse43Icon } from "./Ellipse43Icon";
 
 import classes from "../../cardBanner.module.css";
 import resets from "../_resets.module.css";
+import { IconCoins } from "@/shared/ui/icons";
 
 interface Props {
   title?: string;
   description?: string;
   className?: string;
-  href?: string; // Обновленный интерфейс Props с href
+  href?: string;
+  coinCount?: number;
+  currentStep?: number;
+  totalSteps?: number;
 }
 
-export const CardBanner: FC<Props> = memo(function CardBanner({ title, description, className, href }) {
+export const CardBanner: FC<Props> = memo(function CardBanner({
+  title,
+  description,
+  className,
+  href,
+  coinCount,
+  currentStep,
+  totalSteps,
+}) {
   return (
     <a
-      href={href} // Используем href из props
-      target="_blank" // Открыть в новой вкладке
-      rel="noopener noreferrer" // Для безопасности при открытии внешних ссылок
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`${resets.clapyResets} ${classes.root} ${classes.card} ${className}`}
     >
       <div className={`${resets.clapyResets} ${classes.root} ${classes.card} ${className}`}>
@@ -83,6 +95,26 @@ export const CardBanner: FC<Props> = memo(function CardBanner({ title, descripti
         <div className={classes.ellipse22}>
           <Ellipse22Icon className={classes.icon14} />
         </div>
+
+        {/* Синяя плашка с текстом, отображается только если указаны currentStep и totalSteps */}
+        {currentStep !== undefined && totalSteps !== undefined && (
+          <div className={classes.blueBanner}>К прохождению</div>
+        )}
+
+        {/* Плашка для отображения монет */}
+        {coinCount !== undefined && (
+          <div className={classes.coinBanner}>
+            <span className={classes.coinCount}>{coinCount}</span>
+            <div className={classes.coinCircle}>
+              <IconCoins />
+            </div>
+          </div>
+        )}
+
+        {/* Прогресс, отображается только если указаны currentStep и totalSteps */}
+        {currentStep !== undefined && totalSteps !== undefined && (
+          <div className={classes.progress}>{`${currentStep} / ${totalSteps}`}</div>
+        )}
       </div>
     </a>
   );
