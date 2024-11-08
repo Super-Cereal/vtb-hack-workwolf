@@ -6,9 +6,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ObjectCategory } from 'src/models/object-category.model';
 
 @Module({
-  imports: [
-    SequelizeModule.forFeature([PartnerBanner,  ObjectCategory ]),
-  ],
+  imports: [SequelizeModule.forFeature([PartnerBanner, ObjectCategory])],
   controllers: [PartnerBannerController],
   providers: [PartnerBannerService],
 })

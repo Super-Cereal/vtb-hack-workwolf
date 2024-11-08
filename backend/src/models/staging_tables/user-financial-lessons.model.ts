@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript';
 import { User } from '../user.model';
 import { FinancialLesson } from '../financial-lesson.model';
 
@@ -24,5 +24,4 @@ export class UserFinancialLessons extends Model<UserFinancialLessons> {
     defaultValue: false,
   })
   completed: boolean;
-
 }

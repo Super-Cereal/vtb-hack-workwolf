@@ -1,4 +1,4 @@
- import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { User } from 'src/models/user.model';
 import { OpenApiService } from '../open-api.service';
 
@@ -6,6 +6,7 @@ import { OpenApiService } from '../open-api.service';
 export class AccountsService {
   constructor(private readonly openApiService: OpenApiService) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getAccounts(user: User) {
     const headers = {
       'x-customer-user-agent': 'your_user_agent',
@@ -14,19 +15,19 @@ export class AccountsService {
       'x-fapi-customer-ip-address': 'your_ip_address',
     };
 
-    const consentData = {
-      Data: {
-        // Ваши данные для создания согласия
-      },
-      Risk: {
-        // Ваши данные для оценки риска
-      },
-    };
+    // const consentData = {
+    //   Data: {
+    //     // Ваши данные для создания согласия
+    //   },
+    //   Risk: {
+    //     // Ваши данные для оценки риска
+    //   },
+    // };
 
-    const consentResponse = await this.openApiService.createAccountConsent(consentData, headers);
-/*     const consentId = consentResponse.consentId; */
+    // const consentResponse = await this.openApiService.createAccountConsent(consentData, headers);
+    /*     const consentId = consentResponse.consentId; */
 
     const accountsResponse = await this.openApiService.getAccounts(headers);
     return accountsResponse;
   }
-} 
+}

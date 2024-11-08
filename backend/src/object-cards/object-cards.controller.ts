@@ -14,7 +14,6 @@ export class ObjectCardsController {
   @ApiResponse({ status: 201, description: 'The ObjectCard has been successfully created.' })
   @ApiBody({ type: CreateObjectCardDto })
   @Post()
-  
   async createObjectCard(@Body() createObjectCardDto: CreateObjectCardDto) {
     return this.objectCardsService.createObjectCard(createObjectCardDto);
   }

@@ -12,4 +12,4 @@ export class AccountsController {
     const user = request.user;
     return this.accountsService.getAccounts(user);
   }
-} 
+}

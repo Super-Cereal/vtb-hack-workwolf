@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
 import { CreatePartnerBannerDto } from './dto/create-partner-banner.dto';
@@ -15,8 +15,12 @@ export class PartnerBannerService {
     private objectCategoryModel: typeof ObjectCategory,
   ) {}
 
-  async createPartnerBanner(createPartnerBannerDto: CreatePartnerBannerDto): Promise<PartnerBanner> {
-    const objectCategory = await this.objectCategoryModel.findByPk(createPartnerBannerDto.ObjectCategoryId);
+  async createPartnerBanner(
+    createPartnerBannerDto: CreatePartnerBannerDto,
+  ): Promise<PartnerBanner> {
+    const objectCategory = await this.objectCategoryModel.findByPk(
+      createPartnerBannerDto.ObjectCategoryId,
+    );
     if (!objectCategory) {
       throw new NotFoundException('ObjectCategory not found');
     }
@@ -46,7 +50,9 @@ export class PartnerBannerService {
     }
 
     if (updatePartnerBannerDto.ObjectCategoryId) {
-      const objectCategory = await this.objectCategoryModel.findByPk(updatePartnerBannerDto.ObjectCategoryId);
+      const objectCategory = await this.objectCategoryModel.findByPk(
+        updatePartnerBannerDto.ObjectCategoryId,
+      );
       if (!objectCategory) {
         throw new NotFoundException('ObjectCategory not found');
       }
@@ -55,7 +61,8 @@ export class PartnerBannerService {
     partnerBanner.url = updatePartnerBannerDto.url ?? partnerBanner.url;
     partnerBanner.desc = updatePartnerBannerDto.desc ?? partnerBanner.desc;
     partnerBanner.name = updatePartnerBannerDto.name ?? partnerBanner.name;
-    partnerBanner.ObjectCategoryId = updatePartnerBannerDto.ObjectCategoryId ?? partnerBanner.ObjectCategoryId;
+    partnerBanner.ObjectCategoryId =
+      updatePartnerBannerDto.ObjectCategoryId ?? partnerBanner.ObjectCategoryId;
 
     return partnerBanner.save();
   }

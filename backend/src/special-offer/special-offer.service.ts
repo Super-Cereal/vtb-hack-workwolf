@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SpecialOffer } from 'src/models/special-offer.model';
 import { CreateManySpecialOffersDto, CreateSpecialOfferDto } from './dto/create-special-offer.dto';
 
-
 @Injectable()
 export class SpecialOfferService {
   constructor(
@@ -15,10 +14,12 @@ export class SpecialOfferService {
     return this.specialOfferModel.create(createSpecialOfferDto);
   }
 
-  async createMany(createManySpecialOffersDto: CreateManySpecialOffersDto): Promise<SpecialOffer[]> {
+  async createMany(
+    createManySpecialOffersDto: CreateManySpecialOffersDto,
+  ): Promise<SpecialOffer[]> {
     return this.specialOfferModel.bulkCreate(createManySpecialOffersDto.specialOffers);
   }
-  
+
   async findAll(): Promise<SpecialOffer[]> {
     return this.specialOfferModel.findAll();
   }

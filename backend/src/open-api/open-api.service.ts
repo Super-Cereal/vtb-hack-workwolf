@@ -23,29 +23,44 @@ export class OpenApiService {
     return headers;
   }
 
-  async createAccountConsent(data: any, request: any, additionalHeaders: any = {}): Promise<AxiosResponse> {
+  async createAccountConsent(
+    data: any,
+    request: any,
+    additionalHeaders: any = {},
+  ): Promise<AxiosResponse> {
     const accessToken = await this.oauth2Service.getAccessToken();
     const headers = this.generateHeaders(request, additionalHeaders);
     headers.Authorization = `Bearer ${accessToken}`;
-    headers['x-idempotency-key'] = uuidv4().substring(0, 40); 
+    headers['x-idempotency-key'] = uuidv4().substring(0, 40);
 
     const response = await firstValueFrom(
-      this.httpService.post('https://api.bankingapi.ru/extapi/aft/clientInfo/hackathon/v1/account-consents', data, {
-        headers,
-      }),
+      this.httpService.post(
+        'https://api.bankingapi.ru/extapi/aft/clientInfo/hackathon/v1/account-consents',
+        data,
+        {
+          headers,
+        },
+      ),
     );
     return response.data;
   }
 
-  async getAccountConsent(consentId: string, request: any, additionalHeaders: any = {}): Promise<AxiosResponse> {
+  async getAccountConsent(
+    consentId: string,
+    request: any,
+    additionalHeaders: any = {},
+  ): Promise<AxiosResponse> {
     const accessToken = await this.oauth2Service.getAccessToken();
     const headers = this.generateHeaders(request, additionalHeaders);
     headers.Authorization = `Bearer ${accessToken}`;
 
     const response = await firstValueFrom(
-      this.httpService.get(`https://api.bankingapi.ru/extapi/aft/clientInfo/hackathon/v1/account-consents/${consentId}`, {
-        headers,
-      }),
+      this.httpService.get(
+        `https://api.bankingapi.ru/extapi/aft/clientInfo/hackathon/v1/account-consents/${consentId}`,
+        {
+          headers,
+        },
+      ),
     );
     return response.data;
   }
@@ -56,9 +71,12 @@ export class OpenApiService {
     headers.Authorization = `Bearer ${accessToken}`;
 
     const response = await firstValueFrom(
-      this.httpService.get('https://api.bankingapi.ru/extapi/aft/clientInfo/hackathon/v1/accounts', {
-        headers,
-      }),
+      this.httpService.get(
+        'https://api.bankingapi.ru/extapi/aft/clientInfo/hackathon/v1/accounts',
+        {
+          headers,
+        },
+      ),
     );
     return response.data;
   }
