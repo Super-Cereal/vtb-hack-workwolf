@@ -1,0 +1,128 @@
+[
+  {
+    "objectId": "f3e8de90-e3fc-4ce4-b061-ce0384062b17",
+    "level": 1,
+    "gamecoins": 10,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "f3e8de90-e3fc-4ce4-b061-ce0384062b17",
+    "level": 2,
+    "gamecoins": 15,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "f3e8de90-e3fc-4ce4-b061-ce0384062b17",
+    "level": 3,
+    "gamecoins": 20,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "fc8251d9-9ac9-466b-bff5-477a6f2e4d6e",
+    "level": 1,
+    "gamecoins": 5,
+    "nextLevelCost": 50
+  },
+  {
+    "objectId": "fc8251d9-9ac9-466b-bff5-477a6f2e4d6e",
+    "level": 2,
+    "gamecoins": 10,
+    "nextLevelCost": 100
+  },
+  {
+    "objectId": "fc8251d9-9ac9-466b-bff5-477a6f2e4d6e",
+    "level": 3,
+    "gamecoins": 20,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "fdabbb51-b17c-410a-9b4c-9a74864808e1",
+    "level": 1,
+    "gamecoins": 5,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "fdabbb51-b17c-410a-9b4c-9a74864808e1",
+    "level": 2,
+    "gamecoins": 10,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "fdabbb51-b17c-410a-9b4c-9a74864808e1",
+    "level": 3,
+    "gamecoins": 15,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "53e5f2ca-5dfc-4115-8d60-f2e3784d0bf0",
+    "level": 1,
+    "gamecoins": 5,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "53e5f2ca-5dfc-4115-8d60-f2e3784d0bf0",
+    "level": 2,
+    "gamecoins": 10,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "53e5f2ca-5dfc-4115-8d60-f2e3784d0bf0",
+    "level": 3,
+    "gamecoins": 15,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "23229fac-1003-407a-bd54-dae12f639fbd",
+    "level": 1,
+    "gamecoins": 10,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "23229fac-1003-407a-bd54-dae12f639fbd",
+    "level": 2,
+    "gamecoins": 15,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "23229fac-1003-407a-bd54-dae12f639fbd",
+    "level": 3,
+    "gamecoins": 25,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "1b8d72d1-1025-42bb-9fce-730a3d2dbb46",
+    "level": 1,
+    "gamecoins": 5,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "1b8d72d1-1025-42bb-9fce-730a3d2dbb46",
+    "level": 2,
+    "gamecoins": 15,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "1b8d72d1-1025-42bb-9fce-730a3d2dbb46",
+    "level": 3,
+    "gamecoins": 15,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "69ab3c81-8181-4bd4-93a8-cc748799c196",
+    "level": 1,
+    "gamecoins": 10,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "69ab3c81-8181-4bd4-93a8-cc748799c196",
+    "level": 2,
+    "gamecoins": 15,
+    "nextLevelCost": 0
+  },
+  {
+    "objectId": "69ab3c81-8181-4bd4-93a8-cc748799c196",
+    "level": 3,
+    "gamecoins": 20,
+    "nextLevelCost": 0
+  }
+]

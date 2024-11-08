@@ -31,7 +31,7 @@ export class SpecialOffer extends Model<SpecialOffer> {
   @Column({
     type: DataType.UUID,
   })
-  objectLevelId: number;
+  objectLevelId: string;
 
   @BelongsTo(() => ObjectLevel)
   objectLevel: ObjectLevel;

@@ -58,7 +58,7 @@ export class ObjectCategory extends Model<ObjectCategory> {
   @ForeignKey(() => PartnerBanner)
   @Column({
     type: DataType.UUID,
-    allowNull: false,
+    allowNull: true,
   })
   partnerBannerId: string;
 

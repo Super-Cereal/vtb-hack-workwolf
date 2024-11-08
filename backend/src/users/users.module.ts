@@ -10,6 +10,8 @@ import { ObjectCardsService } from 'src/object-cards/object-cards.service';
 import { SpecialOffer } from 'src/models/special-offer.model';
 import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers.model';
 import { UserFinancialLessons } from 'src/models/staging_tables/user-financial-lessons.model';
+import { FileUploadService } from 'src/utils/file-upload.service';
+import { ObjectCardModule } from 'src/object-cards/object-cards.module';
 
 @Module({
   imports: [
@@ -22,8 +24,10 @@ import { UserFinancialLessons } from 'src/models/staging_tables/user-financial-l
       UserSpecialOffers,
       UserFinancialLessons,
     ]),
+    ObjectCardModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService, ObjectCardsService],
+  providers: [UsersService, ObjectCardsService, FileUploadService],
+  exports: [UsersService],
 })
 export class UsersModule {}

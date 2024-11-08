@@ -24,7 +24,7 @@ export class ObjectCardsService {
     private userSpecialOffersModel: typeof UserSpecialOffers,
     @InjectModel(ObjectLevel)
     private objectLevelModel: typeof ObjectLevel,
-  ) {}
+  ) { }
 
   async createObjectCard(createObjectCardDto: CreateObjectCardDto): Promise<ObjectCard> {
     return this.objectCardModel.create(createObjectCardDto);
@@ -32,6 +32,16 @@ export class ObjectCardsService {
 
   async findAllObjectCards(): Promise<ObjectCard[]> {
     return this.objectCardModel.findAll();
+  }
+
+  async findObjectCardsByUserId(userId: string): Promise<ObjectCard[]> {
+    const objectCards = await this.objectCardModel.findAll({
+      where: { userId: userId },
+    });
+    if (objectCards.length === 0) {
+      throw new NotFoundException('ObjectCards not found');
+    }
+    return objectCards;
   }
 
   async findObjectCardById(id: string): Promise<ObjectCard> {
@@ -59,7 +69,30 @@ export class ObjectCardsService {
     });
   }
 
-  async transferGameCoins(transferGameCoinsDto: TransferGameCoinsDto): Promise<void> {
+  async updateObjectCard(
+    id: string,
+    updateObjectCardDto: UpdateObjectCardDto,
+  ): Promise<ObjectCard> {
+    const [updatedRows] = await this.objectCardModel.update(updateObjectCardDto, {
+      where: { id },
+      returning: true,
+    });
+
+    if (updatedRows === 0) {
+      throw new NotFoundException('ObjectCard not found');
+    }
+
+    return this.findObjectCardById(id);
+  }
+
+  async deleteObjectCard(id: string): Promise<void> {
+    const deletedRows = await this.objectCardModel.destroy({ where: { id } });
+    if (deletedRows === 0) {
+      throw new NotFoundException('ObjectCard not found');
+    }
+  }
+
+  /* async transferGameCoins(transferGameCoinsDto: TransferGameCoinsDto): Promise<void> {
     const user = await this.userModel.findByPk(transferGameCoinsDto.userId);
     if (!user) {
       throw new NotFoundException('User not found');
@@ -100,28 +133,5 @@ export class ObjectCardsService {
         await objectCard.save();
       }
     }
-  }
-
-  async updateObjectCard(
-    id: string,
-    updateObjectCardDto: UpdateObjectCardDto,
-  ): Promise<ObjectCard> {
-    const [updatedRows] = await this.objectCardModel.update(updateObjectCardDto, {
-      where: { id },
-      returning: true,
-    });
-
-    if (updatedRows === 0) {
-      throw new NotFoundException('ObjectCard not found');
-    }
-
-    return this.findObjectCardById(id);
-  }
-
-  async deleteObjectCard(id: string): Promise<void> {
-    const deletedRows = await this.objectCardModel.destroy({ where: { id } });
-    if (deletedRows === 0) {
-      throw new NotFoundException('ObjectCard not found');
-    }
-  }
+  } */
 }

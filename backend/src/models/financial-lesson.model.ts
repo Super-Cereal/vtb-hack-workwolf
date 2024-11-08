@@ -37,10 +37,10 @@ export class FinancialLesson extends Model<FinancialLesson> {
   description: string;
 
   @Column({
-    type: DataType.BOOLEAN,
+    type: DataType.INTEGER,
     allowNull: false,
   })
-  complete: boolean;
+  gamecoins: number;
 
   @HasOne(() => FinancialTest)
   test: FinancialTest;

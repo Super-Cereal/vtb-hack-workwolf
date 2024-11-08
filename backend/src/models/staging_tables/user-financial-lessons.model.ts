@@ -7,18 +7,22 @@ export class UserFinancialLessons extends Model<UserFinancialLessons> {
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
+    primaryKey: true,
   })
   userId: string;
-
-  @BelongsTo(() => User)
-  user: User;
 
   @ForeignKey(() => FinancialLesson)
   @Column({
     type: DataType.UUID,
+    primaryKey: true,
   })
-  financialLessonId: string;
+  lessonId: string;
 
-  @BelongsTo(() => FinancialLesson)
-  financialLesson: FinancialLesson;
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  })
+  completed: boolean;
+
 }

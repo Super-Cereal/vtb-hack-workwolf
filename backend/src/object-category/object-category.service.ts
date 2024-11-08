@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { ObjectCategory } from 'src/models/object-category.model';
-import { CreateObjectCategoryDto } from './dto/create-object-category.dto';
+import { CreateManyObjectCategoriesDto, CreateObjectCategoryDto } from './dto/create-object-category.dto';
 import { UpdateObjectCategoryDto } from './dto/update-object-category.dto';
+import { ObjectLevel } from 'src/models/object-level.model';
 
 @Injectable()
 export class ObjectCategoryService {
@@ -17,8 +18,19 @@ export class ObjectCategoryService {
     return this.objectCategoryModel.create(createObjectCategoryDto);
   }
 
+  async createManyObjectCategories(
+    createManyObjectCategoriesDto: CreateManyObjectCategoriesDto,
+  ): Promise<ObjectCategory[]> {
+    return this.objectCategoryModel.bulkCreate(createManyObjectCategoriesDto.objectCategories);
+  }
+
   async findAllObjectCategories(): Promise<ObjectCategory[]> {
-    return this.objectCategoryModel.findAll();
+   return this.objectCategoryModel.findAll({
+      include: [{
+        model: ObjectLevel,
+        as: 'levels',
+      }],
+    });
   }
 
   async findObjectCategoryById(id: number): Promise<ObjectCategory> {
