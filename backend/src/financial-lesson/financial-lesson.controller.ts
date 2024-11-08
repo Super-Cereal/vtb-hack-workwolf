@@ -52,7 +52,11 @@ export class FinancialLessonsController {
 
   @Get('user/:userId')
   @ApiOperation({ summary: 'Get all financial lessons for a user' })
-  @ApiResponse({ status: 200, description: 'The list of financial lessons for the user.', type: [FinancialLesson] })
+  @ApiResponse({
+    status: 200,
+    description: 'The list of financial lessons for the user.',
+    type: [FinancialLesson],
+  })
   @ApiParam({ name: 'userId', description: 'The ID of the user', type: String })
   async getUserFinancialLessons(@Param('userId') userId: string): Promise<FinancialLesson[]> {
     return this.financialLessonsService.getUserFinancialLessons(userId);
@@ -60,9 +64,12 @@ export class FinancialLessonsController {
 
   @Post('complete')
   @ApiOperation({ summary: 'Complete a financial lesson for a user' })
-  @ApiResponse({ status: 200, description: 'The financial lesson has been successfully completed.' })
+  @ApiResponse({
+    status: 200,
+    description: 'The financial lesson has been successfully completed.',
+  })
   async completeFinancialLesson(
-    @Body() body: { userId: string, lessonId: string, gameCoins: number },
+    @Body() body: { userId: string; lessonId: string; gameCoins: number },
   ): Promise<void> {
     const { userId, lessonId, gameCoins } = body;
     return this.financialLessonsService.completeFinancialLesson(userId, lessonId, gameCoins);

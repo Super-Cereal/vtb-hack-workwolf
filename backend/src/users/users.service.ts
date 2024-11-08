@@ -92,19 +92,26 @@ export class UsersService {
     return user;
   }
 
-  async updateUser(id: string, updateUserDto: UpdateUserDto, avatarFile?: Express.Multer.File): Promise<User> {
+  async updateUser(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    avatarFile?: Express.Multer.File,
+  ): Promise<User> {
     let AccountImg = null;
     if (avatarFile) {
       AccountImg = await this.fileUploadService.uploadFile(avatarFile);
     }
 
-    const [updatedRows] = await this.userModel.update({
-      ...updateUserDto,
-      AccountImg,
-    }, {
-      where: { id },
-      returning: true,
-    });
+    const [updatedRows] = await this.userModel.update(
+      {
+        ...updateUserDto,
+        AccountImg,
+      },
+      {
+        where: { id },
+        returning: true,
+      },
+    );
 
     if (updatedRows === 0) {
       throw new NotFoundException('User not found');

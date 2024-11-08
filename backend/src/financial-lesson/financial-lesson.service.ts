@@ -17,7 +17,9 @@ export class FinancialLessonsService {
     private readonly userFinancialLessonsModel: typeof UserFinancialLessons,
   ) {}
 
-  async createFinancialLesson(createFinancialLessonDto: CreateFinancialLessonDto): Promise<FinancialLesson> {
+  async createFinancialLesson(
+    createFinancialLessonDto: CreateFinancialLessonDto,
+  ): Promise<FinancialLesson> {
     return this.financialLessonModel.create(createFinancialLessonDto);
   }
 
@@ -58,12 +60,14 @@ export class FinancialLessonsService {
 
   async getUserFinancialLessons(userId: string): Promise<FinancialLesson[]> {
     const user = await this.userModel.findByPk(userId, {
-      include: [{
-        model: FinancialLesson,
-        through: {
-          attributes: ['completed'],
+      include: [
+        {
+          model: FinancialLesson,
+          through: {
+            attributes: ['completed'],
+          },
         },
-      }],
+      ],
     });
 
     if (!user) {
@@ -73,7 +77,11 @@ export class FinancialLessonsService {
     return user.lessons;
   }
 
-  async completeFinancialLesson(userId: string, lessonId: string, gameCoins: number): Promise<void> {
+  async completeFinancialLesson(
+    userId: string,
+    lessonId: string,
+    gameCoins: number,
+  ): Promise<void> {
     const user = await this.userModel.findByPk(userId);
     if (!user) {
       throw new NotFoundException('User not found');
@@ -91,10 +99,15 @@ export class FinancialLessonsService {
     if (!userLesson) {
       await this.userFinancialLessonsModel.create({ userId, lessonId, completed: true });
     } else {
-      await this.userFinancialLessonsModel.update({ completed: true }, { where: { userId, lessonId } });
+      await this.userFinancialLessonsModel.update(
+        { completed: true },
+        { where: { userId, lessonId } },
+      );
     }
 
-    await this.userModel.update({ gameCoins: user.gameCoins + gameCoins }, { where: { id: userId } });
+    await this.userModel.update(
+      { gameCoins: user.gameCoins + gameCoins },
+      { where: { id: userId } },
+    );
   }
-
 }

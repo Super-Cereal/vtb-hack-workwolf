@@ -1,4 +1,4 @@
-import { Injectable,  } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 
@@ -6,7 +6,8 @@ import { firstValueFrom } from 'rxjs';
 export class OAuth2Service {
   private readonly clientId = 'team035';
   private readonly clientSecret = 'gRYkcmgzmYjWmK0ZXMICnWB0iMGOQh5e';
-  private readonly tokenUrl = 'https://auth.bankingapi.ru/auth/realms/kubernetes/protocol/openid-connect/token';
+  private readonly tokenUrl =
+    'https://auth.bankingapi.ru/auth/realms/kubernetes/protocol/openid-connect/token';
 
   constructor(private readonly httpService: HttpService) {}
 

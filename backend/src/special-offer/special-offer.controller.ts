@@ -20,7 +20,9 @@ export class SpecialOfferController {
   @Post('many')
   @ApiOperation({ summary: 'Create multiple special offers' })
   @ApiResponse({ status: 201, type: [SpecialOffer] })
-  createMany(@Body() createManySpecialOffersDto: CreateManySpecialOffersDto): Promise<SpecialOffer[]> {
+  createMany(
+    @Body() createManySpecialOffersDto: CreateManySpecialOffersDto,
+  ): Promise<SpecialOffer[]> {
     return this.specialOfferService.createMany(createManySpecialOffersDto);
   }
 

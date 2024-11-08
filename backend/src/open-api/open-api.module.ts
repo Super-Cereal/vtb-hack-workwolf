@@ -1,4 +1,4 @@
-import { Module,  } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { OpenApiService } from './open-api.service';
 import { HttpModule } from '@nestjs/axios';
 import { AccountsService } from './accounts/accounts.service';

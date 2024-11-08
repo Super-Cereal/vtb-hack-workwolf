@@ -1,6 +1,9 @@
 import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { ObjectCategoryService } from './object-category.service';
-import { CreateManyObjectCategoriesDto, CreateObjectCategoryDto } from './dto/create-object-category.dto';
+import {
+  CreateManyObjectCategoriesDto,
+  CreateObjectCategoryDto,
+} from './dto/create-object-category.dto';
 import { UpdateObjectCategoryDto } from './dto/update-object-category.dto';
 import { ApiOperation, ApiResponse, ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 

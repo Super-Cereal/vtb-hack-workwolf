@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { ObjectCard } from '../models/object-card.model';
 import { CreateObjectCardDto } from './dto/create-object-card.dto';
@@ -8,8 +8,6 @@ import { SpecialOffer } from 'src/models/special-offer.model';
 import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers.model';
 import { AddSpecialOfferDto } from './dto/add-special-offer.dto';
 import { ObjectLevel } from 'src/models/object-level.model';
-// import { ObjectCategory } from 'src/models/object-category.model';
-import { TransferGameCoinsDto } from './dto/transfer-game-coins.dto';
 
 @Injectable()
 export class ObjectCardsService {
@@ -24,7 +22,7 @@ export class ObjectCardsService {
     private userSpecialOffersModel: typeof UserSpecialOffers,
     @InjectModel(ObjectLevel)
     private objectLevelModel: typeof ObjectLevel,
-  ) { }
+  ) {}
 
   async createObjectCard(createObjectCardDto: CreateObjectCardDto): Promise<ObjectCard> {
     return this.objectCardModel.create(createObjectCardDto);

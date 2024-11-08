@@ -19,7 +19,6 @@ export class ObjectLevelService {
     return this.objectLevelModel.bulkCreate(createManyObjectLevelsDto.objectLevels);
   }
 
-
   async findAll(): Promise<ObjectLevel[]> {
     return this.objectLevelModel.findAll();
   }
@@ -28,7 +27,10 @@ export class ObjectLevelService {
     return this.objectLevelModel.findOne({ where: { id } });
   }
 
-  async update(id: string, updateObjectLevelDto: UpdateObjectLevelDto): Promise<[number, ObjectLevel[]]> {
+  async update(
+    id: string,
+    updateObjectLevelDto: UpdateObjectLevelDto,
+  ): Promise<[number, ObjectLevel[]]> {
     return this.objectLevelModel.update(updateObjectLevelDto, { where: { id }, returning: true });
   }
 

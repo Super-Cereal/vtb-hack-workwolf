@@ -1,15 +1,6 @@
-import {
-  Controller,
-  Get,
-  Put,
-  Param,
-  Body,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, Put, Param, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @ApiTags('users')
@@ -17,7 +8,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-/*   @Post()
+  /*   @Post()
   @ApiOperation({ summary: 'Create a new user' })
   @ApiResponse({ status: 201, description: 'The user has been successfully created.' })
   @ApiResponse({ status: 400, description: 'Bad request.' })
@@ -54,7 +45,7 @@ export class UsersController {
     return this.userService.updateUser(id, updateUserDto);
   }
 
-/*   @Delete(':id')
+  /*   @Delete(':id')
   @ApiOperation({ summary: 'Delete a user by ID' })
   @ApiParam({ name: 'id', description: 'The ID of the user' })
   @ApiResponse({ status: 200, description: 'The user has been successfully deleted.' })

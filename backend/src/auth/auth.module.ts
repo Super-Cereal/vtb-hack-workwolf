@@ -15,7 +15,7 @@ import { FileUploadService } from 'src/utils/file-upload.service';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel, ]),
+    SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel]),
     UsersModule,
     PassportModule,
     ObjectCardModule,

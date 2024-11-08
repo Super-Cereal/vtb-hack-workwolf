@@ -23,7 +23,11 @@ export class CreateUserDto {
   @MinLength(6)
   password: string;
 
-  @ApiProperty({ example: 'https://example.com/image.jpg', description: 'The URL of the user\'s account image', required: false })
+  @ApiProperty({
+    example: 'https://example.com/image.jpg',
+    description: "The URL of the user's account image",
+    required: false,
+  })
   @IsOptional()
   @IsString()
   AccountImg?: string;
