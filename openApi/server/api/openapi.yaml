@@ -5,14 +5,14 @@ info:
   title: OpenApi микросервис команды workwolf
   version: 1.0.0
 servers:
-- url: http://localhost:8080/api
+  - url: http://localhost:8080/api
 paths:
   /transactions:
     get:
       description: Получить список последних транзакций
       operationId: getTransactions
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
@@ -43,26 +43,26 @@ components:
           format: int64
           type: integer
         type:
-          description: "Направление транзакции (in – пополнение, out – списание)"
+          description: 'Направление транзакции (in – пополнение, out – списание)'
           enum:
-          - in
-          - out
+            - in
+            - out
           type: string
         category:
           $ref: '#/components/schemas/Category'
         status:
           description: Статус транзакции
           enum:
-          - AwaitingAuthorisation
-          - Rejected
-          - Authorised
-          - Consumed
+            - AwaitingAuthorisation
+            - Rejected
+            - Authorised
+            - Consumed
           example: Consumed
           type: string
       required:
-      - id
-      - type
-      - value
+        - id
+        - type
+        - value
       type: object
       xml:
         name: transaction

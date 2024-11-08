@@ -27,10 +27,11 @@ module.exports = {
     ecmaVersion: 13,
     sourceType: "module",
   },
-  plugins: ["nimbus-clean"],
+  plugins: ["nimbus-clean", "explicit-dependencies"],
 
   rules: {
     "@typescript-eslint/naming-convention": [0],
+    "explicit-dependencies/explicit": ["error", { dev: true }],
   },
 
   settings: {
