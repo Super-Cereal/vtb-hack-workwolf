@@ -5,7 +5,7 @@ info:
     Микросервис дает возможность получить список последних транзакий пользователя с учетом категорий покупок/пополнений
   version: 1.0.0
 servers:
-  - url: https://workwolf.swagger.io/api/v3
+  - url: http://localhost:8080/api
 paths:
   /transactions:
     get:

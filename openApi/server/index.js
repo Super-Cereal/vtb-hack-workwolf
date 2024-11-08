@@ -1,23 +1,16 @@
-"use strict";
+const config = require('./config');
+const logger = require('./logger');
+const ExpressServer = require('./expressServer');
 
-var path = require("path");
-var http = require("http");
-
-var oas3Tools = require("oas3-tools");
-var serverPort = 8080;
-
-// swaggerRouter configuration
-var options = {
-  routing: {
-    controllers: path.join(__dirname, "./controllers"),
-  },
+const launchServer = async () => {
+  try {
+    this.expressServer = new ExpressServer(config.URL_PORT, config.OPENAPI_YAML);
+    this.expressServer.launch();
+    logger.info('Express server running');
+  } catch (error) {
+    logger.error('Express Server failure', error.message);
+    await this.close();
+  }
 };
 
-var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, "api/openapi.yaml"), options);
-var app = expressAppConfig.getApp();
-
-// Initialize the Swagger middleware
-http.createServer(app).listen(serverPort, function () {
-  console.log("Your server is listening on port %d (http://localhost:%d)", serverPort, serverPort);
-  console.log("Swagger-ui is available on http://localhost:%d/docs", serverPort);
-});
+launchServer().catch((e) => logger.error(e));
