@@ -39,7 +39,7 @@ export class ObjectLevel extends Model<ObjectLevel> {
     type: DataType.INTEGER,
     allowNull: false,
   })
-  multibonus: number;
+  gamecoins: number;
 
   @Column({
     type: DataType.INTEGER,

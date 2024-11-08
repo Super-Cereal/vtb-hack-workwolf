@@ -6,6 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ObjectCategory, ObjectCategoryEnum } from '../models/object-category.model';
 import { ObjectLevel } from '../models/object-level.model';
 import { ObjectCardsService } from 'src/object-cards/object-cards.service';
+import { FileUploadService } from 'src/utils/file-upload.service';
 
 @Injectable()
 export class UsersService {
@@ -19,10 +20,19 @@ export class UsersService {
     private objectCategoryModel: typeof ObjectCategory,
     @InjectModel(ObjectLevel)
     private objectLevelModel: typeof ObjectLevel,
+    private readonly fileUploadService: FileUploadService,
   ) {}
 
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
-    const user = await this.userModel.create(createUserDto);
+  async createUser(createUserDto: CreateUserDto, avatarFile?: Express.Multer.File): Promise<User> {
+    let AccountImg = null;
+    if (avatarFile) {
+      AccountImg = await this.fileUploadService.uploadFile(avatarFile);
+    }
+
+    const user = await this.userModel.create({
+      ...createUserDto,
+      AccountImg,
+    });
 
     // Создаем карточки для каждой категории
     for (const category of Object.values(ObjectCategoryEnum)) {
@@ -37,7 +47,7 @@ export class UsersService {
         }
 
         const initialLevel = await this.objectLevelModel.findOne({
-          where: { objectId: objectCategory.id, level: 0 },
+          where: { objectId: objectCategory.id, level: 1 },
         });
 
         if (!initialLevel) {
@@ -73,6 +83,7 @@ export class UsersService {
     }
     return user;
   }
+
   async findUserByEmail(id: string): Promise<User> {
     const user = await this.userModel.findByPk(id);
     if (!user) {
@@ -81,8 +92,16 @@ export class UsersService {
     return user;
   }
 
-  async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    const [updatedRows] = await this.userModel.update(updateUserDto, {
+  async updateUser(id: string, updateUserDto: UpdateUserDto, avatarFile?: Express.Multer.File): Promise<User> {
+    let AccountImg = null;
+    if (avatarFile) {
+      AccountImg = await this.fileUploadService.uploadFile(avatarFile);
+    }
+
+    const [updatedRows] = await this.userModel.update({
+      ...updateUserDto,
+      AccountImg,
+    }, {
       where: { id },
       returning: true,
     });

@@ -18,6 +18,10 @@ import { FinancialTest } from './models/financial-test.model';
 import { Article } from './models/article.model';
 import { Question } from './models/question.model';
 import { OAuth2Module } from './open-api/auth/oauth2.module';
+import { FinancialLessonModule } from './financial-lesson/financial-lesson.module';
+import { AuthModule } from './auth/auth.module';
+import { ObjectLevelModule } from './object-level/object-level.module';
+import { SpecialOfferModule } from './special-offer/special-offer.module';
 
 @Module({
   imports: [
@@ -41,6 +45,10 @@ import { OAuth2Module } from './open-api/auth/oauth2.module';
     PartnerBannerModule,
     ObjectCategoryModule,
     OAuth2Module,
+    FinancialLessonModule,
+    AuthModule,
+    ObjectLevelModule,
+    SpecialOfferModule,
   ],
 })
 export class AppModule {}
