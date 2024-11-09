@@ -15,10 +15,12 @@ export class OpenApiService {
 
   private generateHeaders(request: any, additionalHeaders: any = {}): any {
     const headers = {
-      'x-customer-user-agent': additionalHeaders['x-customer-user-agent'] || request.headers['user-agent'] || 'unknown',
+      'x-customer-user-agent':
+        additionalHeaders['x-customer-user-agent'] || request.headers['user-agent'] || 'unknown',
       'x-fapi-auth-date': additionalHeaders['x-fapi-auth-date'] || new Date().toUTCString(),
       'x-fapi-interaction-id': additionalHeaders['x-fapi-interaction-id'] || uuidv4(),
-      'x-fapi-customer-ip-address': additionalHeaders['x-fapi-customer-ip-address'] || request.ip || 'unknown',
+      'x-fapi-customer-ip-address':
+        additionalHeaders['x-fapi-customer-ip-address'] || request.ip || 'unknown',
       ...additionalHeaders,
     };
     return headers;
@@ -32,23 +34,16 @@ export class OpenApiService {
 
     return {
       Data: {
-        permissions: [
-          "ReadAccountsBasic",
-          "ReadTransactionsDebits",
-          "ReadBalances"
-        ],
+        permissions: ['ReadAccountsBasic', 'ReadTransactionsDebits', 'ReadBalances'],
         expirationDateTime,
         transactionFromDateTime,
-        transactionToDateTime
+        transactionToDateTime,
       },
-      Risk: {}
+      Risk: {},
     };
   }
 
-  async createAccountConsent(
-    request: any,
-    additionalHeaders: any = {},
-  ): Promise<ConsentResponse> {
+  async createAccountConsent(request: any, additionalHeaders: any = {}): Promise<ConsentResponse> {
     const accessToken = await this.oauth2Service.getAccessToken();
     const headers = this.generateHeaders(request, additionalHeaders);
     headers.Authorization = `Bearer ${accessToken}`;
@@ -62,8 +57,8 @@ export class OpenApiService {
     const config: AxiosRequestConfig = {
       headers,
       httpsAgent: new (require('https').Agent)({
-        rejectUnauthorized: false
-      })
+        rejectUnauthorized: false,
+      }),
     };
 
     try {
@@ -76,11 +71,13 @@ export class OpenApiService {
       );
       return response.data;
     } catch (error) {
-      console.error('Error creating account consent:', error.response ? error.response.data : error.message);
+      console.error(
+        'Error creating account consent:',
+        error.response ? error.response.data : error.message,
+      );
       throw error;
     }
   }
-
 
   async getAccountConsent(
     consentId: string,
@@ -94,8 +91,8 @@ export class OpenApiService {
     const config: AxiosRequestConfig = {
       headers,
       httpsAgent: new (require('https').Agent)({
-        rejectUnauthorized: false
-      })
+        rejectUnauthorized: false,
+      }),
     };
 
     const response = await firstValueFrom(
@@ -115,8 +112,8 @@ export class OpenApiService {
     const config: AxiosRequestConfig = {
       headers,
       httpsAgent: new (require('https').Agent)({
-        rejectUnauthorized: false
-      })
+        rejectUnauthorized: false,
+      }),
     };
 
     const response = await firstValueFrom(

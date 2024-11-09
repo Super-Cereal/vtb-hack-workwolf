@@ -26,7 +26,7 @@ import { OpenApiModule } from './open-api/open-api.module';
 
 @Module({
   imports: [
-    SequelizeModule.forRoot(sequelizeConfig,  ),
+    SequelizeModule.forRoot(sequelizeConfig),
     SequelizeModule.forFeature([
       User,
       SpecialOffer,

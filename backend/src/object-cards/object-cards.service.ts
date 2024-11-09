@@ -10,6 +10,9 @@ import { AddSpecialOfferDto } from './dto/add-special-offer.dto';
 import { ObjectLevel } from 'src/models/object-level.model';
 import { LevelUpObjectCardDto } from './dto/level-up-obj-card.dto';
 import { ObjectCategory } from 'src/models/object-category.model';
+import { firstValueFrom } from 'rxjs';
+import type { Transaction } from './types';
+import { HttpService } from '@nestjs/axios';
 
 @Injectable()
 export class ObjectCardsService {
@@ -24,6 +27,8 @@ export class ObjectCardsService {
     private userSpecialOffersModel: typeof UserSpecialOffers,
     @InjectModel(ObjectLevel)
     private objectLevelModel: typeof ObjectLevel,
+
+    private readonly httpService: HttpService,
   ) {}
 
   async createObjectCard(createObjectCardDto: CreateObjectCardDto): Promise<ObjectCard> {
@@ -39,74 +44,79 @@ export class ObjectCardsService {
       where: { userId: userId },
       include: [
         {
-            model: ObjectCategory,
-            as: 'objectCategory',
-            attributes: {
-                exclude: ['createdAt', 'updatedAt'],
-            },
+          model: ObjectCategory,
+          as: 'objectCategory',
+          attributes: {
+            exclude: ['createdAt', 'updatedAt'],
+          },
         },
-    ],
-    attributes: {
+      ],
+      attributes: {
         exclude: ['currentLevelId', 'objectCategoryId', 'createdAt', 'updatedAt', 'userId'],
-    },
+      },
     });
+
     if (objectCards.length === 0) {
       throw new NotFoundException('ObjectCards not found');
     }
+
+    /** Обновляем прогресс по всем карточкам */
+    await Promise.all(objectCards.map(({ id }) => this.recalculateProgess(userId, id)));
+
     return objectCards;
   }
 
   async findObjectCardById(id: string): Promise<ObjectCard> {
     const objectCard = await this.objectCardModel.findByPk(id, {
-        include: [
-            {
-                model: ObjectCategory,
-                as: 'objectCategory',
-                attributes: {
-                    exclude: ['createdAt', 'updatedAt'],
-                },
-            },
-            {
-                model: ObjectLevel,
-                as: 'currentLevel',
-                include: [
-                    {
-                        model: SpecialOffer,
-                        as: 'specialOffers',
-                        attributes: {
-                          exclude: ['createdAt', 'updatedAt',  'ObjectLevelId' ],
-                      },
-                    },
-                ],
-                attributes: {
-                    exclude: ['createdAt', 'updatedAt', 'objectId', ],
-                },
-            },
-        ],
-        attributes: {
-            exclude: ['currentLevelId', 'objectCategoryId', 'createdAt', 'updatedAt', 'userId'],
+      include: [
+        {
+          model: ObjectCategory,
+          as: 'objectCategory',
+          attributes: {
+            exclude: ['createdAt', 'updatedAt'],
+          },
         },
+        {
+          model: ObjectLevel,
+          as: 'currentLevel',
+          include: [
+            {
+              model: SpecialOffer,
+              as: 'specialOffers',
+              attributes: {
+                exclude: ['createdAt', 'updatedAt', 'ObjectLevelId'],
+              },
+            },
+          ],
+          attributes: {
+            exclude: ['createdAt', 'updatedAt', 'objectId'],
+          },
+        },
+      ],
+      attributes: {
+        exclude: ['currentLevelId', 'objectCategoryId', 'createdAt', 'updatedAt', 'userId'],
+      },
     });
 
     if (!objectCard) {
-        throw new NotFoundException('ObjectCard not found');
+      throw new NotFoundException('ObjectCard not found');
     }
 
     return objectCard;
-}
+  }
 
   async addSpecialOffer(addSpecialOfferDto: AddSpecialOfferDto): Promise<void> {
     const user = await this.userModel.findOne({
-      where: {id: addSpecialOfferDto.userId}
+      where: { id: addSpecialOfferDto.userId },
     });
     console.log(user);
-    
+
     if (!user) {
       throw new NotFoundException('User not found');
     }
 
     const specialOffer = await this.specialOfferModel.findOne({
-      where: {id: addSpecialOfferDto.specialOfferId }
+      where: { id: addSpecialOfferDto.specialOfferId },
     });
     if (!specialOffer) {
       throw new NotFoundException('SpecialOffer not found');
@@ -181,6 +191,29 @@ export class ObjectCardsService {
 
     objectCard.currentLevelId = nextLevel.id;
     objectCard.progress = 0;
+    await objectCard.save();
+  }
+
+  /** Обновить прогресс по карточке обьекта для пользователя */
+  async recalculateProgess(userId: string, objectCardId: string) {
+    const objectCard = await this.objectCardModel.findByPk(objectCardId);
+    if (!objectCard) {
+      throw new NotFoundException('ObjectCard not found');
+    }
+
+    const transactions = (
+      await firstValueFrom(this.httpService.get(`http://localhost:3001/api/transactions/${userId}`))
+    ).data as Transaction[];
+
+    const transactionsByCategory = transactions.filter(
+      ({ category, type }) => type === 'out' && category.name === objectCard.objectCategory.name,
+    );
+
+    const transactionsSum = transactionsByCategory.reduce((acc, { value }) => acc + value, 0);
+
+    const maxProgress = objectCard.currentLevel.nextLevelCost;
+    objectCard.progress = Math.min(maxProgress, objectCard.progress + transactionsSum);
+
     await objectCard.save();
   }
 

@@ -1,5 +1,7 @@
 import React, { FC, memo } from "react";
 
+import { IconCoins } from "@/shared/ui/icons";
+
 import { Ellipse17Icon } from "./Ellipse17Icon";
 import { Ellipse22Icon } from "./Ellipse22Icon";
 import { Ellipse29Icon } from "./Ellipse29Icon";
@@ -17,7 +19,6 @@ import { Ellipse43Icon } from "./Ellipse43Icon";
 
 import classes from "../../cardBanner.module.css";
 import resets from "../_resets.module.css";
-import { IconCoins } from "@/shared/ui/icons";
 
 interface Props {
   title?: string;
