@@ -5,12 +5,18 @@ info:
   title: OpenApi микросервис команды workwolf
   version: 1.0.0
 servers:
-  - url: http://localhost:8080/api
+  - url: http://localhost:3001/api
 paths:
-  /transactions:
+  /transactions/{id}:
     get:
       description: Получить список последних транзакций
       operationId: getTransactions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           content:
@@ -20,7 +26,6 @@ paths:
                   $ref: '#/components/schemas/Transaction'
                 type: array
           description: Успешно
-      x-eov-operation-handler: controllers/DefaultController
 components:
   schemas:
     Transaction:
@@ -28,7 +33,7 @@ components:
         id: 10
         type: in
         category:
-          name: Restaurant
+          name: Рестораны
           id: 1
         value: 4877
         status: Consumed
@@ -68,7 +73,7 @@ components:
         name: transaction
     Category:
       example:
-        name: Restaurant
+        name: Рестораны
         id: 1
       properties:
         id:
@@ -76,7 +81,7 @@ components:
           format: int64
           type: integer
         name:
-          example: Restaurant
+          example: Рестораны
           type: string
       type: object
       xml:

@@ -1,5 +1,4 @@
 export class LevelUpObjectCardDto {
-    userId: string;
-    objectCardId: string;
-  }
-  
+  userId: string;
+  objectCardId: string;
+}

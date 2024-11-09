@@ -26,7 +26,7 @@ class ExpressServer {
 
   setupMiddleware() {
     // this.setupAllowedMedia();
-    this.app.use(cors());
+    this.app.options('*', cors({ origin: ['http://localhost:3000'] }));
 
     this.app.use(bodyParser.json({ limit: '14MB' }));
     this.app.use(express.json());

@@ -34,7 +34,7 @@ export class CreateObjectCategoryDto {
   ObjectImg?: string;
 
   @ApiProperty({
-    example: 'partner-banner-id-123',
+    example: '123e4567-e89b-12d3-a456-426655440000',
     description: 'The ID of the partner banner',
     required: false,
   })

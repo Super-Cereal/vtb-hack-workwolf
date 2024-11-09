@@ -32,7 +32,7 @@ export class ObjectCardsController {
   @UseGuards(AuthGuard('jwt'))
   @Get('user')
   async findObjectCardsByUserId(@Req() request) {
-    const userId = request.user.id; 
+    const userId = request.user.id;
     return this.objectCardsService.findObjectCardsByUserId(userId);
   }
 
@@ -67,10 +67,10 @@ export class ObjectCardsController {
   @UseGuards(AuthGuard('jwt'))
   @Post('special-offers')
   async addSpecialOffer(@Req() request, @Body() specialOfferId: string): Promise<void> {
-    const userId = request.user.id; 
+    const userId = request.user.id;
     console.log(userId);
-    
-    return this.objectCardsService.addSpecialOffer({userId, specialOfferId});
+
+    return this.objectCardsService.addSpecialOffer({ userId, specialOfferId });
   }
 
   @ApiOperation({ summary: 'Level up object card' })
@@ -78,7 +78,10 @@ export class ObjectCardsController {
   @UseGuards(AuthGuard('jwt'))
   @Post('level-up')
   async levelUpObjectCard(@Req() request, @Body() objectCardId: string) {
-    const userId = request.user.id; 
-    return this.objectCardsService.levelUpObjectCard({userId: userId, objectCardId: objectCardId });
+    const userId = request.user.id;
+    return this.objectCardsService.levelUpObjectCard({
+      userId: userId,
+      objectCardId: objectCardId,
+    });
   }
 }

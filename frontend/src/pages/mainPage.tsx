@@ -2,7 +2,7 @@ import React from "react";
 
 import { CardSpecialOffers } from "@/components/card-special-offers";
 import { PageTemplate } from "@/components/page-template";
-import { Card, CardMore, CardProgress } from "@/shared/ui/card";
+import { CardMore, CardProgress } from "@/shared/ui/card";
 import { CardBanner } from "@/shared/ui/cardBanner/ui/components/Frame2087324180/cardBanner";
 
 /** Главная страница */

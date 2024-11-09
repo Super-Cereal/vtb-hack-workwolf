@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from 'src/models/user.model';
 import { UsersController } from './users.controller';
@@ -25,6 +26,7 @@ import { ObjectCardModule } from 'src/object-cards/object-cards.module';
       UserFinancialLessons,
     ]),
     ObjectCardModule,
+    HttpModule,
   ],
   controllers: [UsersController],
   providers: [UsersService, ObjectCardsService, FileUploadService],

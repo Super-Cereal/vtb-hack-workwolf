@@ -20,7 +20,7 @@ export class UsersController {
     }
   } */
 
-/*   @Get()
+  /*   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'The list of users has been successfully retrieved.' })
   async findAllUsers() {

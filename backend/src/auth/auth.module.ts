@@ -12,23 +12,24 @@ import { ObjectCardModule } from 'src/object-cards/object-cards.module';
 import { ObjectCategory } from 'src/models/object-category.model';
 import { ObjectLevel } from 'src/models/object-level.model';
 import { FileUploadService } from 'src/utils/file-upload.service';
+import { HttpModule } from '@nestjs/axios';
 
-
-const passportModule = PassportModule.register({ defaultStrategy: 'jwt' })
+const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
 @Module({
   imports: [
     SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel]),
     UsersModule,
-    passportModule, 
+    passportModule,
     ObjectCardModule,
     JwtModule.register({
       secret: '123',
       signOptions: { expiresIn: '60m' },
     }),
+    HttpModule,
   ],
   providers: [AuthService, UsersService, FileUploadService, JwtStrategy],
   controllers: [AuthController],
-  exports: [passportModule]
+  exports: [passportModule],
 })
 export class AuthModule {}
