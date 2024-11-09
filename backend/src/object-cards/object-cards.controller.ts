@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, Req } from 
 import { ObjectCardsService } from './object-cards.service';
 import { CreateObjectCardDto } from './dto/create-object-card.dto';
 import { UpdateObjectCardDto } from './dto/update-object-card.dto';
-import { AddSpecialOfferDto } from './dto/add-special-offer.dto';
+import { AddSpecialOfferDto, SpecialOfferDto } from './dto/add-special-offer.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { LevelUpObjectCardDto } from './dto/level-up-obj-card.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -63,10 +63,10 @@ export class ObjectCardsController {
 
   @ApiOperation({ summary: 'Add a special offer to a user' })
   @ApiResponse({ status: 201, description: 'The special offer has been successfully added.' })
-  @ApiBody({ type: AddSpecialOfferDto })
+  @ApiBody({ type: SpecialOfferDto })
   @UseGuards(AuthGuard('jwt'))
   @Post('special-offers')
-  async addSpecialOffer(@Req() request, @Body() specialOfferId: string): Promise<void> {
+  async addSpecialOffer(@Req() request, @Body('specialOfferId') specialOfferId: string): Promise<void> {
     const userId = request.user.id; 
     console.log(userId);
     

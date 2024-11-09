@@ -1,7 +1,8 @@
-import { Controller, Get, Put, Param, Body } from '@nestjs/common';
+import { Controller, Get, Put, Param, Body, UseGuards, Req } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('users')
 @Controller('users')
@@ -26,15 +27,16 @@ export class UsersController {
   async findAllUsers() {
     return this.userService.findAllUsers();
   }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Get a user by ID' })
-  @ApiParam({ name: 'id', description: 'The ID of the user' })
+*/
+  @Get('user')
+  @ApiOperation({ summary: 'Get the current user' })
   @ApiResponse({ status: 200, description: 'The user has been successfully retrieved.' })
   @ApiResponse({ status: 404, description: 'User not found.' })
-  async findUserById(@Param('id') id: string) {
-    return this.userService.findUserById(id);
-  } */
+  @UseGuards(AuthGuard('jwt'))
+  async getCurrentUser(@Req() request) {
+    const userId = request.user.id;
+    return this.userService.findUserById(userId);
+  }
 
   @Put(':id')
   @ApiOperation({ summary: 'Update a user by ID' })

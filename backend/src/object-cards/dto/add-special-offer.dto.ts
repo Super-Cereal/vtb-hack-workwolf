@@ -7,3 +7,7 @@ export class AddSpecialOfferDto {
   @ApiProperty({ description: 'The ID of the special offer' })
   specialOfferId: string;
 }
+
+export class SpecialOfferDto {
+  specialOfferId: string;
+}

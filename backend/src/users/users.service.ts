@@ -7,6 +7,8 @@ import { ObjectCategory, ObjectCategoryEnum } from '../models/object-category.mo
 import { ObjectLevel } from '../models/object-level.model';
 import { ObjectCardsService } from 'src/object-cards/object-cards.service';
 import { FileUploadService } from 'src/utils/file-upload.service';
+import { SpecialOffer } from 'src/models/special-offer.model';
+import { FinancialLesson } from 'src/models/financial-lesson.model';
 
 @Injectable()
 export class UsersService {
@@ -78,9 +80,13 @@ export class UsersService {
   async findUserById(userId: string): Promise<User> {
     const user = await this.userModel.findOne({
       where: { id: userId },
+      include: [
+        { model: SpecialOffer, as: 'ActiveSpecialOffers' },
+        { model: FinancialLesson, as: 'lessons' },
+      ],
     });
     if (!user) {
-      throw new NotFoundException('User not found by email');
+      throw new NotFoundException('User not found');
     }
     return user;
   }
