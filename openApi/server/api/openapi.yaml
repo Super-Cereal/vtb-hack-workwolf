@@ -16,7 +16,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           content:
@@ -26,6 +26,7 @@ paths:
                   $ref: '#/components/schemas/Transaction'
                 type: array
           description: Успешно
+      x-eov-operation-handler: controllers/DefaultController
 components:
   schemas:
     Transaction:

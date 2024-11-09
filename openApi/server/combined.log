@@ -12,3 +12,5 @@
 {"level":"info","message":"Express server running","service":"user-service","timestamp":"2024-11-09T14:18:44.299Z"}
 {"level":"info","message":"Express server running","service":"user-service","timestamp":"2024-11-09T14:28:47.908Z"}
 {"level":"info","message":"Express server running","service":"user-service","timestamp":"2024-11-09T14:51:33.386Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2024-11-09T15:08:48.520Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2024-11-09T15:58:34.225Z"}

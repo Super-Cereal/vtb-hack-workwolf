@@ -50,6 +50,13 @@ export class ObjectCardsService {
             exclude: ['createdAt', 'updatedAt'],
           },
         },
+        {
+          model: ObjectLevel,
+          as: 'currentLevel',
+          attributes: {
+            exclude: ['createdAt', 'updatedAt'],
+          },
+        },
       ],
       attributes: {
         exclude: ['currentLevelId', 'objectCategoryId', 'createdAt', 'updatedAt', 'userId'],
@@ -61,9 +68,9 @@ export class ObjectCardsService {
     }
 
     /** Обновляем прогресс по всем карточкам */
-    await Promise.all(objectCards.map(({ id }) => this.recalculateProgess(userId, id)));
+    const recalculatedObjectCards = await this.recalculateProgess(userId, objectCards);
 
-    return objectCards;
+    return recalculatedObjectCards;
   }
 
   async findObjectCardById(id: string): Promise<ObjectCard> {
@@ -195,26 +202,29 @@ export class ObjectCardsService {
   }
 
   /** Обновить прогресс по карточке обьекта для пользователя */
-  async recalculateProgess(userId: string, objectCardId: string) {
-    const objectCard = await this.objectCardModel.findByPk(objectCardId);
-    if (!objectCard) {
-      throw new NotFoundException('ObjectCard not found');
+  async recalculateProgess(userId: string, objectCards: ObjectCard[]) {
+    const transactions = (
+      (
+        await firstValueFrom(
+          this.httpService.get(`http://localhost:3001/api/transactions/${userId}`),
+        )
+      ).data as Transaction[]
+    ).filter(({ type }) => type === 'out');
+
+    for (const objectCard of objectCards) {
+      const transactionsByCategory = transactions.filter(
+        ({ category }) => category.name === objectCard.objectCategory.name,
+      );
+
+      const transactionsSum = transactionsByCategory.reduce((acc, { value }) => acc + value, 0);
+      const maxProgress = objectCard.currentLevel.nextLevelCost;
+      console.log(maxProgress);
+
+      objectCard.progress = Math.min(maxProgress, objectCard.progress + transactionsSum);
+      await objectCard.save();
     }
 
-    const transactions = (
-      await firstValueFrom(this.httpService.get(`http://localhost:3001/api/transactions/${userId}`))
-    ).data as Transaction[];
-
-    const transactionsByCategory = transactions.filter(
-      ({ category, type }) => type === 'out' && category.name === objectCard.objectCategory.name,
-    );
-
-    const transactionsSum = transactionsByCategory.reduce((acc, { value }) => acc + value, 0);
-
-    const maxProgress = objectCard.currentLevel.nextLevelCost;
-    objectCard.progress = Math.min(maxProgress, objectCard.progress + transactionsSum);
-
-    await objectCard.save();
+    return objectCards;
   }
 
   /* async transferGameCoins(transferGameCoinsDto: TransferGameCoinsDto): Promise<void> {
