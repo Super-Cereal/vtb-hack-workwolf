@@ -10,8 +10,8 @@
 .card_progress {
   border-radius: 40px;
   width: 100%;
-  height: 467px;
-  overflow: hidden;
+  /* height: 467px;
+  overflow: hidden; */
 }
 
 .card_header {
@@ -98,4 +98,13 @@
   border-radius: 10px;
   background: var(--progress-color);
   transition: width 0.3s ease-in-out;
+}
+
+.progress_bar {
+  height: 8px;
+  border-radius: 10px;
+  background: #eee;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 1%;
 }

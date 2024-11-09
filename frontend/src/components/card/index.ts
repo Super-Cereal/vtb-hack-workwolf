@@ -1,4 +1,4 @@
 export { CardProgress } from "../cardProgress/ui/cardProgress";
-export { Card } from "./ui/card";
-export { CardMore } from "./ui/cardMore";
 export { CardSelection } from "./ui/cardSelection";
+export { ServiceCard } from "./ui/serviceCard";
+export { SummaryCard } from "./ui/summaryCard";

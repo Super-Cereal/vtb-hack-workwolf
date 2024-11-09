@@ -11,15 +11,15 @@ interface CardProps extends PropsWithChildren {
 }
 
 /**
- * Пример использования компонента `Card`.
+ * Пример использования компонента `SummaryCard`.
  *
  * @example
-        <Card title="Откройте счёт для бизнеса в ВТБ" description="ВТБ — надёжный партнёр для вашего бизнеса" titleTag="h2">
-        </Card>
+        <SummaryCard title="Откройте счёт для бизнеса в ВТБ" description="ВТБ — надёжный партнёр для вашего бизнеса" titleTag="h2">
+        </SummaryCard>
  * />
  */
 
-export const Card = ({ title, titleTag: TitleTag = "span", className, description }: CardProps) => (
+export const SummaryCard = ({ title, titleTag: TitleTag = "span", className, description }: CardProps) => (
   <div className={cx(styles.card, className)}>
     {title && <TitleTag className={styles.title}>{title}</TitleTag>}
     {description && <div className={styles.description}>{description}</div>}

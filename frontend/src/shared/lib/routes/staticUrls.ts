@@ -9,6 +9,9 @@ export const staticUrls = {
   /** Список уроков фин грамотности */
   lessonsList: "/lessons",
 
+  /** Страница авторизации */
+  AuthorizationPage: "/authorization",
+
   /** Урок фин грамотности */
   lesson: "/lessons/:lessonId",
 
