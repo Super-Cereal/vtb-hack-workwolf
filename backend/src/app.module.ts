@@ -22,6 +22,7 @@ import { FinancialLessonModule } from './financial-lesson/financial-lesson.modul
 import { AuthModule } from './auth/auth.module';
 import { ObjectLevelModule } from './object-level/object-level.module';
 import { SpecialOfferModule } from './special-offer/special-offer.module';
+import { OpenApiModule } from './open-api/open-api.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { SpecialOfferModule } from './special-offer/special-offer.module';
       Article,
       Question,
     ]),
+    OpenApiModule,
     UsersModule,
     ObjectCardModule,
     PartnerBannerModule,

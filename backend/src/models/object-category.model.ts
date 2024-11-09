@@ -11,6 +11,7 @@ import {
 import { PartnerBanner } from './partner-banner.model';
 import { ObjectLevel } from './object-level.model';
 import { v4 as uuidv4 } from 'uuid';
+import { ObjectCard } from './object-card.model';
 
 export enum ObjectCategoryEnum {
   SUPERMARKETS = 'Супермаркеты',
@@ -67,6 +68,9 @@ export class ObjectCategory extends Model<ObjectCategory> {
 
   @HasMany(() => ObjectLevel)
   levels: ObjectLevel[];
+
+  @HasMany(() => ObjectCard)
+  objectCards: ObjectCard[];
 
   @BeforeCreate
   static generateUuid(instance: ObjectCategory) {

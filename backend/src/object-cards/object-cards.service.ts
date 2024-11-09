@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { ObjectCard } from '../models/object-card.model';
 import { CreateObjectCardDto } from './dto/create-object-card.dto';
@@ -8,6 +8,8 @@ import { SpecialOffer } from 'src/models/special-offer.model';
 import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers.model';
 import { AddSpecialOfferDto } from './dto/add-special-offer.dto';
 import { ObjectLevel } from 'src/models/object-level.model';
+import { LevelUpObjectCardDto } from './dto/level-up-obj-card.dto';
+import { ObjectCategory } from 'src/models/object-category.model';
 
 @Injectable()
 export class ObjectCardsService {
@@ -43,7 +45,19 @@ export class ObjectCardsService {
   }
 
   async findObjectCardById(id: string): Promise<ObjectCard> {
-    const objectCard = await this.objectCardModel.findByPk(id);
+    const objectCard = await this.objectCardModel.findByPk(id, {
+      include: [
+        { model: ObjectCategory, as: 'objectCategory' },
+        { model: ObjectLevel, as: 'currentLevel' },
+        {
+          model: UserSpecialOffers,
+          as: 'userSpecialOffers',
+          include: [
+            { model: SpecialOffer, as: 'specialOffer' },
+          ],
+        },
+      ],
+    });
     if (!objectCard) {
       throw new NotFoundException('ObjectCard not found');
     }
@@ -88,6 +102,49 @@ export class ObjectCardsService {
     if (deletedRows === 0) {
       throw new NotFoundException('ObjectCard not found');
     }
+  }
+
+  async levelUpObjectCard(levelUpObjectCardDto: LevelUpObjectCardDto): Promise<void> {
+    const user = await this.userModel.findByPk(levelUpObjectCardDto.userId);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const objectCard = await this.objectCardModel.findByPk(levelUpObjectCardDto.objectCardId);
+    if (!objectCard) {
+      throw new NotFoundException('ObjectCard not found');
+    }
+
+    const currentLevel = await this.objectLevelModel.findByPk(objectCard.currentLevelId);
+    if (!currentLevel) {
+      throw new NotFoundException('Current level not found');
+    }
+
+    if (objectCard.progress < currentLevel.nextLevelCost) {
+      throw new BadRequestException('Insufficient progress to level up');
+    }
+
+    if (user.gameCoins < currentLevel.gamecoins) {
+      throw new BadRequestException('Insufficient game coins to level up');
+    }
+
+    const nextLevel = await this.objectLevelModel.findOne({
+      where: {
+        objectId: currentLevel.objectId,
+        level: currentLevel.level + 1,
+      },
+    });
+
+    if (!nextLevel) {
+      throw new NotFoundException('Next level not found');
+    }
+
+    user.gameCoins -= currentLevel.gamecoins;
+    await user.save();
+
+    objectCard.currentLevelId = nextLevel.id;
+    objectCard.progress = 0;
+    await objectCard.save();
   }
 
   /* async transferGameCoins(transferGameCoinsDto: TransferGameCoinsDto): Promise<void> {

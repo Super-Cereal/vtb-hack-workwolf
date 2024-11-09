@@ -34,7 +34,6 @@ export class UsersService {
       AccountImg,
     });
 
-    // Создаем карточки для каждой категории
     for (const category of Object.values(ObjectCategoryEnum)) {
       try {
         // Получаем категорию из базы данных
@@ -60,12 +59,14 @@ export class UsersService {
         await this.objectCardsService.createObjectCard({
           userId: user.id,
           currentLevelId: initialLevel.id,
+          objectCategoryId: objectCategory.id,
         });
       } catch (error) {
         this.logger.error(`Error creating object card for category: ${category}`, error.stack);
         throw error; // Пробрасываем ошибку наверх, чтобы она могла быть обработана на уровне контроллера
       }
     }
+
 
     return user;
   }

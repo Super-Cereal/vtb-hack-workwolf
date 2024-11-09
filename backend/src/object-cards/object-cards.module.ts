@@ -7,10 +7,11 @@ import { User } from 'src/models/user.model';
 import { SpecialOffer } from 'src/models/special-offer.model';
 import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers.model';
 import { ObjectLevel } from 'src/models/object-level.model';
+import { ObjectCategory } from 'src/models/object-category.model';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([ObjectCard, User, SpecialOffer, UserSpecialOffers, ObjectLevel]),
+    SequelizeModule.forFeature([ObjectCard, User, SpecialOffer, UserSpecialOffers, ObjectLevel, ObjectCategory]),
   ],
   controllers: [ObjectCardsController],
   providers: [ObjectCardsService],

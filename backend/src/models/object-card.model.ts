@@ -11,6 +11,7 @@ import {
 import { User } from './user.model';
 import { v4 as uuidv4 } from 'uuid';
 import { ObjectLevel } from './object-level.model';
+import { ObjectCategory } from './object-category.model';
 
 @Table
 export class ObjectCard extends Model<ObjectCard> {
@@ -51,6 +52,15 @@ export class ObjectCard extends Model<ObjectCard> {
 
   @BelongsTo(() => ObjectLevel)
   currentLevel: ObjectLevel;
+
+  @ForeignKey(() => ObjectCategory)
+  @Column({
+    type: DataType.UUID,
+  })
+  objectCategoryId: string;
+
+  @BelongsTo(() => ObjectCategory)
+  objectCategory: ObjectCategory;
 
   @BeforeCreate
   static generateUuid(instance: ObjectCard) {
