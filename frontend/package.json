@@ -25,6 +25,7 @@
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.25.9",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "@total-typescript/ts-reset": "^0.6.1",
     "@types/lodash": "^4.17.13",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

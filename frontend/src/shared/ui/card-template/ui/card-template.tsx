@@ -6,9 +6,10 @@ import { Loader } from "../../loader";
 import styles from "./card-template.module.css";
 
 interface Props extends PropsWithChildren {
-  title?: string;
+  title?: ReactNode;
   titleTag?: ElementType;
   subtitle?: ReactNode;
+  titleSize?: "m" | "l";
 
   /** Отрендерить заголовок над карточкой */
   separatedTitle?: boolean;
@@ -16,6 +17,12 @@ interface Props extends PropsWithChildren {
   loading?: boolean;
   view?: "secondary" | "primary";
   className?: string;
+
+  /** Если передана, то отображается как ссылка */
+  href?: string;
+
+  /** Если передана, то отображается как подложка */
+  backgroundSrc?: string;
 }
 
 /**
@@ -32,21 +39,31 @@ export const CardTemplate = ({
   titleTag: TitleTag = "span",
   separatedTitle,
   subtitle,
+  titleSize = "m",
 
   loading,
   view = "primary",
   className,
   children,
+
+  href,
+  backgroundSrc,
 }: Props) => {
   const title = titleFromProps && (
-    <div className={cx(styles.titleWrapper, separatedTitle && styles.titleWrapper_separated)}>
+    <div
+      className={cx(
+        styles.titleWrapper,
+        titleSize && styles[`titleWrapper_${titleSize}`],
+        separatedTitle && styles.titleWrapper_separated,
+      )}
+    >
       <TitleTag className={styles.title}>{titleFromProps}</TitleTag>
       {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
     </div>
   );
 
-  return (
-    <div className={cx(styles.card, styles[`card_${view}`], className)}>
+  const content = (
+    <>
       {!loading && separatedTitle && title}
 
       <div className={styles.innerWrapper}>
@@ -54,12 +71,25 @@ export const CardTemplate = ({
           <Loader />
         ) : (
           <>
-            {!separatedTitle && title}
+            <div className={styles.fixZIndex}>
+              {!separatedTitle && title}
+              <div className={styles.content}>{children}</div>
+            </div>
 
-            <div className={styles.content}>{children}</div>
+            {backgroundSrc && <img alt="" className={styles.bg} src={backgroundSrc} />}
           </>
         )}
       </div>
-    </div>
+    </>
+  );
+
+  const classNames = cx(styles.card, styles[`card_${view}`], className);
+
+  return href ? (
+    <a className={classNames} href={href} target="_blank" rel="noopener noreferrer">
+      {content}
+    </a>
+  ) : (
+    <div className={classNames}>{content}</div>
   );
 };

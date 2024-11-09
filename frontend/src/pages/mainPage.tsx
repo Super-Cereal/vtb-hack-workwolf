@@ -1,21 +1,25 @@
 import React from "react";
 
+import { CardMore, CardProgress } from "@/components/card";
 import { CardSpecialOffers } from "@/components/card-special-offers";
+import { LessonBanner } from "@/components/lessonBanner";
 import { PageTemplate } from "@/components/page-template";
-import { CardMore, CardProgress } from "@/shared/ui/card";
-import { CardBanner } from "@/shared/ui/cardBanner/ui/components/Frame2087324180/cardBanner";
+import { PartnerBanner } from "@/components/partnerBanner";
 
 /** Главная страница */
 export const MainPage = () => (
   <PageTemplate>
     <h1>MainPage</h1>
 
-    <CardBanner title="Пример карточки" description="Описание карточки" href="#" />
+    <PartnerBanner
+      title="Откройте счёт для бизнеса в ВТБ"
+      description="ВТБ — надёжный партнёр для вашего бизнеса"
+      href="#"
+    />
 
-    <CardBanner
+    <LessonBanner
       title="Пример карточки"
       description="Описание карточки"
-      href="#"
       coinCount={5}
       currentStep={2}
       totalSteps={6}

@@ -1,0 +1,17 @@
+.card {
+  position: relative;
+
+  display: block;
+  height: 216px;
+
+  border-radius: 30px;
+  overflow: hidden;
+
+  color: var(--font-color-special);
+  text-decoration: unset;
+}
+
+.text {
+  display: block;
+  max-width: 250px;
+}

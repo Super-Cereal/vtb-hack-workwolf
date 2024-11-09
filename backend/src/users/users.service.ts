@@ -80,21 +80,21 @@ export class UsersService {
     const user = await this.userModel.findOne({
       where: { id: userId },
       include: [
-        { model: SpecialOffer, as: 'ActiveSpecialOffers',
+        {
+          model: SpecialOffer,
+          as: 'ActiveSpecialOffers',
           attributes: {
-            exclude: [ 'createdAt', 'updatedAt', ],
+            exclude: ['createdAt', 'updatedAt'],
           },
           through: {
-            attributes: [], 
+            attributes: [],
           },
-         },
-        { model: FinancialLesson, as: 'lessons',
-          
-         },
+        },
+        { model: FinancialLesson, as: 'lessons' },
       ],
       attributes: {
-        exclude: ['password', 'createdAt', 'updatedAt', ],
-      }
+        exclude: ['password', 'createdAt', 'updatedAt'],
+      },
     });
     if (!user) {
       throw new NotFoundException('User not found');

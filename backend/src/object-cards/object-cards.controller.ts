@@ -66,8 +66,11 @@ export class ObjectCardsController {
   @ApiBody({ type: SpecialOfferDto })
   @UseGuards(AuthGuard('jwt'))
   @Post('special-offers')
-  async addSpecialOffer(@Req() request, @Body('specialOfferId') specialOfferId: string): Promise<void> {
-    const userId = request.user.id; 
+  async addSpecialOffer(
+    @Req() request,
+    @Body('specialOfferId') specialOfferId: string,
+  ): Promise<void> {
+    const userId = request.user.id;
     console.log(userId);
 
     return this.objectCardsService.addSpecialOffer({ userId, specialOfferId });

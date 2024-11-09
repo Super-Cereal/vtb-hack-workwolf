@@ -126,12 +126,7 @@
   border-radius: 40px 40px 0 0;
 }
 
-.block_description_card h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.block_description_card h1 {
   font-size: 27px;
   margin: 0 0 12px 0;
   font-weight: 400;
