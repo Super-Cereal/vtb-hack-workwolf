@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt/jwt.strategy';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/models/user.model';
@@ -13,18 +13,22 @@ import { ObjectCategory } from 'src/models/object-category.model';
 import { ObjectLevel } from 'src/models/object-level.model';
 import { FileUploadService } from 'src/utils/file-upload.service';
 
+
+const passportModule = PassportModule.register({ defaultStrategy: 'jwt' })
+
 @Module({
   imports: [
     SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel]),
     UsersModule,
-    PassportModule,
+    passportModule, 
     ObjectCardModule,
     JwtModule.register({
-      secret: 'secret_key',
+      secret: '123',
       signOptions: { expiresIn: '60m' },
     }),
   ],
-  providers: [AuthService, JwtStrategy, UsersService, JwtService, FileUploadService],
+  providers: [AuthService, UsersService, FileUploadService, JwtStrategy],
   controllers: [AuthController],
+  exports: [passportModule]
 })
 export class AuthModule {}

@@ -6,9 +6,11 @@ import {
   BelongsTo,
   ForeignKey,
   BeforeCreate,
+  HasMany,
 } from 'sequelize-typescript';
 import { ObjectCategory } from './object-category.model';
 import { v4 as uuidv4 } from 'uuid';
+import { SpecialOffer } from './special-offer.model';
 
 @Table
 export class ObjectLevel extends Model<ObjectLevel> {
@@ -46,6 +48,9 @@ export class ObjectLevel extends Model<ObjectLevel> {
     allowNull: false,
   })
   nextLevelCost: number;
+
+  @HasMany(() => SpecialOffer)
+  specialOffers: SpecialOffer[];
 
   @BeforeCreate
   static generateUuid(instance: ObjectLevel) {

@@ -75,9 +75,9 @@ export class UsersService {
     return this.userModel.findAll();
   }
 
-  async findUserById(email: string): Promise<User> {
+  async findUserById(userId: string): Promise<User> {
     const user = await this.userModel.findOne({
-      where: { email },
+      where: { id: userId },
     });
     if (!user) {
       throw new NotFoundException('User not found by email');
@@ -85,8 +85,11 @@ export class UsersService {
     return user;
   }
 
-  async findUserByEmail(id: string): Promise<User> {
-    const user = await this.userModel.findByPk(id);
+  async findUserByEmail(email: string): Promise<User> {
+    console.log(`Searching for user with email: ${email}`);
+    const user = await this.userModel.findOne({
+      where: {email}
+    });
     if (!user) {
       throw new NotFoundException('User not found');
     }

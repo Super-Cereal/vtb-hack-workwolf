@@ -18,7 +18,13 @@ export class AuthService {
       ...registerDto,
       password: hashedPassword,
     });
-    return user;
+
+    const payload = { email: user.email, sub: user.id };
+    const access_token = this.jwtService.sign(payload);
+
+    return {
+      access_token,
+    };
   }
 
   async login(loginDto: LoginDto) {

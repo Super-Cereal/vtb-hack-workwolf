@@ -20,7 +20,7 @@ export class UsersController {
     }
   } */
 
-  @Get()
+/*   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'The list of users has been successfully retrieved.' })
   async findAllUsers() {
@@ -34,7 +34,7 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'User not found.' })
   async findUserById(@Param('id') id: string) {
     return this.userService.findUserById(id);
-  }
+  } */
 
   @Put(':id')
   @ApiOperation({ summary: 'Update a user by ID' })

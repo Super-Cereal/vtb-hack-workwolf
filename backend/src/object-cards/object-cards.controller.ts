@@ -38,7 +38,7 @@ export class ObjectCardsController {
 
   @ApiOperation({ summary: 'Get ObjectCard by ID' })
   @ApiResponse({ status: 200, description: 'The ObjectCard with the specified ID.' })
-  @Get(':id')
+  @Get('getone/:id')
   async findObjectCardById(@Param('id') id: string) {
     return this.objectCardsService.findObjectCardById(id);
   }
@@ -48,7 +48,7 @@ export class ObjectCardsController {
   @ApiBody({ type: UpdateObjectCardDto })
   @Put(':id')
   async updateObjectCard(
-    @Param('id') id: string,
+    @Param('update/id') id: string,
     @Body() updateObjectCardDto: UpdateObjectCardDto,
   ) {
     return this.objectCardsService.updateObjectCard(id, updateObjectCardDto);
@@ -56,7 +56,7 @@ export class ObjectCardsController {
 
   @ApiOperation({ summary: 'Delete an ObjectCard' })
   @ApiResponse({ status: 200, description: 'The ObjectCard has been successfully deleted.' })
-  @Delete(':id')
+  @Delete('delete/:id')
   async deleteObjectCard(@Param('id') id: string) {
     return this.objectCardsService.deleteObjectCard(id);
   }
@@ -68,6 +68,8 @@ export class ObjectCardsController {
   @Post('special-offers')
   async addSpecialOffer(@Req() request, @Body() specialOfferId: string): Promise<void> {
     const userId = request.user.id; 
+    console.log(userId);
+    
     return this.objectCardsService.addSpecialOffer({userId, specialOfferId});
   }
 

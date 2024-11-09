@@ -37,6 +37,18 @@ export class ObjectCardsService {
   async findObjectCardsByUserId(userId: string): Promise<ObjectCard[]> {
     const objectCards = await this.objectCardModel.findAll({
       where: { userId: userId },
+      include: [
+        {
+            model: ObjectCategory,
+            as: 'objectCategory',
+            attributes: {
+                exclude: ['createdAt', 'updatedAt'],
+            },
+        },
+    ],
+    attributes: {
+        exclude: ['currentLevelId', 'objectCategoryId', 'createdAt', 'updatedAt', 'userId'],
+    },
     });
     if (objectCards.length === 0) {
       throw new NotFoundException('ObjectCards not found');
@@ -46,31 +58,56 @@ export class ObjectCardsService {
 
   async findObjectCardById(id: string): Promise<ObjectCard> {
     const objectCard = await this.objectCardModel.findByPk(id, {
-      include: [
-        { model: ObjectCategory, as: 'objectCategory' },
-        { model: ObjectLevel, as: 'currentLevel' },
-        {
-          model: UserSpecialOffers,
-          as: 'userSpecialOffers',
-          include: [
-            { model: SpecialOffer, as: 'specialOffer' },
-          ],
+        include: [
+            {
+                model: ObjectCategory,
+                as: 'objectCategory',
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt'],
+                },
+            },
+            {
+                model: ObjectLevel,
+                as: 'currentLevel',
+                include: [
+                    {
+                        model: SpecialOffer,
+                        as: 'specialOffers',
+                        attributes: {
+                          exclude: ['createdAt', 'updatedAt',  'ObjectLevelId' ],
+                      },
+                    },
+                ],
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'objectId', ],
+                },
+            },
+        ],
+        attributes: {
+            exclude: ['currentLevelId', 'objectCategoryId', 'createdAt', 'updatedAt', 'userId'],
         },
-      ],
     });
+
     if (!objectCard) {
-      throw new NotFoundException('ObjectCard not found');
+        throw new NotFoundException('ObjectCard not found');
     }
+
     return objectCard;
-  }
+}
 
   async addSpecialOffer(addSpecialOfferDto: AddSpecialOfferDto): Promise<void> {
-    const user = await this.userModel.findByPk(addSpecialOfferDto.userId);
+    const user = await this.userModel.findOne({
+      where: {id: addSpecialOfferDto.userId}
+    });
+    console.log(user);
+    
     if (!user) {
       throw new NotFoundException('User not found');
     }
 
-    const specialOffer = await this.specialOfferModel.findByPk(addSpecialOfferDto.specialOfferId);
+    const specialOffer = await this.specialOfferModel.findOne({
+      where: {id: addSpecialOfferDto.specialOfferId }
+    });
     if (!specialOffer) {
       throw new NotFoundException('SpecialOffer not found');
     }
