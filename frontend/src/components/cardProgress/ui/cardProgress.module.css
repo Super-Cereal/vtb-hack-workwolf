@@ -82,6 +82,7 @@
   width: 100%;
   height: auto;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .card_header {

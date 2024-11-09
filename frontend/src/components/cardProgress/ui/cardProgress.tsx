@@ -1,15 +1,13 @@
 import React from "react";
+import { generatePath } from "react-router-dom";
+
+import { staticUrls } from "@/shared/lib/routes";
+import { IObjectCard } from "@/shared/model/object";
 
 import styles from "./cardProgress.module.css";
 
 interface CardProgressProps {
-  progress?: number;
-  start?: number;
-  end?: number;
-  paragraph?: string;
-  lvl_card?: string;
-  card_image?: string;
-  title?: string;
+  object: IObjectCard;
 }
 
 /**
@@ -26,22 +24,25 @@ interface CardProgressProps {
  * />
  */
 
-export function CardProgress({
-  progress = 0,
-  start,
-  end,
-  paragraph = "",
-  lvl_card = "Уровень",
-  card_image = "",
-  title = "Заголовок",
-}: CardProgressProps) {
+export function CardProgress({ object }: CardProgressProps) {
+  const { id: objectId, objectInfo, objectLevel, progress } = object;
+
+  const start = objectLevel.levelCost;
+  const end = objectLevel.nextLevelCost;
+  const paragraph = objectInfo.shortDecsiption;
+  const lvl_card = `${objectLevel.level} уровень`;
+  const card_image = objectInfo.image;
+  const title = objectInfo.name;
+
   const isCollapsed = !paragraph && !card_image && lvl_card === "Уровень";
 
   // Вычисление прогресса, если заданы `start` и `end`
   const calculatedProgress = start !== undefined && end !== undefined ? (start / end) * 100 : progress;
 
+  const link = generatePath(staticUrls.object, { objectId: String(objectId) });
+
   return (
-    <div className={`${styles.card_progress} ${isCollapsed ? styles.collapsed : ""}`}>
+    <a href={link} className={`${styles.card_progress} ${isCollapsed ? styles.collapsed : ""}`}>
       <div className={styles.card_header} style={{ display: card_image ? "block" : "none" }}>
         {card_image && (
           <div className={styles.card_image}>
@@ -70,6 +71,6 @@ export function CardProgress({
           </div>
         )}
       </div>
-    </div>
+    </a>
   );
 }

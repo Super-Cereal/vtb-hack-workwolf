@@ -14,9 +14,9 @@ cd -
 echo
 echo "---"
 
-; echo "\033[33m Проверка бекенда \033[m"
-; cd backend
-; npm run eslint:check
-; npm run typescript:check
-; cd -
-; echo "---"
+# echo "\033[33m Проверка бекенда \033[m"
+# cd backend
+# npm run eslint:check
+# npm run typescript:check
+# cd -
+# echo "---"

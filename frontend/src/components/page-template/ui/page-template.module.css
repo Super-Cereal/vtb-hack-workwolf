@@ -18,7 +18,7 @@
   .header {
     position: fixed;
     top: var(--padding-vertical);
-    z-index: 5;
+    z-index: 15;
 
     width: 100%;
     max-width: calc(var(--max-width) + var(--padding-horizontal) * 2);

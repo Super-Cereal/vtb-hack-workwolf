@@ -11,8 +11,8 @@ export interface IObjectCard {
 export interface IObjectInfo {
   id: string;
   name: string;
-  smallDecsiption: string;
   description: string;
+  shortDecsiption: string;
   partnerBanner?: IPartnerBanner;
   category: string;
   image: string;
@@ -22,6 +22,7 @@ export interface IObjectLevel {
   id: string;
   level: number;
   multibonus?: number;
+  levelCost: number;
   nextLevelCost: number;
   specialOffers: ISpecialOffer[];
 }

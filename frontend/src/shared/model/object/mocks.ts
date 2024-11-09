@@ -6,6 +6,7 @@ import { specialOfferMocks } from "../specialOffers";
 export const level: IObjectLevel = {
   id: "1",
   level: 1,
+  levelCost: 1000,
   nextLevelCost: 10000,
   specialOffers: specialOfferMocks.list,
 };
@@ -13,7 +14,7 @@ export const level: IObjectLevel = {
 export const info: IObjectInfo = {
   id: "1",
   name: "ВТБ-Гурман",
-  smallDecsiption: "Это место, где можно насладиться изысканными блюдами в комфортной и элегантной обстановке",
+  shortDecsiption: "Это место, где можно насладиться изысканными блюдами в комфортной и элегантной обстановке",
   description:
     "Это место, где можно насладиться изысканными блюдами в комфортной и элегантной обстановке. Это не просто сеть ресторанов, а настоящее гастрономическое приключение! Здесь вы сможете попробовать разнообразные блюда и напитки, приготовленные из свежих и качественных продуктов.",
   category: "Ресторан",
@@ -28,9 +29,9 @@ export const card: IObjectCard = {
   objectLevel: level,
 };
 
-export const cardsList = Array.from(Array(10)).map((id) => ({
+export const cardsList: IObjectCard[] = Array.from(Array(10)).map((_, idx) => ({
   ...card,
-  id,
-  objectInfo: { ...card.objectInfo, id },
-  objectLevel: { ...card.objectLevel, id },
+  id: idx + 1,
+  objectInfo: { ...card.objectInfo, id: String(idx + 1) },
+  objectLevel: { ...card.objectLevel, id: String(idx + 1) },
 }));
