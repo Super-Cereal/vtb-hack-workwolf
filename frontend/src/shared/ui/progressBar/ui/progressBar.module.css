@@ -1,0 +1,29 @@
+.wrapper {
+  width: 100%;
+}
+
+.emptyLine {
+  width: 100%;
+  height: 8px;
+  border-radius: 10px;
+
+  overflow: hidden;
+  background-color: var(--color-white);
+}
+
+.filledPart {
+  height: 100%;
+
+  border-radius: inherit;
+  background-color: var(--color-special);
+}
+
+.numericProgress {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 4px;
+
+  font-size: 0.7rem;
+  color: var(--font-color-primary);
+}

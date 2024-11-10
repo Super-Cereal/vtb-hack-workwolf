@@ -1,13 +1,17 @@
 import React from "react";
-import { generatePath } from "react-router-dom";
+import { generatePath, Link } from "react-router-dom";
+import cx from "classnames";
 
 import { staticUrls } from "@/shared/lib/routes";
 import { IObjectCard } from "@/shared/model/object";
+import { CardTemplate } from "@/shared/ui/card-template";
 
 import styles from "./cardProgress.module.css";
 
-interface CardProgressProps {
-  object: IObjectCard;
+interface Props {
+  object: IObjectCard | undefined;
+  noProgress?: boolean;
+  withLinkToObjectPage?: boolean;
 }
 
 /**
@@ -24,7 +28,11 @@ interface CardProgressProps {
  * />
  */
 
-export function CardProgress({ object }: CardProgressProps) {
+export function CardProgress({ object, noProgress = false, withLinkToObjectPage = false }: Props) {
+  if (!object) {
+    return <CardTemplate loading view="primary" />;
+  }
+
   const { id: objectId, objectInfo, objectLevel, progress } = object;
 
   const start = objectLevel.levelCost;
@@ -41,8 +49,8 @@ export function CardProgress({ object }: CardProgressProps) {
 
   const link = generatePath(staticUrls.object, { objectId: String(objectId) });
 
-  return (
-    <a href={link} className={`${styles.card_progress} ${isCollapsed ? styles.collapsed : ""}`}>
+  const content = (
+    <>
       <div className={styles.card_header} style={{ display: card_image ? "block" : "none" }}>
         {card_image && (
           <div className={styles.card_image}>
@@ -55,22 +63,35 @@ export function CardProgress({ object }: CardProgressProps) {
         <h3>{title}</h3>
         {paragraph && <p className={styles.paragraph}>{paragraph}</p>}
 
-        {/* Полоса прогресса */}
-        <div className={isCollapsed ? styles.progress_bar_lil : styles.progress_bar}>
-          <div
-            className={isCollapsed ? styles.progress_fill_lil : styles.progress_fill}
-            style={{ width: `${calculatedProgress}%` }}
-          ></div>
-        </div>
+        {!noProgress && (
+          <>
+            <div className={isCollapsed ? styles.progress_bar_lil : styles.progress_bar}>
+              <div
+                className={isCollapsed ? styles.progress_fill_lil : styles.progress_fill}
+                style={{ width: `${calculatedProgress}%` }}
+              ></div>
+            </div>
 
-        {/* Отображение start и end только если они определены */}
-        {start !== undefined && end !== undefined && (
-          <div className={styles.progress_status}>
-            <div className={styles.start}>{start}</div>
-            <div className={styles.end}>{end}</div>
-          </div>
+            {/* Отображение start и end только если они определены */}
+            {start !== undefined && end !== undefined && (
+              <div className={styles.progress_status}>
+                <div className={styles.start}>{start}</div>
+                <div className={styles.end}>{end}</div>
+              </div>
+            )}
+          </>
         )}
       </div>
-    </a>
+    </>
+  );
+
+  const classNames = cx(styles.card_progress, isCollapsed ? styles.collapsed : "");
+
+  return withLinkToObjectPage ? (
+    <Link to={link} className={cx(styles.card_link, classNames)}>
+      {content}
+    </Link>
+  ) : (
+    <div className={classNames}>{content}</div>
   );
 }

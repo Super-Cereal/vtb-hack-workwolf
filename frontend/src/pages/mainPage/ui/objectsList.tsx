@@ -8,7 +8,6 @@ import styles from "./objectsList.module.css";
 
 export const ObjectsList = () => {
   const { isLoading, data: objects } = useObjects();
-  debugger;
 
   if (isLoading || !objects) {
     return <Loader />;
@@ -17,7 +16,7 @@ export const ObjectsList = () => {
   return (
     <div className={styles.list}>
       {objects.map((object) => (
-        <CardProgress key={object.id} object={object} />
+        <CardProgress key={object.id} object={object} withLinkToObjectPage />
       ))}
     </div>
   );

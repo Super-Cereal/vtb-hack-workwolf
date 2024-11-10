@@ -6,7 +6,7 @@ import { LessonPage } from "@/pages/lessonPage";
 import { LessonsListPage } from "@/pages/lessonsListPage";
 import { LessonTestPage } from "@/pages/lessonTestPage";
 import { MainPage } from "@/pages/mainPage";
-import { ObjectPage } from "@/pages/objectPage";
+import { ObjectPage } from "@/pages/objectPage/ui/objectPage";
 import { staticUrls } from "@/shared/lib/routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -22,7 +22,13 @@ export const browserRouter = createBrowserRouter([
   { path: staticUrls.lessonTest, element: <LessonTestPage /> },
 ]);
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+    },
+  },
+});
 
 export const App = () => (
   <QueryClientProvider client={queryClient}>
