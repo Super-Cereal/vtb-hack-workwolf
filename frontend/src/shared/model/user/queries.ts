@@ -1,9 +1,9 @@
 import { get, post } from "@/shared/lib/requests";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import type { IRegisterUserDTO, IUserDTO } from "./types";
+import type { IRegisterUserDTO } from "./types";
 
-import { adapter_userQuery } from "./adapters";
+import { adapter_userQuery, type IUserDTO } from "./adapters";
 import { userQueryKeys } from "./queryKeys";
 
 export const useUserQuery = () =>

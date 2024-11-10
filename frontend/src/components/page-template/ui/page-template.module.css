@@ -37,7 +37,7 @@
     max-width: var(--max-width);
 
     box-sizing: border-box;
-    padding: var(--padding-vertical) var(--padding-horizontal);
+    padding: var(--padding-vertical) 0;
     margin-top: calc(var(--max-header-height) + 12px);
   }
 }

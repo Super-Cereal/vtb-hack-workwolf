@@ -2,7 +2,7 @@ import type { IPartnerBanner } from "../partnerBanner";
 import type { ISpecialOffer } from "../specialOffers";
 
 export interface IObjectCard {
-  id: number;
+  id: string;
   progress: number;
   objectInfo: IObjectInfo;
   objectLevel: IObjectLevel;
@@ -13,9 +13,10 @@ export interface IObjectInfo {
   name: string;
   description: string;
   shortDecsiption: string;
+  partnerBannerId?: string;
   partnerBanner?: IPartnerBanner;
   category: string;
-  image: string;
+  image?: string;
 }
 
 export interface IObjectLevel {

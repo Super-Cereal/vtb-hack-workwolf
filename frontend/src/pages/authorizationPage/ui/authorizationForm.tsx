@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { staticUrls } from "@/shared/lib/routes";
-import { type IRegisterFormData, useRegisterUserMutation } from "@/shared/model/user";
+import { useRegisterUserMutation } from "@/shared/model/user";
 import { Button } from "@/shared/ui/button";
 
-import { adapter_registerFormDataToRegisterUserDTO } from "../lib/adapters";
+import { adapter_registerFormData, type IRegisterFormData } from "../lib/adapters";
 
 import styles from "./authorizationForm.module.css";
 
@@ -43,8 +43,8 @@ export const AuthorizationForm = () => {
     // Проверка на незаполненные поля
     const submitData = { ...formData };
 
-    Object.keys(submitData).forEach((key) => {
-      submitData[key] = submitData[key].trim();
+    Object.keys(submitData).forEach((key: keyof typeof submitData) => {
+      submitData[key] = submitData[key]!.trim();
     });
 
     const allFilled = Object.values(submitData).every((v) => Boolean(v));
@@ -56,7 +56,7 @@ export const AuthorizationForm = () => {
     }
 
     setFormError(""); // Убираем ошибку, если все поля заполнены
-    registerUser(adapter_registerFormDataToRegisterUserDTO(submitData));
+    registerUser(adapter_registerFormData(submitData));
   };
 
   return (
@@ -79,9 +79,9 @@ export const AuthorizationForm = () => {
       </p>
       <p className={styles.loginText}>
         Уже зарегистрированы?{" "}
-        <a className={styles.loginLink} href={staticUrls.authorization}>
+        <Link className={styles.loginLink} to={staticUrls.authorization}>
           Войти
-        </a>
+        </Link>
       </p>
     </form>
   );

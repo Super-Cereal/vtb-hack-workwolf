@@ -1,5 +1,5 @@
 import React from "react";
-import { generatePath } from "react-router-dom";
+import { generatePath, Link } from "react-router-dom";
 
 import { staticUrls } from "@/shared/lib/routes";
 import { IObjectCard } from "@/shared/model/object";
@@ -42,7 +42,7 @@ export function CardProgress({ object }: CardProgressProps) {
   const link = generatePath(staticUrls.object, { objectId: String(objectId) });
 
   return (
-    <a href={link} className={`${styles.card_progress} ${isCollapsed ? styles.collapsed : ""}`}>
+    <Link to={link} className={`${styles.card_progress} ${isCollapsed ? styles.collapsed : ""}`}>
       <div className={styles.card_header} style={{ display: card_image ? "block" : "none" }}>
         {card_image && (
           <div className={styles.card_image}>
@@ -71,6 +71,6 @@ export function CardProgress({ object }: CardProgressProps) {
           </div>
         )}
       </div>
-    </a>
+    </Link>
   );
 }

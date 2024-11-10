@@ -1,8 +1,14 @@
-import { IRegisterUserDTO } from "@/shared/model/user";
+import type { IRegisterUserDTO } from "@/shared/model/user";
 
-import type { IRegisterFormData } from "./types";
+export interface IRegisterFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  image?: string;
+}
 
-export const adapter_registerFormDataToRegisterUserDTO = ({
+export const adapter_registerFormData = ({
   firstName,
   lastName,
   email,

@@ -8,7 +8,6 @@ import styles from "./objectsList.module.css";
 
 export const ObjectsList = () => {
   const { isLoading, data: objects } = useObjects();
-  debugger;
 
   if (isLoading || !objects) {
     return <Loader />;

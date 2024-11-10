@@ -1,4 +1,5 @@
 import React, { type ElementType, type PropsWithChildren, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import cx from "classnames";
 
 import { Loader } from "../../loader";
@@ -86,9 +87,9 @@ export const CardTemplate = ({
   const classNames = cx(styles.card, styles[`card_${view}`], className);
 
   return href ? (
-    <a className={classNames} href={href} target="_blank" rel="noopener noreferrer">
+    <Link className={classNames} to={href} target="_blank" rel="noopener noreferrer">
       {content}
-    </a>
+    </Link>
   ) : (
     <div className={classNames}>{content}</div>
   );

@@ -11,7 +11,7 @@ import { Checkbox } from "@/shared/ui/checkbox";
 import styles from "./card-special-offers.module.css";
 
 interface Props {
-  objectId: number;
+  objectId: string;
 }
 
 /** Карточка со списком спецпредложений */

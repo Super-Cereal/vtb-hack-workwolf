@@ -15,19 +15,6 @@ export interface IUser {
   multibonusAccount: number;
 }
 
-export interface IUserDTO {
-  AccountImg?: string;
-  ActiveSpecialOffers: ISpecialOffer[];
-  bankAccount: string;
-  email: string;
-  gameCoins: number;
-  id: string;
-  lessons: {}[];
-  multiBonusAccount: number;
-  name: string;
-  surname: string;
-}
-
 export interface IRegisterUserDTO {
   name: string;
   surname: string;
