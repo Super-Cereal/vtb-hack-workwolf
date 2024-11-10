@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { ObjectCard } from '../models/object-card.model';
 import { CreateObjectCardDto } from './dto/create-object-card.dto';
@@ -6,7 +6,7 @@ import { UpdateObjectCardDto } from './dto/update-object-card.dto';
 import { User } from 'src/models/user.model';
 import { SpecialOffer } from 'src/models/special-offer.model';
 import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers.model';
-import { AddSpecialOfferDto } from './dto/add-special-offer.dto';
+import { AddorRemoveSpecialOfferDto } from './dto/add-special-offer.dto';
 import { ObjectLevel } from 'src/models/object-level.model';
 import { LevelUpObjectCardDto } from './dto/level-up-obj-card.dto';
 import { ObjectCategory } from 'src/models/object-category.model';
@@ -112,7 +112,7 @@ export class ObjectCardsService {
     return objectCard;
   }
 
-  async addSpecialOffer(addSpecialOfferDto: AddSpecialOfferDto): Promise<void> {
+  async addSpecialOffer(addSpecialOfferDto: AddorRemoveSpecialOfferDto): Promise<void> {
     const user = await this.userModel.findOne({
       where: { id: addSpecialOfferDto.userId },
     });
@@ -135,6 +135,37 @@ export class ObjectCardsService {
     });
   }
 
+  async removeSpecialOffer(removeSpecialOfferDto: AddorRemoveSpecialOfferDto): Promise<void> {
+    const user = await this.userModel.findOne({
+      where: { id: removeSpecialOfferDto.userId },
+    });
+  
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+  
+    const specialOffer = await this.specialOfferModel.findOne({
+      where: { id: removeSpecialOfferDto.specialOfferId },
+    });
+  
+    if (!specialOffer) {
+      throw new NotFoundException('SpecialOffer not found');
+    }
+  
+    const userSpecialOffer = await this.userSpecialOffersModel.findOne({
+      where: { userId: user.id, specialOfferId: specialOffer.id },
+    });
+  
+    if (!userSpecialOffer) {
+      throw new HttpException('User does not have this special offer', HttpStatus.OK);
+    }
+  
+    await this.userSpecialOffersModel.destroy({
+      where: { userId: user.id, specialOfferId: specialOffer.id },
+    });
+  }
+
+  
   async updateObjectCard(
     id: string,
     updateObjectCardDto: UpdateObjectCardDto,

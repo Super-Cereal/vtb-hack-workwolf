@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class AddSpecialOfferDto {
+export class AddorRemoveSpecialOfferDto {
   @ApiProperty({ description: 'The ID of the user' })
   userId: string;
 
@@ -9,5 +9,6 @@ export class AddSpecialOfferDto {
 }
 
 export class SpecialOfferDto {
+  @ApiProperty({ description: 'The ID of the special offer' })
   specialOfferId: string;
 }
