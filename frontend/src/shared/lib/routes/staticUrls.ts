@@ -10,7 +10,7 @@ export const staticUrls = {
   lessonsList: "/lessons",
 
   /** Страница авторизации */
-  AuthorizationPage: "/authorization",
+  authorization: "/authorization",
 
   /** Урок фин грамотности */
   lesson: "/lessons/:lessonId",

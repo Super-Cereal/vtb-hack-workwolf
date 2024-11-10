@@ -1,4 +1,4 @@
 export * as userMocks from "./mocks";
-export { useUser } from "./queries";
+export { useRegisterUserMutation, useUserQuery } from "./queries";
 export { userQueryKeys } from "./queryKeys";
-export type { IUser } from "./types";
+export type { IRegisterFormData, IRegisterUserDTO, IUser } from "./types";

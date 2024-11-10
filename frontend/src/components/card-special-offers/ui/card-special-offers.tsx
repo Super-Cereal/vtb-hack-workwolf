@@ -4,7 +4,7 @@ import { getPluralForm } from "@/shared/lib/plurals";
 import { appConfig } from "@/shared/model/appConfig";
 import { useObject } from "@/shared/model/object";
 import type { ISpecialOffer } from "@/shared/model/specialOffers";
-import { useUser } from "@/shared/model/user";
+import { useUserQuery } from "@/shared/model/user";
 import { CardTemplate } from "@/shared/ui/card-template";
 import { Checkbox } from "@/shared/ui/checkbox";
 
@@ -16,7 +16,7 @@ interface Props {
 
 /** Карточка со списком спецпредложений */
 export const CardSpecialOffers = ({ objectId }: Props) => {
-  const { isLoading: isUserLoading, data: user } = useUser();
+  const { isLoading: isUserLoading, data: user } = useUserQuery();
   const { isLoading: isObjectLoading, data: object } = useObject(objectId);
 
   const [checkedItems, setCheckedItems] = useState<Record<ISpecialOffer["id"], true>>({});

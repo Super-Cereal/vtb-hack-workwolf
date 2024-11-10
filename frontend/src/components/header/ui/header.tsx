@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 
-import { useUser } from "@/shared/model/user";
+import { useUserQuery } from "@/shared/model/user";
 import { A11yButton } from "@/shared/ui/a11yButton";
 import { IconCoins, IconShortArrowLeft, IconSpecialOffers } from "@/shared/ui/icons";
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const Header = ({ shouldShowBigHeader, withGoBackButton = false, className }: Props) => {
-  const { isLoading, data: user } = useUser();
+  const { isLoading, data: user } = useUserQuery();
   const navigate = useNavigate();
 
   if (isLoading || !user) {

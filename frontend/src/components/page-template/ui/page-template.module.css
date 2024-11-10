@@ -1,19 +1,23 @@
 .page {
-  --max-width: 375px;
+  --max-width: 420px;
   --padding-vertical: 16px;
   --padding-horizontal: 12px;
   --max-header-height: 56px;
 }
 
-.page.page_main {
+.page.page_bigHeader {
   --max-header-height: 170px;
+}
+
+.page.page_noHeader {
+  --max-header-height: -12px;
 }
 
 .page {
   display: flex;
   justify-content: center;
   background-color: var(--bg-color-primary);
-  min-height: 150vh;
+  min-height: 100vh;
 
   .header {
     position: fixed;
@@ -32,6 +36,7 @@
     width: 100%;
     max-width: var(--max-width);
 
+    box-sizing: border-box;
     padding: var(--padding-vertical) var(--padding-horizontal);
     margin-top: calc(var(--max-header-height) + 12px);
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import AuthorizationPage from "@/pages/authorizationPage";
+import { AuthorizationPage } from "@/pages/authorizationPage";
 import { LessonPage } from "@/pages/lessonPage";
 import { LessonsListPage } from "@/pages/lessonsListPage";
 import { LessonTestPage } from "@/pages/lessonTestPage";
@@ -18,7 +18,7 @@ export const browserRouter = createBrowserRouter([
 
   { path: staticUrls.lessonsList, element: <LessonsListPage /> },
   { path: staticUrls.lesson, element: <LessonPage /> },
-  { path: staticUrls.AuthorizationPage, element: <AuthorizationPage /> },
+  { path: staticUrls.authorization, element: <AuthorizationPage /> },
   { path: staticUrls.lessonTest, element: <LessonTestPage /> },
 ]);
 

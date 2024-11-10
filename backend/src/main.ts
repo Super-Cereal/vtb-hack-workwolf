@@ -9,6 +9,12 @@ console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: process.env.FRONTEND_DOMAIN,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow these methods
+    allowedHeaders: 'Content-Type, Authorization', // Allow these headers
+    credentials: true,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('WorkWolf VTB hakaton API')

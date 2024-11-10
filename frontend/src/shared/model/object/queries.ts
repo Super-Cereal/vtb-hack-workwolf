@@ -1,3 +1,4 @@
+import { get } from "@/shared/lib/requests";
 import { useQuery } from "@tanstack/react-query";
 
 import type { IObjectCard } from "./types";
@@ -19,10 +20,5 @@ export const useObject = (objectId: number) =>
 export const useObjects = () =>
   useQuery({
     queryKey: [objectQueryKeys.getList],
-    queryFn: (): Promise<IObjectCard[]> =>
-      new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(objectMocks.cardsList);
-        }, 2000);
-      }),
+    queryFn: () => get<IObjectCard[]>("/object-cards/user"),
   });
