@@ -27,7 +27,7 @@ export class UsersService {
     private objectLevelModel: typeof ObjectLevel,
     @InjectModel(UserFinancialLessons)
     private userFinancialLessonsModel: typeof UserFinancialLessons,
-    
+
     private readonly fileUploadService: FileUploadService,
   ) {}
 
@@ -80,7 +80,7 @@ export class UsersService {
     // Создаем записи в промежуточной таблице для каждого урока
     const userFinancialLessons = lessons.map(lesson => ({
       userId: user.id,
-      financialLessonId: lesson.id,
+      lessonId: lesson.id,
       complete: false,
     }));
   
@@ -107,7 +107,6 @@ export class UsersService {
             attributes: [],
           },
         },
-        { model: FinancialLesson, as: 'lessons' },
       ],
       attributes: {
         exclude: ['password', 'createdAt', 'updatedAt'],

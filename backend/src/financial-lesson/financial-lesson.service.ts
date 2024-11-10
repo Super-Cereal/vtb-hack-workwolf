@@ -59,15 +59,22 @@ export class FinancialLessonService {
   }
 
   async getUserFinancialLessons(userId: string) {
+    // Получаем записи из таблицы UserFinancialLessons
     const userFinancialLessons = await this.userFinancialLessonsModel.findAll({
       where: { userId },
-      include: [{ model: FinancialLesson }],
     });
 
     if (!userFinancialLessons || userFinancialLessons.length === 0) {
       throw new NotFoundException('No financial lessons found for this user');
     }
+    // Извлекаем идентификаторы финансовых уроков
+    const financialLessonIds = userFinancialLessons.map(uf => uf.lessonId);
 
-    return userFinancialLessons;
+    // Получаем финансовые уроки по идентификаторам
+    const financialLessons = await this.financialLessonModel.findAll({
+      where: { id: financialLessonIds },
+    });
+
+    return financialLessons;
   }
 }
