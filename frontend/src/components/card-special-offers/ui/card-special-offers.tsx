@@ -60,7 +60,8 @@ export const CardSpecialOffers = ({ object }: Props) => {
   const availableSpecialOffersCount =
     appConfig.maxSpecialOffers -
     user.activeSpecialOffers.length -
-    Object.keys(checkedItems).filter((id) => !user.activeSpecialOffers.find((v) => v.id === id)).length;
+    Object.keys(checkedItems).filter((id) => !user.activeSpecialOffers.find((v) => v.id === id)).length +
+    user.activeSpecialOffers.filter(({ id }) => !checkedItems[id]).length;
 
   const title =
     `"${object.objectInfo.name}" растет – это ${object.objectInfo.category.toLowerCase().slice(0, object.objectInfo.category.length - 1)} ` +
