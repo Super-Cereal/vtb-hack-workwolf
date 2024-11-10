@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { getPluralForm } from "@/shared/lib/plurals";
 import { appConfig } from "@/shared/model/appConfig";
-import { useObject } from "@/shared/model/object";
+import type { IObjectCard } from "@/shared/model/object";
 import type { ISpecialOffer } from "@/shared/model/specialOffers";
 import { useUserQuery } from "@/shared/model/user";
 import { CardTemplate } from "@/shared/ui/card-template";
@@ -11,17 +11,16 @@ import { Checkbox } from "@/shared/ui/checkbox";
 import styles from "./card-special-offers.module.css";
 
 interface Props {
-  objectId: string;
+  object: IObjectCard | undefined;
 }
 
 /** Карточка со списком спецпредложений */
-export const CardSpecialOffers = ({ objectId }: Props) => {
-  const { isLoading: isUserLoading, data: user } = useUserQuery();
-  const { isLoading: isObjectLoading, data: object } = useObject(objectId);
+export const CardSpecialOffers = ({ object }: Props) => {
+  const { data: user } = useUserQuery();
 
   const [checkedItems, setCheckedItems] = useState<Record<ISpecialOffer["id"], true>>({});
 
-  if (isUserLoading || isObjectLoading || !user || !object) {
+  if (!user || !object) {
     return <CardTemplate loading={true} />;
   }
 
@@ -42,7 +41,7 @@ export const CardSpecialOffers = ({ objectId }: Props) => {
     appConfig.maxSpecialOffers - user.activeSpecialOffers.length - Object.keys(checkedItems).length;
 
   const title =
-    `${object.objectInfo.name} растет – это ${object.objectInfo.category.toLowerCase()} ` +
+    `"${object.objectInfo.name}" растет – это ${object.objectInfo.category.toLowerCase().slice(0, object.objectInfo.category.length - 1)} ` +
     `${object.objectLevel.level} уровня, он дарит вам:`;
 
   const hint = !availableSpecialOffersCount
@@ -53,7 +52,7 @@ export const CardSpecialOffers = ({ objectId }: Props) => {
   return (
     <CardTemplate title={title} titleTag="h2" separatedTitle view="secondary">
       <div className={styles.checkboxes}>
-        {object.objectLevel.specialOffers.map(({ id, description }) => (
+        {object.objectLevel.specialOffers?.map(({ id, description }) => (
           <Checkbox
             disabled={!checkedItems[id] && availableSpecialOffersCount === 0}
             checked={Boolean(checkedItems[id])}

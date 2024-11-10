@@ -66,8 +66,6 @@ export function DetailsLessonBanner({
             <div className={styles.progress_fill} style={{ width: `${progress}%` }}></div>
           </div>
         )}
-
-
       </div>
     </div>
   );

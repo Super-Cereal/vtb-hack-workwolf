@@ -7,7 +7,7 @@ import { objectQueryKeys } from "./queryKeys";
 export const useObject = (objectId: string) =>
   useQuery({
     queryKey: [objectQueryKeys.get, objectId],
-    queryFn: () => get<IObjectCardDTO>(`/object-cards/getone/${objectId}`),
+    queryFn: () => get<IObjectCardDTO>(`/object-cards/${objectId}`),
     select: adapter_objectCard,
   });
 

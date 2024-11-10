@@ -22,7 +22,13 @@ export const browserRouter = createBrowserRouter([
   { path: staticUrls.lessonTest, element: <LessonTestPage /> },
 ]);
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+    },
+  },
+});
 
 export const App = () => (
   <QueryClientProvider client={queryClient}>

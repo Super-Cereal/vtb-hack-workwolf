@@ -1,1 +1,1 @@
-export { detailsLessonBanner } from "./ui/detailsLessonBanner";
+export { DetailsLessonBanner } from "./ui/detailsLessonBanner";

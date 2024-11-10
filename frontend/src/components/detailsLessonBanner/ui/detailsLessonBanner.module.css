@@ -11,12 +11,11 @@
   border-radius: 40px;
   width: 100%;
   overflow: hidden;
-  background-image: url('bg.png'); /* Устанавливаем изображение фона */
+  background-image: url("bg.png"); /* Устанавливаем изображение фона */
   background-size: cover; /* Изображение растягивается на всю область */
   background-position: center; /* Центрируем изображение */
   background-repeat: no-repeat; /* Убираем повторение */
 }
-
 
 .card_header {
   position: relative;
@@ -49,7 +48,6 @@
   border-bottom: 2px solid #303239;
   /* Убираем фон, если не нужен */
 }
-
 
 .block_description_card h1 {
   font-size: 27px;
@@ -101,12 +99,12 @@
   margin-bottom: 1%;
 }
 
-.coinWrapper{
+.coinWrapper {
   position: absolute;
   left: 14px;
   top: 18px;
   color: #ffffff;
-  background: #1E1F2499;
+  background: #1e1f2499;
   padding: 8px 12px;
   border-radius: 100px;
   font-size: 0.75rem;

@@ -16,7 +16,7 @@ export const ObjectsList = () => {
   return (
     <div className={styles.list}>
       {objects.map((object) => (
-        <CardProgress key={object.id} object={object} />
+        <CardProgress key={object.id} object={object} withLinkToObjectPage />
       ))}
     </div>
   );

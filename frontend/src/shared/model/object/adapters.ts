@@ -21,6 +21,11 @@ export interface IObjectCardDTO {
     level: 1;
     gamecoins: 10;
     nextLevelCost: 0;
+    specialOffers?: {
+      id: string;
+      sale: string;
+      objectLevelId: string;
+    }[];
   };
 }
 
@@ -46,12 +51,13 @@ const adapter_objectLevel = ({
   id,
   level,
   nextLevelCost,
+  specialOffers,
 }: IObjectCardDTO["currentLevel"]): IObjectCard["objectLevel"] => ({
   id,
   level,
   levelCost: nextLevelCost - 1000,
   nextLevelCost,
-  specialOffers: [],
+  specialOffers: specialOffers?.map(({ id, sale }) => ({ id, description: sale })),
 });
 
 export const adapter_objectCard = ({ id, progress, objectCategory, currentLevel }: IObjectCardDTO): IObjectCard => ({

@@ -2,9 +2,8 @@ import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, Req } from 
 import { ObjectCardsService } from './object-cards.service';
 import { CreateObjectCardDto } from './dto/create-object-card.dto';
 import { UpdateObjectCardDto } from './dto/update-object-card.dto';
-import { AddSpecialOfferDto, SpecialOfferDto } from './dto/add-special-offer.dto';
+import { SpecialOfferDto } from './dto/add-special-offer.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
-import { LevelUpObjectCardDto } from './dto/level-up-obj-card.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('ObjectCards')
@@ -38,7 +37,7 @@ export class ObjectCardsController {
 
   @ApiOperation({ summary: 'Get ObjectCard by ID' })
   @ApiResponse({ status: 200, description: 'The ObjectCard with the specified ID.' })
-  @Get('getone/:id')
+  @Get(':id')
   async findObjectCardById(@Param('id') id: string) {
     return this.objectCardsService.findObjectCardById(id);
   }

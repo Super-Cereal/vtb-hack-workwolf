@@ -25,5 +25,5 @@ export interface IObjectLevel {
   multibonus?: number;
   levelCost: number;
   nextLevelCost: number;
-  specialOffers: ISpecialOffer[];
+  specialOffers?: ISpecialOffer[];
 }
