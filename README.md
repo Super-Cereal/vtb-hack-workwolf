@@ -10,6 +10,10 @@
   ```bash
   npm run deps
   ```
+- Запускаем микросервис с openApi
+  ```bash
+  npm run openApi
+  ```
 - Запускаем бэкенд
   ```bash
   npm run backend
