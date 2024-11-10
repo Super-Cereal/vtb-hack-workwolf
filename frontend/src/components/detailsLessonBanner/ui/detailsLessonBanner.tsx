@@ -1,8 +1,5 @@
 import React from "react";
-
-// Дополнительные импорты
 import { IconCoins } from "@/shared/ui/icons";
-
 import styles from "./detailsLessonBanner.module.css";
 
 // Импортируем изображение фона

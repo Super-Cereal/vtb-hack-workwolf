@@ -1,5 +1,6 @@
 import React from "react";
 import cx from "classnames";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/shared/ui/button";
 import { CardTemplate } from "@/shared/ui/card-template";
@@ -21,30 +22,36 @@ interface Props {
   coinCount?: number;
   currentStep?: number;
   totalSteps?: number;
+  lessonId: string;
 }
 
 export const LessonBanner = ({
   title,
   description,
   className,
-  onButtonClick,
+  lessonId,
   coinCount,
-  currentStep,
-  totalSteps,
-}: Props) => (
-  <CardTemplate
-    className={cx(styles.card, className)}
-    title={title}
-    subtitle={description}
-    titleSize="l"
-    titleTag="h2"
-    view="secondary"
-    backgroundSrc={bg}
-  >
-    {/* Синяя плашка с текстом, отображается только если указаны currentStep и totalSteps */}
-    {currentStep !== undefined && totalSteps !== undefined && (
+  /* currentStep,
+  totalSteps, */
+}: Props) => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate(`/lesson/${lessonId}`);
+  };
+
+  return (
+    <CardTemplate
+      className={cx(styles.card, className)}
+      title={title}
+      subtitle={description}
+      titleSize="l"
+      titleTag="h2"
+      view="secondary"
+      backgroundSrc={bg}
+    >
       <div className={styles.footer}>
-        <Button onClick={onButtonClick}>К прохождению</Button>
+        <Button onClick={handleButtonClick}>К прохождению</Button>
 
         {coinCount !== undefined && (
           <div className={styles.coinWrapper}>
@@ -55,11 +62,6 @@ export const LessonBanner = ({
           </div>
         )}
       </div>
-    )}
-
-    {/* Прогресс, отображается только если указаны currentStep и totalSteps */}
-    {currentStep !== undefined && totalSteps !== undefined && (
-      <div className={styles.progress}>{`${currentStep} / ${totalSteps}`}</div>
-    )}
-  </CardTemplate>
-);
+    </CardTemplate>
+  );
+};

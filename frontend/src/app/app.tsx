@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { AuthorizationPage } from "@/pages/authorizationPage";
-import { LessonPage } from "@/pages/lessonPage";
+import { LessonPage } from "@/pages/lessonPage/lessonPage";
 import { LessonsListPage } from "@/pages/lessonsListPage";
 import { LessonTestPage } from "@/pages/lessonTestPage";
 import { MainPage } from "@/pages/mainPage";
@@ -17,7 +17,7 @@ export const browserRouter = createBrowserRouter([
   { path: staticUrls.object, element: <ObjectPage /> },
 
   { path: staticUrls.lessonsList, element: <LessonsListPage /> },
-  { path: staticUrls.lesson, element: <LessonPage /> },
+  { path: "/lesson/:lessonId", element: <LessonPage /> },
   { path: staticUrls.authorization, element: <AuthorizationPage /> },
   { path: staticUrls.lessonTest, element: <LessonTestPage /> },
 ]);

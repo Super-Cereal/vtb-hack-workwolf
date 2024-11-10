@@ -1,0 +1,32 @@
+.cardTemplate {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lessonTest {
+  margin-top: 20px;
+}
+
+.lessonTest h2 {
+  margin-bottom: 10px;
+}
+
+.lessonTest .question {
+  margin-bottom: 20px;
+}
+
+.lessonTest .question p {
+  margin-bottom: 10px;
+}
+
+.lessonTest .question ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lessonTest .question ul li {
+  margin-bottom: 5px;
+}

@@ -24,12 +24,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // app.enableCors({
-  //   origin: 'http://your-frontend-domain.com', // Allow requests from this domain
-  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow these methods
-  //   allowedHeaders: 'Content-Type, Authorization', // Allow these headers
-  //   credentials: true, // Allow credentials (cookies, HTTP authentication)
-  // });
+  app.enableCors({
+   origin: 'http://localhost:8080', // Allow requests from this domain
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow these methods
+    allowedHeaders: 'Content-Type, Authorization', // Allow these headers
+    credentials: true, // Allow credentials (cookies, HTTP authentication)
+ });
 
   await app.listen(3000);
 }

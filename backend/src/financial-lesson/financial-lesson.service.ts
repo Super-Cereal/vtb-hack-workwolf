@@ -70,9 +70,24 @@ export class FinancialLessonService {
     // Извлекаем идентификаторы финансовых уроков
     const financialLessonIds = userFinancialLessons.map(uf => uf.lessonId);
 
-    // Получаем финансовые уроки по идентификаторам
     const financialLessons = await this.financialLessonModel.findAll({
       where: { id: financialLessonIds },
+      include: [
+        {
+          model: Article,
+          as: 'content',
+        },
+        {
+          model: FinancialTest,
+          as: 'test',
+          include: [
+            {
+              model: Question, 
+              as: 'questions',
+            },
+          ],
+        },
+      ],
     });
 
     return financialLessons;
