@@ -40,7 +40,7 @@ export class Question extends Model<Question> {
   @Column({
     type: DataType.UUID,
   })
-  financialTestId: number;
+  financialTestId: string;
 
   @BelongsTo(() => FinancialTest)
   financialTest: FinancialTest;

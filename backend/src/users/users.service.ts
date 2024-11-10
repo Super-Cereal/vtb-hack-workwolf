@@ -9,6 +9,7 @@ import { ObjectCardsService } from 'src/object-cards/object-cards.service';
 import { FileUploadService } from 'src/utils/file-upload.service';
 import { SpecialOffer } from 'src/models/special-offer.model';
 import { FinancialLesson } from 'src/models/financial-lesson.model';
+import { UserFinancialLessons } from 'src/models/staging_tables/user-financial-lessons.model';
 
 @Injectable()
 export class UsersService {
@@ -20,8 +21,13 @@ export class UsersService {
     private objectCardsService: ObjectCardsService,
     @InjectModel(ObjectCategory)
     private objectCategoryModel: typeof ObjectCategory,
+    @InjectModel(FinancialLesson)
+    private financialLessonModel: typeof FinancialLesson,
     @InjectModel(ObjectLevel)
     private objectLevelModel: typeof ObjectLevel,
+    @InjectModel(UserFinancialLessons)
+    private userFinancialLessonsModel: typeof UserFinancialLessons,
+    
     private readonly fileUploadService: FileUploadService,
   ) {}
 
@@ -30,34 +36,33 @@ export class UsersService {
     if (avatarFile) {
       AccountImg = await this.fileUploadService.uploadFile(avatarFile);
     }
-
     const user = await this.userModel.create({
       ...createUserDto,
       AccountImg,
     });
-
+  
     for (const category of Object.values(ObjectCategoryEnum)) {
       try {
         // Получаем категорию из базы данных
         const objectCategory = await this.objectCategoryModel.findOne({
           where: { category },
         });
-
+  
         if (!objectCategory) {
           throw new HttpException(`Category not found: ${category}`, HttpStatus.BAD_REQUEST);
         }
-
+  
         const initialLevel = await this.objectLevelModel.findOne({
           where: { objectId: objectCategory.id, level: 1 },
         });
-
+  
         if (!initialLevel) {
           throw new HttpException(
             `Initial level not found for category: ${category}`,
             HttpStatus.BAD_REQUEST,
           );
         }
-
+  
         await this.objectCardsService.createObjectCard({
           userId: user.id,
           currentLevelId: initialLevel.id,
@@ -68,7 +73,19 @@ export class UsersService {
         throw error; // Пробрасываем ошибку наверх, чтобы она могла быть обработана на уровне контроллера
       }
     }
-
+  
+    // Получаем все уроки из базы данных
+    const lessons = await this.financialLessonModel.findAll();
+  
+    // Создаем записи в промежуточной таблице для каждого урока
+    const userFinancialLessons = lessons.map(lesson => ({
+      userId: user.id,
+      financialLessonId: lesson.id,
+      complete: false,
+    }));
+  
+    await this.userFinancialLessonsModel.bulkCreate(userFinancialLessons);
+  
     return user;
   }
 

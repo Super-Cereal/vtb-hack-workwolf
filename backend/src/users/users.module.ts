@@ -13,6 +13,7 @@ import { UserSpecialOffers } from 'src/models/staging_tables/user-special-offers
 import { UserFinancialLessons } from 'src/models/staging_tables/user-financial-lessons.model';
 import { FileUploadService } from 'src/utils/file-upload.service';
 import { ObjectCardModule } from 'src/object-cards/object-cards.module';
+import { FinancialLesson } from 'src/models/financial-lesson.model';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ObjectCardModule } from 'src/object-cards/object-cards.module';
       SpecialOffer,
       UserSpecialOffers,
       UserFinancialLessons,
+      FinancialLesson
     ]),
     ObjectCardModule,
     HttpModule,

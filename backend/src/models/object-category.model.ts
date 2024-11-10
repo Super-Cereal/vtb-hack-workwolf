@@ -40,7 +40,7 @@ export class ObjectCategory extends Model<ObjectCategory> {
   name: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false,
   })
   description: string;

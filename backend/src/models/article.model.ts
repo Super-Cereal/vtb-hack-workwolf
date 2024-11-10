@@ -36,7 +36,7 @@ export class Article extends Model<Article> {
     type: DataType.UUID,
     allowNull: false,
   })
-  lessonId: number;
+  lessonId: string;
 
   @BelongsTo(() => FinancialLesson)
   financialLesson: FinancialLesson;

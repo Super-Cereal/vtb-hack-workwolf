@@ -23,6 +23,8 @@ import { AuthModule } from './auth/auth.module';
 import { ObjectLevelModule } from './object-level/object-level.module';
 import { SpecialOfferModule } from './special-offer/special-offer.module';
 import { OpenApiModule } from './open-api/open-api.module';
+import { FinancialTestModule } from './financial-test/financial-test.module';
+
 
 @Module({
   imports: [
@@ -51,6 +53,7 @@ import { OpenApiModule } from './open-api/open-api.module';
     AuthModule,
     ObjectLevelModule,
     SpecialOfferModule,
+    FinancialTestModule,
   ],
 })
 export class AppModule {}

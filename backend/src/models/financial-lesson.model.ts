@@ -31,7 +31,7 @@ export class FinancialLesson extends Model<FinancialLesson> {
   title: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false,
   })
   description: string;
@@ -47,12 +47,6 @@ export class FinancialLesson extends Model<FinancialLesson> {
 
   @HasOne(() => Article)
   content: Article;
-
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.UUID,
-  })
-  userId: string;
 
   @BelongsToMany(() => User, () => UserFinancialLessons)
   users: User[];

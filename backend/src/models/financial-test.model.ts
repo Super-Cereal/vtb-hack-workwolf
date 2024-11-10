@@ -25,7 +25,7 @@ export class FinancialTest extends Model<FinancialTest> {
     type: DataType.UUID,
     allowNull: false,
   })
-  lessonId: number;
+  lessonId: string;
 
   @BelongsTo(() => FinancialLesson)
   financialLesson: FinancialLesson;

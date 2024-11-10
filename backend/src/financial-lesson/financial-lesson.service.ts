@@ -1,113 +1,73 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateFinancialLessonDto } from './dto/create-financial-lesson.dto';
-import { UpdateFinancialLessonDto } from './dto/update-financial-lesson.dto';
+import { Article } from 'src/models/article.model';
 import { FinancialLesson } from 'src/models/financial-lesson.model';
+import { FinancialTest } from 'src/models/financial-test.model';
+import { Question } from 'src/models/question.model';
 import { User } from 'src/models/user.model';
+import { CreateFinancialLessonDto } from './dto/create-financial-lesson.dto';
 import { UserFinancialLessons } from 'src/models/staging_tables/user-financial-lessons.model';
 
 @Injectable()
-export class FinancialLessonsService {
+export class FinancialLessonService {
   constructor(
     @InjectModel(FinancialLesson)
     private readonly financialLessonModel: typeof FinancialLesson,
+    @InjectModel(FinancialTest)
+    private readonly financialTestModel: typeof FinancialTest,
+    @InjectModel(Question)
+    private readonly questionModel: typeof Question,
     @InjectModel(User)
     private readonly userModel: typeof User,
+    @InjectModel(Article)
+    private readonly articleModel: typeof Article,
     @InjectModel(UserFinancialLessons)
     private readonly userFinancialLessonsModel: typeof UserFinancialLessons,
-  ) {}
+  ) { }
 
-  async createFinancialLesson(
-    createFinancialLessonDto: CreateFinancialLessonDto,
-  ): Promise<FinancialLesson> {
-    return this.financialLessonModel.create(createFinancialLessonDto);
-  }
+  async createFinancialLesson(data: CreateFinancialLessonDto) {
+    const { title, description, gamecoins,  questions, article } = data;
 
-  async findAllFinancialLessons(): Promise<FinancialLesson[]> {
-    return this.financialLessonModel.findAll();
-  }
+    const financialLesson = await this.financialLessonModel.create({
+      title,
+      description,
+      gamecoins,
+    });
 
-  async findFinancialLessonById(id: string): Promise<FinancialLesson> {
-    const financialLesson = await this.financialLessonModel.findByPk(id);
-    if (!financialLesson) {
-      throw new NotFoundException('FinancialLesson not found');
-    }
+    const createArticle = await this.articleModel.create({
+      name: article.name,
+      text: article.text,
+      lessonId: financialLesson.id
+    });
+
+    const financialTest = await this.financialTestModel.create({
+      lessonId: financialLesson.id,
+    });
+
+    const createQuestions = await Promise.all(
+      questions.map(async (questionData) => {
+        return this.questionModel.create({
+          text: questionData.text,
+          answers: questionData.answers,
+          rightAnswer: questionData.rightAnswer,
+          financialTestId: financialTest.id,
+        });
+      })
+    );
+
     return financialLesson;
   }
 
-  async updateFinancialLesson(
-    id: string,
-    updateFinancialLessonDto: UpdateFinancialLessonDto,
-  ): Promise<FinancialLesson> {
-    const [updatedRows] = await this.financialLessonModel.update(updateFinancialLessonDto, {
-      where: { id },
-      returning: true,
+  async getUserFinancialLessons(userId: string) {
+    const userFinancialLessons = await this.userFinancialLessonsModel.findAll({
+      where: { userId },
+      include: [{ model: FinancialLesson }],
     });
 
-    if (updatedRows === 0) {
-      throw new NotFoundException('FinancialLesson not found');
+    if (!userFinancialLessons || userFinancialLessons.length === 0) {
+      throw new NotFoundException('No financial lessons found for this user');
     }
 
-    return this.findFinancialLessonById(id);
-  }
-
-  async deleteFinancialLesson(id: string): Promise<void> {
-    const deletedRows = await this.financialLessonModel.destroy({ where: { id } });
-    if (deletedRows === 0) {
-      throw new NotFoundException('FinancialLesson not found');
-    }
-  }
-
-  async getUserFinancialLessons(userId: string): Promise<FinancialLesson[]> {
-    const user = await this.userModel.findByPk(userId, {
-      include: [
-        {
-          model: FinancialLesson,
-          through: {
-            attributes: ['completed'],
-          },
-        },
-      ],
-    });
-
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
-    return user.lessons;
-  }
-
-  async completeFinancialLesson(
-    userId: string,
-    lessonId: string,
-    gameCoins: number,
-  ): Promise<void> {
-    const user = await this.userModel.findByPk(userId);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
-    const lesson = await this.financialLessonModel.findByPk(lessonId);
-    if (!lesson) {
-      throw new NotFoundException('FinancialLesson not found');
-    }
-
-    const userLesson = await this.userFinancialLessonsModel.findOne({
-      where: { userId, lessonId },
-    });
-
-    if (!userLesson) {
-      await this.userFinancialLessonsModel.create({ userId, lessonId, completed: true });
-    } else {
-      await this.userFinancialLessonsModel.update(
-        { completed: true },
-        { where: { userId, lessonId } },
-      );
-    }
-
-    await this.userModel.update(
-      { gameCoins: user.gameCoins + gameCoins },
-      { where: { id: userId } },
-    );
+    return userFinancialLessons;
   }
 }

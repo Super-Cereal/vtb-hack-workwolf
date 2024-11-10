@@ -14,11 +14,14 @@ import { ObjectLevel } from 'src/models/object-level.model';
 import { FileUploadService } from 'src/utils/file-upload.service';
 import { HttpModule } from '@nestjs/axios';
 
+import { UserFinancialLessons } from 'src/models/staging_tables/user-financial-lessons.model';
+import { FinancialLesson } from 'src/models/financial-lesson.model';
+
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel]),
+    SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel, UserFinancialLessons, FinancialLesson ]),
     UsersModule,
     passportModule,
     ObjectCardModule,
