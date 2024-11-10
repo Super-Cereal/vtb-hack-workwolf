@@ -25,7 +25,7 @@ import { FinancialLesson } from 'src/models/financial-lesson.model';
       SpecialOffer,
       UserSpecialOffers,
       UserFinancialLessons,
-      FinancialLesson
+      FinancialLesson,
     ]),
     ObjectCardModule,
     HttpModule,

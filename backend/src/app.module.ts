@@ -25,7 +25,6 @@ import { SpecialOfferModule } from './special-offer/special-offer.module';
 import { OpenApiModule } from './open-api/open-api.module';
 import { FinancialTestModule } from './financial-test/financial-test.module';
 
-
 @Module({
   imports: [
     SequelizeModule.forRoot(sequelizeConfig),

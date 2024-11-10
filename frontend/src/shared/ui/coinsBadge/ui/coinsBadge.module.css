@@ -1,0 +1,36 @@
+.coinWrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: fit-content;
+
+  font-size: 0.8rem;
+  color: var(--font-color-primary);
+
+  padding: 4px 6px;
+  border-radius: 100px;
+
+  .coinValue {
+    margin-left: 14px;
+  }
+
+  .coinCircle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+
+    background-color: var(--bg-color-white);
+  }
+}
+
+.coinWrapper_primary {
+  background-color: rgba(30, 31, 36, 0.6);
+}
+
+.coinWrapper_secondary {
+  background-color: var(--bg-color-secondary);
+}

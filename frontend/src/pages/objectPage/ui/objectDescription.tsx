@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 
 import { CardProgress } from "@/components/card";
 import { CardSpecialOffers } from "@/components/card-special-offers";
+import { ProgressBar } from "@/components/progressBar";
 import { useObject } from "@/shared/model/object";
 import { CardTemplate } from "@/shared/ui/card-template";
-import { ProgressBar } from "@/shared/ui/progressBar";
 
 import styles from "./objectDescription.module.css";
 
@@ -24,7 +24,7 @@ export const ObjectDescription = () => {
       <div className={styles.progressWrapper}>
         <h2 className={styles.progressTitle}>Прогресс</h2>
 
-        <ProgressBar object={objectQuery.data} showNumericProgress />
+        <ProgressBar object={objectQuery.data} showNumericProgress canShowUpdateLevelBtn />
       </div>
       <CardTemplate loading={!object} view="primary" className={styles.progressDescription}>
         Чтобы повысить уровень &quot;{objectName}&quot; вам необходимо тратить деньги в любых заведениях категории

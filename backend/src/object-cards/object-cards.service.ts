@@ -209,9 +209,10 @@ export class ObjectCardsService {
       throw new BadRequestException('Insufficient progress to level up');
     }
 
-    if (user.gameCoins < currentLevel.gamecoins) {
-      throw new BadRequestException('Insufficient game coins to level up');
-    }
+    // FIXME: У пользователя нет валюты
+    // if (user.gameCoins < currentLevel.gamecoins) {
+    //   throw new BadRequestException('Insufficient game coins to level up');
+    // }
 
     const nextLevel = await this.objectLevelModel.findOne({
       where: {
@@ -224,7 +225,8 @@ export class ObjectCardsService {
       throw new NotFoundException('Next level not found');
     }
 
-    user.gameCoins -= currentLevel.gamecoins;
+    // FIXME: У пользователя нет валюты
+    // user.gameCoins -= currentLevel.gamecoins;
     await user.save();
 
     objectCard.currentLevelId = nextLevel.id;
@@ -244,12 +246,11 @@ export class ObjectCardsService {
 
     for (const objectCard of objectCards) {
       const transactionsByCategory = transactions.filter(
-        ({ category }) => category.name === objectCard.objectCategory.name,
+        ({ category }) => category.name === objectCard.objectCategory.category,
       );
 
       const transactionsSum = transactionsByCategory.reduce((acc, { value }) => acc + value, 0);
       const maxProgress = objectCard.currentLevel.nextLevelCost;
-      console.log(maxProgress);
 
       objectCard.progress = Math.min(maxProgress, objectCard.progress + transactionsSum);
       await objectCard.save();

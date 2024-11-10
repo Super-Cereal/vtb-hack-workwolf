@@ -1,4 +1,13 @@
-import { Controller, Post, Body, UsePipes, ValidationPipe, UseGuards, Get, Req } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UsePipes,
+  ValidationPipe,
+  UseGuards,
+  Get,
+  Req,
+} from '@nestjs/common';
 import { FinancialLessonService } from './financial-lesson.service';
 import { CreateFinancialLessonDto } from './dto/create-financial-lesson.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -19,7 +28,10 @@ export class FinancialLessonsController {
   }
 
   @ApiOperation({ summary: 'Get financial lessons by User ID' })
-  @ApiResponse({ status: 200, description: 'The list of financial lessons for the specified user.' })
+  @ApiResponse({
+    status: 200,
+    description: 'The list of financial lessons for the specified user.',
+  })
   @ApiResponse({ status: 401, description: 'Unauthorized, invalid or missing token.' })
   @ApiResponse({ status: 404, description: 'No financial lessons found for this user.' })
   @UseGuards(AuthGuard('jwt'))

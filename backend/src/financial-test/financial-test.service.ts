@@ -27,7 +27,7 @@ export class FinancialTestService {
 
     const financialTest = await this.financialTestModel.findOne({
       where: { lessonId },
-      include: [{ model: Question }], 
+      include: [{ model: Question }],
     });
 
     if (!financialTest) {
@@ -39,7 +39,7 @@ export class FinancialTestService {
     let allCorrect = true;
 
     for (const answer of answers) {
-      const question = questions.find(q => q.id === answer.questionId);
+      const question = questions.find((q) => q.id === answer.questionId);
       if (!question || question.rightAnswer !== answer.userAnswer) {
         allCorrect = false;
         break;

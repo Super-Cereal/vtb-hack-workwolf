@@ -9,11 +9,16 @@ import { FinancialLessonService } from './financial-lesson.service';
 import { FinancialLessonsController } from './financial-lesson.controller';
 import { UserFinancialLessons } from 'src/models/staging_tables/user-financial-lessons.model';
 
-
 @Module({
   imports: [
-    SequelizeModule.forFeature(
-      [FinancialLesson, FinancialTest, Question, User, Article, UserFinancialLessons]),
+    SequelizeModule.forFeature([
+      FinancialLesson,
+      FinancialTest,
+      Question,
+      User,
+      Article,
+      UserFinancialLessons,
+    ]),
   ],
   providers: [FinancialLessonService],
   controllers: [FinancialLessonsController],

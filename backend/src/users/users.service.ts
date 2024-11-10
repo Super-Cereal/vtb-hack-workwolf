@@ -40,29 +40,29 @@ export class UsersService {
       ...createUserDto,
       AccountImg,
     });
-  
+
     for (const category of Object.values(ObjectCategoryEnum)) {
       try {
         // Получаем категорию из базы данных
         const objectCategory = await this.objectCategoryModel.findOne({
           where: { category },
         });
-  
+
         if (!objectCategory) {
           throw new HttpException(`Category not found: ${category}`, HttpStatus.BAD_REQUEST);
         }
-  
+
         const initialLevel = await this.objectLevelModel.findOne({
           where: { objectId: objectCategory.id, level: 1 },
         });
-  
+
         if (!initialLevel) {
           throw new HttpException(
             `Initial level not found for category: ${category}`,
             HttpStatus.BAD_REQUEST,
           );
         }
-  
+
         await this.objectCardsService.createObjectCard({
           userId: user.id,
           currentLevelId: initialLevel.id,
@@ -73,19 +73,19 @@ export class UsersService {
         throw error; // Пробрасываем ошибку наверх, чтобы она могла быть обработана на уровне контроллера
       }
     }
-  
+
     // Получаем все уроки из базы данных
     const lessons = await this.financialLessonModel.findAll();
-  
+
     // Создаем записи в промежуточной таблице для каждого урока
-    const userFinancialLessons = lessons.map(lesson => ({
+    const userFinancialLessons = lessons.map((lesson) => ({
       userId: user.id,
       lessonId: lesson.id,
       complete: false,
     }));
-  
+
     await this.userFinancialLessonsModel.bulkCreate(userFinancialLessons);
-  
+
     return user;
   }
 

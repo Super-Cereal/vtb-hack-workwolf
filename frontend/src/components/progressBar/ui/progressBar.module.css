@@ -27,3 +27,10 @@
   font-size: 0.7rem;
   color: var(--font-color-primary);
 }
+
+.updateLevelBtnWrapper {
+  display: flex;
+  gap: 8px;
+
+  margin-top: 8px;
+}
