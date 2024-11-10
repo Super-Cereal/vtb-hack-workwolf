@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/shared/ui/button";
 import { CardTemplate } from "@/shared/ui/card-template";
-import { IconCoins } from "@/shared/ui/icons";
+import { CoinsBadge } from "@/shared/ui/coinsBadge";
 
 import styles from "./lessonBanner.module.css";
 
@@ -53,14 +53,7 @@ export const LessonBanner = ({
       <div className={styles.footer}>
         <Button onClick={handleButtonClick}>К прохождению</Button>
 
-        {coinCount !== undefined && (
-          <div className={styles.coinWrapper}>
-            <span className={styles.coinValue}>{coinCount}</span>
-            <div className={styles.coinCircle}>
-              <IconCoins />
-            </div>
-          </div>
-        )}
+        {coinCount !== undefined && <CoinsBadge coins={coinCount} />}
       </div>
     </CardTemplate>
   );

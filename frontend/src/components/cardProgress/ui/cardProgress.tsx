@@ -35,7 +35,7 @@ export function CardProgress({ object, noProgress = false, withLinkToObjectPage 
 
   const { id: objectId, objectInfo, objectLevel, progress } = object;
 
-  const start = objectLevel.levelCost;
+  const start = progress;
   const end = objectLevel.nextLevelCost;
   const paragraph = objectInfo.shortDecsiption;
   const lvl_card = `${objectLevel.level} уровень`;

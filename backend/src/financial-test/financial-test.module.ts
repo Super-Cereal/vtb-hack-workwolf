@@ -7,9 +7,7 @@ import { FinancialTest } from 'src/models/financial-test.model';
 import { Question } from 'src/models/question.model';
 
 @Module({
-  imports: [
-    SequelizeModule.forFeature([UserFinancialLessons, FinancialTest, Question]),
-  ],
+  imports: [SequelizeModule.forFeature([UserFinancialLessons, FinancialTest, Question])],
   providers: [FinancialTestService],
   controllers: [FinancialTestController],
 })

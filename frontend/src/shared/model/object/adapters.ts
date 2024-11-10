@@ -51,12 +51,13 @@ const adapter_objectLevel = ({
   id,
   level,
   nextLevelCost,
+  gamecoins,
   specialOffers,
 }: IObjectCardDTO["currentLevel"]): IObjectCard["objectLevel"] => ({
   id,
   level,
-  levelCost: nextLevelCost - 1000,
   nextLevelCost,
+  gamecoins,
   specialOffers: specialOffers?.map(({ id, sale }) => ({ id, description: sale })),
 });
 

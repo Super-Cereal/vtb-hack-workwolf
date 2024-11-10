@@ -1,5 +1,5 @@
 import { get, post } from "@/shared/lib/requests";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { IRegisterUserDTO } from "./types";
 
@@ -14,11 +14,16 @@ export const useUserQuery = () =>
     retry: false,
   });
 
-export const useRegisterUserMutation = () =>
-  useMutation({
+export const useRegisterUserMutation = () => {
+  const queryClient = useQueryClient();
+
+  queryClient.invalidateQueries({ queryKey: [userQueryKeys.get] });
+
+  return useMutation({
     mutationKey: [userQueryKeys.register],
     mutationFn: (body: IRegisterUserDTO) => post<{ access_token: string }>("/auth/register", JSON.stringify(body)),
     onSuccess: ({ access_token }) => {
       localStorage.setItem("accessToken", access_token);
     },
   });
+};

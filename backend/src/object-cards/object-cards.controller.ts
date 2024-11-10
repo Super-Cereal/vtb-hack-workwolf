@@ -93,12 +93,9 @@ export class ObjectCardsController {
   @ApiOperation({ summary: 'Level up object card' })
   @ApiResponse({ status: 200, description: 'The object card has been successfully leveled up.' })
   @UseGuards(AuthGuard('jwt'))
-  @Post('level-up')
-  async levelUpObjectCard(@Req() request, @Body() objectCardId: string) {
+  @Post('level-up/:id')
+  async levelUpObjectCard(@Req() request, @Param('id') objectCardId: string) {
     const userId = request.user.id;
-    return this.objectCardsService.levelUpObjectCard({
-      userId: userId,
-      objectCardId: objectCardId,
-    });
+    return this.objectCardsService.levelUpObjectCard({ userId, objectCardId });
   }
 }

@@ -21,7 +21,13 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([User, ObjectCategory, ObjectLevel, UserFinancialLessons, FinancialLesson ]),
+    SequelizeModule.forFeature([
+      User,
+      ObjectCategory,
+      ObjectLevel,
+      UserFinancialLessons,
+      FinancialLesson,
+    ]),
     UsersModule,
     passportModule,
     ObjectCardModule,

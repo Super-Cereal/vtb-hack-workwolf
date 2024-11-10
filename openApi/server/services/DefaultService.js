@@ -27,7 +27,7 @@ const getTransactions = () =>
             id: Math.round(Math.random() * 10000),
             type: ['in', 'out'][Math.round(Math.random())],
             category: categories[Math.round(Math.random() * (categories.length - 1))],
-            value: Math.round(Math.random() * 3000),
+            value: Math.round(Math.random() * 5000),
             status: 'Consumed',
           })),
         ),

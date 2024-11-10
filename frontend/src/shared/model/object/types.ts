@@ -22,8 +22,9 @@ export interface IObjectInfo {
 export interface IObjectLevel {
   id: string;
   level: number;
-  multibonus?: number;
-  levelCost: number;
+
+  /** сколько валюты надо потратить для перехода на новый уровень */
+  gamecoins?: number;
   nextLevelCost: number;
   specialOffers?: ISpecialOffer[];
 }

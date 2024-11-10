@@ -23,10 +23,10 @@ export class FinancialLessonService {
     private readonly articleModel: typeof Article,
     @InjectModel(UserFinancialLessons)
     private readonly userFinancialLessonsModel: typeof UserFinancialLessons,
-  ) { }
+  ) {}
 
   async createFinancialLesson(data: CreateFinancialLessonDto) {
-    const { title, description, gamecoins,  questions, article } = data;
+    const { title, description, gamecoins, questions, article } = data;
 
     const financialLesson = await this.financialLessonModel.create({
       title,
@@ -37,7 +37,7 @@ export class FinancialLessonService {
     const createArticle = await this.articleModel.create({
       name: article.name,
       text: article.text,
-      lessonId: financialLesson.id
+      lessonId: financialLesson.id,
     });
 
     const financialTest = await this.financialTestModel.create({
@@ -52,7 +52,7 @@ export class FinancialLessonService {
           rightAnswer: questionData.rightAnswer,
           financialTestId: financialTest.id,
         });
-      })
+      }),
     );
 
     return financialLesson;
@@ -68,7 +68,7 @@ export class FinancialLessonService {
       throw new NotFoundException('No financial lessons found for this user');
     }
     // Извлекаем идентификаторы финансовых уроков
-    const financialLessonIds = userFinancialLessons.map(uf => uf.lessonId);
+    const financialLessonIds = userFinancialLessons.map((uf) => uf.lessonId);
 
     const financialLessons = await this.financialLessonModel.findAll({
       where: { id: financialLessonIds },
