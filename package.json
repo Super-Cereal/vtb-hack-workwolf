@@ -8,6 +8,7 @@
     "frontend": "cd frontend && npm run start",
     "backend": "cd backend && npm run start:dev",
     "openApi": "cd openApi/server && npm start",
+    "start": "concurrently -n openApi,backend,frontend \"(npm start --prefix openApi/server)\" \"(npm run start:dev --prefix backend)\" \"(npm start --prefix frontend)\"",
     "prettier:check": "prettier . --check",
     "prettier:fix": "prettier . --write --list-different",
     "prepare": "husky"
@@ -22,6 +23,7 @@
   },
   "dependencies": {
     "@nestjs/mapped-types": "*",
+    "concurrently": "^9.1.0",
     "uuid": "^11.0.2"
   }
 }

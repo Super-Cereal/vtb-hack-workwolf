@@ -1,4 +1,10 @@
-import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { ObjectCard } from '../models/object-card.model';
 import { CreateObjectCardDto } from './dto/create-object-card.dto';
@@ -139,33 +145,32 @@ export class ObjectCardsService {
     const user = await this.userModel.findOne({
       where: { id: removeSpecialOfferDto.userId },
     });
-  
+
     if (!user) {
       throw new NotFoundException('User not found');
     }
-  
+
     const specialOffer = await this.specialOfferModel.findOne({
       where: { id: removeSpecialOfferDto.specialOfferId },
     });
-  
+
     if (!specialOffer) {
       throw new NotFoundException('SpecialOffer not found');
     }
-  
+
     const userSpecialOffer = await this.userSpecialOffersModel.findOne({
       where: { userId: user.id, specialOfferId: specialOffer.id },
     });
-  
+
     if (!userSpecialOffer) {
       throw new HttpException('User does not have this special offer', HttpStatus.OK);
     }
-  
+
     await this.userSpecialOffersModel.destroy({
       where: { userId: user.id, specialOfferId: specialOffer.id },
     });
   }
 
-  
   async updateObjectCard(
     id: string,
     updateObjectCardDto: UpdateObjectCardDto,

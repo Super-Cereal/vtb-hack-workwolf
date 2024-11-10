@@ -10,17 +10,18 @@
   ```bash
   npm run deps
   ```
-- Запускаем микросервис с openApi
-  ```bash
-  npm run openApi
+- Создать базу данные и заполнить файлик `.env` в `/backend`:
+  ```txt
+  DB_HOST=localhost
+  DB_PORT=5432
+  DB_USERNAME=postgres
+  DB_PASSWORD=password
+  DB_NAME=vtbhackaton
+  FRONTEND_DOMAIN=http://localhost:8080
   ```
-- Запускаем бэкенд
+- Запускаем микросервис с openApi, бэкенд и фронтенд
   ```bash
-  npm run backend
-  ```
-- Запускаем фронтенд
-  ```bash
-  npm run frontend
+  npm run start
   ```
 
 ## О проекте

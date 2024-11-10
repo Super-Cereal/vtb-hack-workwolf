@@ -40,7 +40,7 @@ export class ObjectCategoryController {
   @ApiResponse({ status: 200, description: 'Object category retrieved successfully' })
   @ApiParam({ name: 'id', description: 'The ID of the object category' })
   @Get(':id')
-  async findObjectCategoryById(@Param('id') id: number) {
+  async findObjectCategoryById(@Param('id') id: string) {
     return this.objectCategoryService.findObjectCategoryById(id);
   }
 
@@ -50,7 +50,7 @@ export class ObjectCategoryController {
   @ApiBody({ type: UpdateObjectCategoryDto })
   @Put(':id')
   async updateObjectCategory(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateObjectCategoryDto: UpdateObjectCategoryDto,
   ) {
     return this.objectCategoryService.updateObjectCategory(id, updateObjectCategoryDto);

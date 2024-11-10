@@ -85,11 +85,10 @@ export class ObjectCardsController {
     @Body('specialOfferId') specialOfferId: string,
   ): Promise<void> {
     const userId = request.user.id;
-  
+
     return this.objectCardsService.removeSpecialOffer({ userId, specialOfferId });
   }
 
-  
   @ApiOperation({ summary: 'Level up object card' })
   @ApiResponse({ status: 200, description: 'The object card has been successfully leveled up.' })
   @UseGuards(AuthGuard('jwt'))

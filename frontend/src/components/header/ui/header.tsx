@@ -39,7 +39,7 @@ export const Header = ({ shouldShowBigHeader, withGoBackButton = false, classNam
             <IconShortArrowLeft />
           </A11yButton>
         ) : (
-          <img alt="" className={cx(styles.circle, styles.userImg)} src="#" />
+          <img alt="" className={cx(styles.circle, styles.userImg)} src={user.accountImage} />
         )}
 
         {shouldShowBigHeader && !withGoBackButton && <span className={styles.userName}>{user.name}</span>}

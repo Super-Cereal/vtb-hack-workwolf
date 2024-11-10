@@ -15,7 +15,9 @@ export const MainPage = () => {
 
   return (
     <PageTemplate>
-         <Button onClick={handleButtonClick} fullWidth>Уроки финансовой грамотности</Button>
+      <Button onClick={handleButtonClick} fullWidth>
+        Уроки финансовой грамотности
+      </Button>
       <ObjectsList />
     </PageTemplate>
   );

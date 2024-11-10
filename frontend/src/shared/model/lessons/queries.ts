@@ -17,5 +17,3 @@ export const useFinancialLessons = () =>
     queryFn: () => get<IFinancialLessonDTO[]>("/financial-lessons/user"),
     select: (financialLessons) => financialLessons.map(adapter_financialLesson),
   });
-
-

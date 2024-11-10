@@ -1,4 +1,3 @@
-
 export interface IFinancialLessonDTO {
   id: string;
   title: string;

@@ -38,7 +38,7 @@ export class ObjectCategoryService {
     });
   }
 
-  async findObjectCategoryById(id: number): Promise<ObjectCategory> {
+  async findObjectCategoryById(id: string): Promise<ObjectCategory> {
     const objectCategory = await this.objectCategoryModel.findByPk(id);
     if (!objectCategory) {
       throw new NotFoundException('ObjectCategory not found');
@@ -47,7 +47,7 @@ export class ObjectCategoryService {
   }
 
   async updateObjectCategory(
-    id: number,
+    id: string,
     updateObjectCategoryDto: UpdateObjectCategoryDto,
   ): Promise<ObjectCategory> {
     const [updatedRows] = await this.objectCategoryModel.update(updateObjectCategoryDto, {

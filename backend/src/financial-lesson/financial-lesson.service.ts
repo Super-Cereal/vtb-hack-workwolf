@@ -82,7 +82,7 @@ export class FinancialLessonService {
           as: 'test',
           include: [
             {
-              model: Question, 
+              model: Question,
               as: 'questions',
             },
           ],

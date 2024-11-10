@@ -15,27 +15,35 @@ export const LessonPage = () => {
   const { data: financialLessons, isLoading, error } = useFinancialLessons();
 
   if (isLoading) {
-    return <PageTemplate><h1>Loading...</h1></PageTemplate>;
+    return (
+      <PageTemplate>
+        <h1>Loading...</h1>
+      </PageTemplate>
+    );
   }
 
   if (error) {
-    return <PageTemplate><h1>Error loading lesson</h1></PageTemplate>;
+    return (
+      <PageTemplate>
+        <h1>Error loading lesson</h1>
+      </PageTemplate>
+    );
   }
 
   const lesson = financialLessons?.find((lesson: IFinancialLesson) => lesson.id === lessonId);
 
   if (!lesson) {
-    return <PageTemplate><h1>Lesson not found</h1></PageTemplate>;
+    return (
+      <PageTemplate>
+        <h1>Lesson not found</h1>
+      </PageTemplate>
+    );
   }
 
   return (
     <PageTemplate>
-      <DetailsLessonBanner
-        title={lesson.title}
-        paragraph={lesson.description}
-        coinCount={lesson.gamecoins}
-      />
-      <CardTemplate view="primary" >
+      <DetailsLessonBanner title={lesson.title} paragraph={lesson.description} coinCount={lesson.gamecoins} />
+      <CardTemplate view="primary">
         <h2>Статья</h2>
         <p>{lesson.content?.text}</p>
 
