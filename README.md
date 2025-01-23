@@ -1,6 +1,11 @@
 # vtb-hack-workwolf
 
-Проект команды workwolf на VTB API hackathon 2024
+Проект команды workwolf на VTB API hackathon 2024. 
+
+Геймифицированный сервис, который в обмен на выполнение заданий и обучение финансовой грамотности предоставляет кешбеки, скидки и акции. 
+
+<img width="1424" alt="Screenshot 2025-01-23 at 13 04 40" src="https://github.com/user-attachments/assets/5ba26886-97aa-46b0-86d2-045ae0c46edc" />
+
 
 ## Как запустить
 
